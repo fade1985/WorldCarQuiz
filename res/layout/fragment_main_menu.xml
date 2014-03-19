@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.android.worldcarquiz.MainActivity$PlaceholderFragment" >
+    tools:context="com.android.worldcarquiz.activity.MainActivity$PlaceholderFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 	        
          </LinearLayout>
         <Button 
-            android:id="@+id/play"
+            android:id="@+id/play_main_menu_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
@@ -54,7 +54,7 @@
             android:fontFamily="Roboto" 
             />
         <Button 
-            android:id="@+id/worlds"
+            android:id="@+id/worlds_main_menu_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
@@ -66,7 +66,7 @@
             android:fontFamily="Roboto" 
             />
         <Button 
-            android:id="@+id/tutorial"
+            android:id="@+id/tutorial_main_menu_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"

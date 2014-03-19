@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:id="@+id/image_list_worlds"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#9933CC"
+        android:contentDescription="Imagen mundos"/>
+    
+	<TextView
+	    android:id="@+id/text_list_worlds"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:textSize="30sp"
+	    android:gravity="center_horizontal|center_vertical"
+	    android:text="World"/>
+	    
+</LinearLayout>

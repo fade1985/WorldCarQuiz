@@ -27,16 +27,21 @@ public final class R {
         public static final int shapes=0x7f020002;
     }
     public static final class id {
-        public static final int cars=0x7f070002;
-        public static final int container=0x7f070000;
-        public static final int play=0x7f070003;
-        public static final int tutorial=0x7f070005;
-        public static final int world_quiz=0x7f070001;
-        public static final int worlds=0x7f070004;
+        public static final int cars=0x7f070003;
+        public static final int container_list_worlds=0x7f070000;
+        public static final int container_main_menu=0x7f070001;
+        public static final int image_list_worlds=0x7f070007;
+        public static final int play_main_menu_button=0x7f070004;
+        public static final int text_list_worlds=0x7f070008;
+        public static final int tutorial_main_menu_button=0x7f070006;
+        public static final int world_quiz=0x7f070002;
+        public static final int worlds_main_menu_button=0x7f070005;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int fragment_main=0x7f030001;
+        public static final int container_list_worlds=0x7f030000;
+        public static final int container_main_menu=0x7f030001;
+        public static final int fragment_main_menu=0x7f030002;
+        public static final int list_worlds_fragment=0x7f030003;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
