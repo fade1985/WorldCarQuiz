@@ -117,7 +117,7 @@
       	android:layout_width="wrap_content"
       	android:layout_height="wrap_content"
       	android:layout_alignParentBottom="true"
-      	android:scaleType="centerInside"
+      	android:scaleType="fitEnd"
         android:src="@drawable/fondo" />
 
 </RelativeLayout>
