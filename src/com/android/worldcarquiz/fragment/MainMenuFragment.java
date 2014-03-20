@@ -23,9 +23,9 @@ public class MainMenuFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_main_menu, null);
 		
-		mPlayButton = (Button)v.findViewById(R.id.play_main_menu_button);
+		mPlayButton = (Button)v.findViewById(R.id.play_main_button);
 		
-		mWorldsButton = (Button)v.findViewById(R.id.worlds_main_menu_button);
+		mWorldsButton = (Button)v.findViewById(R.id.worlds_main_button);
 		mWorldsButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -35,7 +35,7 @@ public class MainMenuFragment extends Fragment {
 			}
 		});
 		
-		mTutorialButton = (Button)v.findViewById(R.id.tutorial_main_menu_button);
+		mTutorialButton = (Button)v.findViewById(R.id.tutorial_main_button);
 		
 		return v;
 	}
