@@ -5,6 +5,7 @@
 *.pydevproject
 .project
 .metadata
+gen/
 bin/
 tmp/
 *.tmp
@@ -213,3 +214,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+gen/com/android/worldcarquiz/BuildConfig.java
