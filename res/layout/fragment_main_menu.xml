@@ -9,39 +9,41 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
         android:gravity="center"
-        
         android:orientation="vertical" >
-
-        <TextView
+ 		
+ 		<RelativeLayout 
+ 		    android:layout_width="match_parent"
+ 		    android:layout_height="wrap_content">
+ 		    
+ 		    <TextView
             android:id="@+id/world_quiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="@string/world_quiz"
             android:textColor="#ffffff"
-            android:textSize="35sp"     
+            android:textSize="42sp"     
              />
-        
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal" >
-
         	<ImageView 
 		        android:id="@+id/ic_action_split"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_below="@id/world_quiz"
+				android:layout_toLeftOf="@id/cars"
 		        android:src="@drawable/ic_action_split" />
 	        <TextView
 	            android:id="@+id/cars"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+				android:layout_below="@id/world_quiz"
+				android:layout_alignRight="@id/world_quiz"
 	            android:text="@string/cars"
 	            android:textColor="#ffffff"
-	            android:textSize="18sp"        
+	            android:textSize="30sp"        
 	             />
-	        
-         </LinearLayout>
+		    
+ 		</RelativeLayout>
+        
         <Button 
             android:id="@+id/play_main_button"
             android:layout_width="match_parent"
