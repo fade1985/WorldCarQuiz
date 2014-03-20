@@ -24,13 +24,6 @@
             android:textColor="#ffffff"
             android:textSize="42sp"     
              />
-        	<ImageView 
-		        android:id="@+id/ic_action_split"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@id/world_quiz"
-				android:layout_toLeftOf="@id/cars"
-		        android:src="@drawable/ic_action_split" />
 	        <TextView
 	            android:id="@+id/cars"
 	            android:layout_width="wrap_content"
@@ -39,8 +32,15 @@
 				android:layout_alignRight="@id/world_quiz"
 	            android:text="@string/cars"
 	            android:textColor="#ffffff"
-	            android:textSize="30sp"        
-	             />
+	            android:textSize="30sp"/>
+	        
+	        <ImageView 
+		        android:id="@+id/ic_action_split"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/world_quiz"
+				android:layout_toLeftOf="@id/cars"
+		        android:src="@drawable/ic_action_split"/>
 		    
  		</RelativeLayout>
         
