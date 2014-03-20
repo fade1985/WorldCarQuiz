@@ -87,23 +87,25 @@
             <ImageButton 
 	            android:id="@+id/stats_main_circle_button"
 	            android:layout_marginTop="18dp"
-	            android:layout_width="55sp"
-				android:layout_height="55sp"
-				android:src="@drawable/ic_action_split"
+	            android:layout_width="52sp"
+				android:layout_height="52sp"
+				android:src="@drawable/ic_action_network_cell"
 	            android:background="@drawable/button_circle_shape"/>
             <ImageButton 
 	            android:id="@+id/awards_main_circle_button"
 	            android:layout_marginTop="18dp"
-	            android:layout_marginRight="30dp"
-	            android:layout_marginLeft="30dp"
-	            android:layout_width="55sp"
-				android:layout_height="55sp"
+	            android:layout_marginRight="25dp"
+	            android:layout_marginLeft="25dp"
+	            android:layout_width="52sp"
+				android:layout_height="52sp"
+				android:src="@drawable/ic_action_important"
 	            android:background="@drawable/button_circle_shape"/>
             <ImageButton 
 	            android:id="@+id/stamps_main_circle_button"
 	            android:layout_marginTop="18dp"
-	            android:layout_width="55sp"
-				android:layout_height="55sp"
+	            android:layout_width="52sp"
+				android:layout_height="52sp"
+				android:src="@drawable/ic_action_favorite"
 	            android:background="@drawable/button_circle_shape"/>
         
          </LinearLayout>

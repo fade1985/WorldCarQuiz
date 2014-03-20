@@ -215,3 +215,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 gen/com/android/worldcarquiz/BuildConfig.java
+gen/com/android/worldcarquiz/R.java
+gen/com/android/worldcarquiz/BuildConfig.java
