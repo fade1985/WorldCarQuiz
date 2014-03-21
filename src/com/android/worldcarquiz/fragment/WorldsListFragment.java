@@ -59,7 +59,6 @@ public class WorldsListFragment extends ListFragment {
 			c = c - (25 * position);	
 			
 			Button buttonWorld = (Button)convertView.findViewById(R.id.image_list_worlds);
-			buttonWorld.setBackgroundColor(c);
 			
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
 			worldTitle.setText("World" + String.valueOf(position));
