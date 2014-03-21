@@ -51,6 +51,7 @@ public class WorldsListFragment extends ListFragment {
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_worlds_fragment, null);
 			}
+			
 			//intento de convertir el color en un hexadecimal pero peta 
 			//int c = (int)Integer.parseInt("33B5E5", 16);
 			
