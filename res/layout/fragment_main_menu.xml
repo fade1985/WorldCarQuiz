@@ -32,7 +32,7 @@
 				android:layout_alignRight="@id/world_quiz"
 	            android:text="@string/cars"
 	            android:textColor="#ffffff"
-	            android:textSize="30sp"/>
+	            android:textSize="25sp"/>
 	        
 	        <ImageView 
 		        android:id="@+id/ic_action_split"
