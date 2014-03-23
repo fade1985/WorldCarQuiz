@@ -2,21 +2,27 @@ package com.android.worldcarquiz.fragment;
 
 import java.util.ArrayList;
 
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.text.style.TypefaceSpan;
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.World;
 
 public class WorldsListFragment extends ListFragment {
+	
 	private ArrayList<World> mWorlds;
+	//Tipografia
+	private Typeface RobotoThin;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,9 @@ public class WorldsListFragment extends ListFragment {
 		
 		WorldAdapter adapter = new WorldAdapter(mWorlds);
 		setListAdapter(adapter);
+		
+		//Two lines in buttons
+		
 	}
 	
 	
@@ -51,12 +60,6 @@ public class WorldsListFragment extends ListFragment {
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_worlds_fragment, null);
 			}
-			
-			//intento de convertir el color en un hexadecimal pero peta 
-			//int c = (int)Integer.parseInt("33B5E5", 16);
-			
-			int c = Color.BLUE;
-			c = c - (25 * position);	
 			
 			Button buttonWorld = (Button)convertView.findViewById(R.id.image_list_worlds);
 			
