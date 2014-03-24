@@ -8,6 +8,8 @@ import android.support.v4.app.ListFragment;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -27,6 +29,7 @@ public class WorldsListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		
 		mWorlds = new ArrayList<World>();
 		for (int i = 0; i<10; i++) {
@@ -69,5 +72,11 @@ public class WorldsListFragment extends ListFragment {
 			return convertView;
 			
 		}
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu1, MenuInflater menuinflater) {
+		super.onCreateOptionsMenu(menu1, menuinflater);
+		menuinflater.inflate(R.menu.fragment_subworld, menu1);
 	}
 }
