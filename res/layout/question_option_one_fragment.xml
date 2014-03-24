@@ -26,6 +26,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="0.33"
+		            android:background="@drawable/button_selector"
 		            android:src="@drawable/ic_action_network_cell" />
 
 		        <ImageButton
@@ -34,6 +35,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_above="@+id/image_car_question"
 		            android:layout_weight="0.33"
+		             android:background="@drawable/button_selector"
 		            android:src="@drawable/ic_action_network_cell" />
 
 		        <ImageButton
@@ -42,6 +44,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_above="@+id/image_car_question"
 		            android:layout_weight="0.33"
+		             android:background="@drawable/button_selector"
 		            android:src="@drawable/ic_action_network_cell" />
 		    </LinearLayout>
            
