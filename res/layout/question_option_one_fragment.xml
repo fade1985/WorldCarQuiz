@@ -1,44 +1,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@drawable/shapes" >
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:weightSum="1"
+   android:background="@drawable/shapes" >
     
-  
-     
-    
-        
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+   <LinearLayout 
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:weightSum="1"
+       android:orientation="vertical">
+         <!-- Imagen del coche -->
+           <ImageView 
+               android:layout_width="match_parent"
+               android:layout_height="0dip"
+               android:scaleType="fitXY"
+               android:layout_weight="0.33"
+               android:src="@drawable/car1"/>
+       	 <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content" >
 
-        android:orientation="vertical" >
-          <!-- Imagen del coche -->
-	    <ImageView 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:scaleType="fitStart"
-	        android:src="@drawable/subaru"/>
+		        <ImageButton
+		            android:id="@+id/share_button"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="0.33"
+		            android:src="@drawable/ic_action_network_cell" />
 
-                <ImageButton 
-	            android:id="@+id/share_button"
-	            android:layout_width="100dp"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_action_network_cell"
-	            android:background="@drawable/button_selector"/>
-            	<ImageButton 
-	            android:id="@+id/help_button"
-	            android:layout_width="100dp"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_action_network_cell"
-	            android:background="@drawable/button_selector"/>
-                <ImageButton 
-	            android:id="@+id/help_button"
-	            android:layout_width="100dp"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_action_network_cell"
-	            android:background="@drawable/button_selector"/>
- 		        
-    </LinearLayout>
+		        <ImageButton
+		            android:id="@+id/help_button"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_above="@+id/image_car_question"
+		            android:layout_weight="0.33"
+		            android:src="@drawable/ic_action_network_cell" />
+
+		        <ImageButton
+		            android:id="@+id/help_button"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_above="@+id/image_car_question"
+		            android:layout_weight="0.33"
+		            android:src="@drawable/ic_action_network_cell" />
+		    </LinearLayout>
+           
+
+                            
+   </LinearLayout>
 
 </RelativeLayout>
