@@ -3,10 +3,13 @@ package com.android.worldcarquiz.data;
 public class Question {
 	private boolean mSolved;
 	private int mValor;
+	private int mTrys;
+	private String[] mOptions;
 	
-	public Question(int valor, boolean solved) {
+	public Question(int valor, boolean solved, int trys) {
 		mSolved = solved;
 		mValor = valor;
+		mTrys = trys;
 	}
 
 	public boolean isSolved() {
@@ -23,5 +26,17 @@ public class Question {
 
 	public void setValor(int valor) {
 		mValor = valor;
+	}
+
+	public int getTrys() {
+		return mTrys;
+	}
+
+	public void setTrys(int trys) {
+		mTrys = trys;
+	}
+	
+	public void setOptions(String[] options) {
+		mOptions = options;
 	}
 }

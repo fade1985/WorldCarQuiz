@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.activity.QuestionActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
 
 public class MainMenuFragment extends Fragment {
@@ -37,6 +38,15 @@ public class MainMenuFragment extends Fragment {
 		mCarsText.setTypeface(RobotoRegular);
 		
 		mPlayButton = (Button)v.findViewById(R.id.play_main_button);
+		mPlayButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), QuestionActivity.class);
+				startActivity(i);
+			}
+		});
+		
 		mWorldsButton = (Button)v.findViewById(R.id.worlds_main_button);
 		mWorldsButton.setOnClickListener(new OnClickListener() {
 			
