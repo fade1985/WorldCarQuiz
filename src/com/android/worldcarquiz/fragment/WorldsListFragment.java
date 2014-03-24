@@ -58,7 +58,7 @@ public class WorldsListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
-				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_worlds_fragment, null);
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
 			}
 			
 			Button buttonWorld = (Button)convertView.findViewById(R.id.image_list_worlds);
