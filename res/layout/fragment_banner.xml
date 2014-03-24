@@ -3,14 +3,14 @@
    android:layout_width="match_parent"
    android:layout_height="match_parent"
    android:weightSum="1"
-   android:background="@drawable/shapes" >
-   <LinearLayout 
+   android:gravity="bottom" >
+   <FrameLayout 
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
+       android:layout_height="55dp"  
        android:background="#ffffff">
        <TextView 
-           android:text="PUBLICIDAD"
-           android:height="60dp"/>
-   </LinearLayout>
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="PUBLICIDAD"/>
+   </FrameLayout>
 </RelativeLayout>

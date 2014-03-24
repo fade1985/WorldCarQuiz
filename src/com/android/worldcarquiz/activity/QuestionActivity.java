@@ -20,9 +20,11 @@ public class QuestionActivity extends FragmentActivity{
 		
 		Fragment fragment = QuestionFragment.newInstance(0);
 		Fragment fragment2 = QuestionFragment.newInstance(1);
+		Fragment fragment3 = QuestionFragment.newInstance(2);
 		fm.beginTransaction()
 		.add(R.id.fragment_photo, fragment)
 		.add(R.id.fragment_result, fragment2)
+		.add(R.id.fragment_banner, fragment3)
 		.commit();
 		
 	}

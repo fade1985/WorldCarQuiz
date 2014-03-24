@@ -48,7 +48,7 @@ public class QuestionFragment{
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
-			return super.onCreateView(inflater, container, savedInstanceState);
+			return inflater.inflate(R.layout.fragment_banner, null);
 		}
 	}
 }
