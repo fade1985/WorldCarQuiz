@@ -28,8 +28,7 @@ public class MainMenuFragment extends Fragment {
 	private Typeface RobotoRegular;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
+	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 	}
 		
@@ -72,12 +71,5 @@ public class MainMenuFragment extends Fragment {
 		mTutorialButton.setTypeface(RobotoRegular);
 		
 		return v;
-	}
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu1, MenuInflater menuinflater) {
-		super.onCreateOptionsMenu(menu1, menuinflater);
-		menuinflater.inflate(R.menu.fragment_subworld, menu1);
-	}
-	
+	}	
 }
