@@ -21,8 +21,8 @@ public class QuestionActivity extends FragmentActivity{
 		Fragment fragment = QuestionFragment.newInstance(0);
 		Fragment fragment2 = QuestionFragment.newInstance(1);
 		fm.beginTransaction()
-		.replace(R.id.fragment_photo, fragment)
-		.replace(R.id.fragment_result, fragment2)
+		.add(R.id.fragment_photo, fragment)
+		.add(R.id.fragment_result, fragment2)
 		.commit();
 		
 	}

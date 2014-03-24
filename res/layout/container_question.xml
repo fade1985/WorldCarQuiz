@@ -8,18 +8,19 @@
     
     <FrameLayout 
         android:id="@+id/fragment_photo"
-    	android:layout_width="match_parent"
+    	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_weight="0.33"/>
+    	android:layout_weight="0.5"/>
     
     <FrameLayout 
         android:id="@+id/fragment_result"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"/>        
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="0.5"/>        
         
     <FrameLayout 
         android:id="@+id/fragment_banner"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"/>
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"/>
     
 </LinearLayout>
