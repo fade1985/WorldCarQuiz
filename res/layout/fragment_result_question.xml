@@ -23,6 +23,8 @@
 		            android:layout_marginLeft="10dp"
 		            android:layout_marginRight="5dp"
 		            android:background="@drawable/button_selector"
+		            android:text="Var Respuesta 1"
+		            android:textColor="#ffffff"
 		             />
 		        <Button
 		            android:id="@+id/solution_two"
@@ -33,6 +35,8 @@
 		            android:layout_marginLeft="5dp"
 		            android:layout_marginRight="10dp"
 		             android:background="@drawable/button_selector"
+		             android:text="Var Respuesta 2"
+		             android:textColor="#ffffff"
 		             />
 		    </LinearLayout>
        	 	 <LinearLayout
@@ -47,6 +51,8 @@
 		            android:layout_marginLeft="10dp"
 		            android:layout_marginRight="5dp"
 		            android:background="@drawable/button_selector"
+		            android:text="Var Respuesta 3"
+		            android:textColor="#ffffff"
 		             />
 		        <Button
 		            android:id="@+id/solution_four"
@@ -57,6 +63,8 @@
 		            android:layout_marginLeft="5dp"
 		            android:layout_marginRight="10dp"
 		            android:background="@drawable/button_selector"
+		            android:text="Var Respuesta 4"
+		            android:textColor="#ffffff"
 		            />
 		    </LinearLayout>
 

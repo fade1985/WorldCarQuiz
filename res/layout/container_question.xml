@@ -11,13 +11,13 @@
         android:id="@+id/fragment_photo"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_weight="0.5"/>
+    	android:layout_weight="0.4"/>
     
     <FrameLayout 
         android:id="@+id/fragment_result"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_weight="0.5"/>        
+    	android:layout_weight="0.6"/>        
         
     <FrameLayout 
         android:id="@+id/fragment_banner"
