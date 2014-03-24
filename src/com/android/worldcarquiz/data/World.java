@@ -1,11 +1,10 @@
 package com.android.worldcarquiz.data;
 
-import java.util.ArrayList;
 
 public class World {
 	private static final int sWorldsToUnlock = 30;
 	
-	private ArrayList<Question> mQuestions;
+	private SubWorld[] mSubWorlds;
 	private int mUnlockedQuestions;
 	
 	public World(int i) {
@@ -19,11 +18,7 @@ public class World {
 
 	public void updateUnlockedQuestions() {
 		mUnlockedQuestions = 0;	
-		for (Question q : mQuestions) {
-			if (q.isSolved()) {
-				mUnlockedQuestions++;
-			}
-		}
+
 	}
 		
 }

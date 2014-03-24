@@ -33,6 +33,11 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Light">      
         </activity>        
+        <activity 
+            android:name="com.android.worldcarquiz.activity.WorldPagerActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light">      
+        </activity>          
     </application>
 
 </manifest>

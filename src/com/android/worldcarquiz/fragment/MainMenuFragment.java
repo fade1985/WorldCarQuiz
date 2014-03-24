@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.QuestionActivity;
+import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
 
 public class MainMenuFragment extends Fragment {
@@ -42,7 +43,7 @@ public class MainMenuFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), QuestionActivity.class);
+				Intent i = new Intent(getActivity(), WorldPagerActivity.class);
 				startActivity(i);
 			}
 		});
