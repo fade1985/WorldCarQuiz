@@ -25,39 +25,7 @@ public class SubWorldFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		mPos = getArguments().getInt("PRUEBA");
-			
-		ActionBar actionBar = getActivity().getActionBar();
-	    // Se especifica que se van a mostrar barras en la barra de accion
-	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    
-	    // Create a tab listener that is called when the user changes tabs.
-	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-			
-			@Override
-			public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
-				
-			}
-			
-			@Override
-			public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
-
-			}
-			
-			@Override
-			public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
-				
-			}
-		};
-		
-	    // Se añaden los titulos de las tablas
-	   actionBar.addTab(actionBar.newTab()
-			   .setText("NIGGA").setTabListener(tabListener));
-	   actionBar.addTab(actionBar.newTab()
-			   .setText("SUPER-NIGGA").setTabListener(tabListener));	    
-	   actionBar.addTab(actionBar.newTab()
-			   .setText("NIGERRIMO").setTabListener(tabListener));
-		
+		mPos = getArguments().getInt("PRUEBA");		
 		
 	}
 	

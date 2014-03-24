@@ -23,7 +23,7 @@ public class WorldPagerActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-	   
+	   	   
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
 		setContentView(mViewPager);
@@ -48,7 +48,7 @@ public class WorldPagerActivity extends FragmentActivity {
 			
 			@Override
 			public void onPageSelected(int arg0) {
-				
+				getActionBar().setSelectedNavigationItem(arg0);
 			}
 			
 			@Override
@@ -60,6 +60,37 @@ public class WorldPagerActivity extends FragmentActivity {
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
-		});
+		});	
+		
+		ActionBar actionBar = getActionBar();
+	    // Se especifica que se van a mostrar barras en la barra de accion
+	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    
+	    // Create a tab listener that is called when the user changes tabs.
+	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+			
+			@Override
+			public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
+				
+			}
+			
+			@Override
+			public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
+				mViewPager.setCurrentItem(tab.getPosition());	
+			}
+			
+			@Override
+			public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
+				
+			}
+		};
+		
+	    // Se añaden los titulos de las tablas
+	   actionBar.addTab(actionBar.newTab()
+			   .setText("NIGGA").setTabListener(tabListener));
+	   actionBar.addTab(actionBar.newTab()
+			   .setText("SUPER-NIGGA").setTabListener(tabListener));	    
+	   actionBar.addTab(actionBar.newTab()
+			   .setText("NIGERRIMO").setTabListener(tabListener));
 	}
 }
