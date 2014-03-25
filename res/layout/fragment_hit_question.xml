@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+
+    >
+   <LinearLayout 
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+
+       android:orientation="vertical">     
+       	 
+       	 <!-- Botones Respuestas -->
+       	 	 <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">
+		         <TextView
+		            android:id="@+id/world_quiz"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:layout_marginTop="20dp"
+		            android:text="Var Correct!"
+		            android:textColor="#99CC00"
+		            android:textSize="32sp" />
+		          <TextView
+		            android:id="@+id/world_quiz"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+ 					android:gravity="center"
+		            android:text="Var Correct!"
+		            android:textColor="#c3c3c3"
+		            android:textSize="18sp" />
+		           <Button
+		            android:id="@+id/solution_four"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="0.5"
+		            android:minHeight="50dp"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="20dp"
+		            android:layout_marginRight="20dp"
+		            android:background="@drawable/button_selector"
+		            android:text="@string/next_car"
+		            android:textColor="#ffffff"
+		            android:textSize="20sp"
+		            />
+		          
+		    </LinearLayout>
+       	 	 
+		    
+
+  	</LinearLayout>
+</RelativeLayout>
