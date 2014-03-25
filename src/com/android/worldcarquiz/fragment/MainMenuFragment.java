@@ -20,6 +20,7 @@ import com.android.worldcarquiz.activity.WorldsListActivity;
 
 public class MainMenuFragment extends Fragment {
 
+	//Declaracion de botones
 	private Button mPlayButton;
 	private Button mWorldsButton;
 	private Button mTutorialButton;
@@ -37,6 +38,7 @@ public class MainMenuFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_main_menu, null);
 		
+		//Cargamos la fuente de los textos
 		TextView mWorldQuizText = (TextView) v.findViewById(R.id.world_quiz);
 		TextView mCarsText = (TextView) v.findViewById(R.id.cars);
 		RobotoThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
@@ -44,6 +46,7 @@ public class MainMenuFragment extends Fragment {
 		mWorldQuizText.setTypeface(RobotoThin); 
 		mCarsText.setTypeface(RobotoRegular);
 		
+		//Listener del boton Jugar
 		mPlayButton = (Button)v.findViewById(R.id.play_main_button);
 		mPlayButton.setOnClickListener(new OnClickListener() {
 			
@@ -54,6 +57,7 @@ public class MainMenuFragment extends Fragment {
 			}
 		});
 		
+		//Listener del boton Mundos
 		mWorldsButton = (Button)v.findViewById(R.id.worlds_main_button);
 		mWorldsButton.setOnClickListener(new OnClickListener() {
 			
@@ -66,6 +70,7 @@ public class MainMenuFragment extends Fragment {
 		
 		mTutorialButton = (Button)v.findViewById(R.id.tutorial_main_button);
 		
+		//Asignacion de la fuente a los bototnes
 		mPlayButton.setTypeface(RobotoRegular);
 		mWorldsButton.setTypeface(RobotoRegular);
 		mTutorialButton.setTypeface(RobotoRegular);
