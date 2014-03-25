@@ -1,24 +1,22 @@
 package com.android.worldcarquiz.fragment;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.QuestionActivity;
 
 public class SubWorldFragment extends Fragment {
-	private Button mButton;
+	private ImageButton mButton;
 	private int mPos;
 	
 	@Override
@@ -34,8 +32,8 @@ public class SubWorldFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_subworld, null);
 		
-		mButton = (Button)v.findViewById(R.id.boton_prueba);
-		mButton.setText("Pagina: " + mPos);
+		mButton = (ImageButton)v.findViewById(R.id.boton_prueba);
+		//mButton.setText("Pagina: " + mPos);
 		mButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
