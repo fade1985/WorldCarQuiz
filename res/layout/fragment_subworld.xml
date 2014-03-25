@@ -2,25 +2,38 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="1"
 	android:background="@drawable/shapes">
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:layout_weight="0.2">
-       
+        >
+       		<RelativeLayout
+       		    android:layout_width="match_parent"
+       		    android:layout_height="match_parent"
+       		    android:layout_width="0.2"
+       		    
+       		     >
             <ImageButton 
                 android:id="@+id/boton_prueba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitStart"
                 android:paddingTop="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_open"/>
+                android:scaleType="fitCenter"
+                
+                android:background="@drawable/box_open"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/boton_prueba"
+                android:gravity="center_horizontal"
+                android:text="Var 3 Liters won"
+                android:textColor="#ffffff"/>
+            
+            </RelativeLayout>
 
             <ImageButton 
                 android:layout_width="match_parent"
@@ -60,16 +73,30 @@
         android:weightSum="1"
         android:layout_weight="0.2">
        
+            <RelativeLayout
+       		    android:layout_width="match_parent"
+       		    android:layout_height="wrap_content"
+       		    android:layout_weight="0.2" >
             <ImageButton 
+                android:id="@+id/boton_prueba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"
                 android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
+                android:layout_weight="0.5"
+                android:background="@drawable/box_open"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/boton_prueba"
+                android:gravity="center_horizontal"
+                android:text="Var 3 Liters won"
+                android:textColor="#ffffff"/>
+            
+            </RelativeLayout>
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,64 +135,30 @@
         android:weightSum="1"
         android:layout_weight="0.2">
        
-            <ImageButton
+            <RelativeLayout
+       		    android:layout_width="match_parent"
+       		    android:layout_height="wrap_content"
+       		    android:layout_weight="0.2" >
+            <ImageButton 
+                android:id="@+id/boton_prueba"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"
                 android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
-            <ImageButton
+                android:layout_weight="0.5"
+                android:background="@drawable/box_open"/>
+            <TextView 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
-             <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
-       
- 	</TableRow>    
- 	 <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_weight="0.2">
-       
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:paddingTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="2dp"
-                android:layout_weight="0.25"
-                android:src="@drawable/box_close"/>
+                android:layout_height="match_parent"
+                android:layout_below="@id/boton_prueba"
+                android:gravity="center_horizontal"
+                android:text="Var 3 Liters won"
+                android:textColor="#ffffff"/>
+            
+            </RelativeLayout>
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -204,6 +197,30 @@
         android:weightSum="1"
         android:layout_weight="0.2">
        
+           <RelativeLayout
+       		    android:layout_width="match_parent"
+       		    android:layout_height="wrap_content"
+       		    android:layout_weight="0.2" >
+            <ImageButton 
+                android:id="@+id/boton_prueba"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:paddingTop="5dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:paddingBottom="2dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/box_open"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/boton_prueba"
+                android:gravity="center_horizontal"
+                android:text="Var 3 Liters won"
+                android:textColor="#ffffff"/>
+            
+            </RelativeLayout>
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,6 +231,58 @@
                 android:paddingBottom="2dp"
                 android:layout_weight="0.25"
                 android:src="@drawable/box_close"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:paddingTop="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="2dp"
+                android:layout_weight="0.25"
+                android:src="@drawable/box_close"/>
+             <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:paddingTop="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="2dp"
+                android:layout_weight="0.25"
+                android:src="@drawable/box_close"/>
+       
+ 	</TableRow>    
+ 	 <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+       
+           <RelativeLayout
+       		    android:layout_width="match_parent"
+       		    android:layout_height="wrap_content"
+       		    android:layout_weight="0.2" >
+            <ImageButton 
+                android:id="@+id/boton_prueba"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:paddingTop="5dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:paddingBottom="2dp"
+                android:layout_weight="0"
+                android:background="@drawable/box_open"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/boton_prueba"
+                android:gravity="center_horizontal"
+                android:text="Var 3 Liters won"
+                android:textColor="#ffffff"/>
+            
+            </RelativeLayout>
             <ImageButton 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
