@@ -2,7 +2,7 @@ package com.android.worldcarquiz.data;
 
 
 public class World {
-	private static final int sWorldsToUnlock = 30;
+	private static final int sWorldsToUnlock = 40;
 	
 	private SubWorld[] mSubWorlds;
 	private int mUnlockedQuestions;
@@ -18,7 +18,9 @@ public class World {
 
 	public void updateUnlockedQuestions() {
 		mUnlockedQuestions = 0;	
-
+		for (SubWorld s : mSubWorlds) {
+			mUnlockedQuestions += s.getUnlockedQuestions();
+		}
 	}
 		
 }
