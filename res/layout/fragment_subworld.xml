@@ -40,7 +40,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="2 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -69,7 +69,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="3 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -98,7 +98,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="2 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>       		           		    
@@ -127,7 +127,7 @@
 		                android:layout_weight="0.1"		                
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="3 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>            
@@ -169,7 +169,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="1 Litre Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -198,7 +198,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="1 Litre Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -227,7 +227,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="2 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>       		           		    
@@ -256,7 +256,7 @@
 		                android:layout_weight="0.1"		                
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="2 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>            
@@ -297,7 +297,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="2 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -326,7 +326,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="3 Litres Won"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -346,7 +346,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/caja_medio_abierta"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -355,7 +355,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Win this car!"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>       		           		    
@@ -375,7 +375,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/caja_medio_abierta"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -384,7 +384,7 @@
 		                android:layout_weight="0.1"		                
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Win this car!"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>            
@@ -416,7 +416,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/caja_medio_abierta"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -425,7 +425,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Win this car!"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -454,7 +454,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -483,7 +483,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>       		           		    
@@ -512,7 +512,7 @@
 		                android:layout_weight="0.1"		                
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>            
@@ -544,7 +544,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/caja_cerrada"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -553,7 +553,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -573,7 +573,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/caja_cerrada"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -582,7 +582,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>
@@ -602,7 +602,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/caja_cerrada"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -611,7 +611,7 @@
 		                android:layout_weight="0.1"
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>       		           		    
@@ -631,7 +631,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/caja_cerrada"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -640,7 +640,7 @@
 		                android:layout_weight="0.1"		                
 		                android:layout_gravity="center_horizontal"
 		                android:layout_marginBottom="10dp"
-		                android:text="Var 3"
+		                android:text="Lock Car"
 		                android:textColor="#ffffff"/>
        		        
        		    </LinearLayout>            
