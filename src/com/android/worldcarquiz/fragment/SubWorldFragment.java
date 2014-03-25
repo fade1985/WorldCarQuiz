@@ -32,7 +32,7 @@ public class SubWorldFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_subworld, null);
 		
-		mButton = (ImageButton)v.findViewById(R.id.boton_prueba);
+		mButton = (ImageButton)v.findViewById(R.id.boton_prueba1);
 		//mButton.setText("Pagina: " + mPos);
 		mButton.setOnClickListener(new OnClickListener() {
 			
