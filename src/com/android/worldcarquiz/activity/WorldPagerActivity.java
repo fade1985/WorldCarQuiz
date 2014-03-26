@@ -87,10 +87,10 @@ public class WorldPagerActivity extends FragmentActivity {
 		
 	    // Se añaden los titulos de las tablas
 	   actionBar.addTab(actionBar.newTab()
-			   .setText("NIGGA").setTabListener(tabListener));
+			   .setText("Rookie").setTabListener(tabListener));
 	   actionBar.addTab(actionBar.newTab()
-			   .setText("SUPER-NIGGA").setTabListener(tabListener));	    
+			   .setText("Expert").setTabListener(tabListener));	    
 	   actionBar.addTab(actionBar.newTab()
-			   .setText("NIGERRIMO").setTabListener(tabListener));
+			   .setText("Pro").setTabListener(tabListener));
 	}
 }
