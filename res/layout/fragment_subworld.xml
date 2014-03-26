@@ -31,7 +31,7 @@
                 		android:layout_marginBottom="2dp"
                 		android:scaleType="fitXY"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_one"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_one"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_nine"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_seven"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_six"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_four"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_four"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -247,7 +247,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_three"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -288,7 +288,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_three"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -317,7 +317,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_abierta_llena"/>
+                		android:background="@drawable/ic_open_box_two"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -346,7 +346,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/ic_half_closed_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -375,7 +375,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/ic_half_closed_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -416,7 +416,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_medio_abierta"/>
+                		android:background="@drawable/ic_half_closed_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -445,7 +445,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -474,7 +474,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -503,7 +503,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -544,7 +544,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -573,7 +573,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -602,7 +602,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"	
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
@@ -631,7 +631,7 @@
                 		android:layout_marginRight="15dp"
                 		android:layout_marginBottom="2dp"
                 		android:layout_weight="0.9"                		
-                		android:background="@drawable/caja_cerrada"/>
+                		android:background="@drawable/ic_close_box"/>
        		        
 		            <TextView 
 		                android:layout_width="wrap_content"
