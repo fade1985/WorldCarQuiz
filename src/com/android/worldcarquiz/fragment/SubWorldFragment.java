@@ -1,10 +1,8 @@
 package com.android.worldcarquiz.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,12 +14,15 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.activity.QuestionActivity;
 
 public class SubWorldFragment extends Fragment {
 	private ImageButton mButton;
@@ -41,6 +42,14 @@ public class SubWorldFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_subworld, null);
 		
 		GridView gridView = (GridView) v.findViewById(R.id.gridview);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
+		    {
+		        // this 'mActivity' parameter is Activity object, you can send the current activity.
+		        Intent i = new Intent(getActivity(), QuestionActivity.class);
+		        startActivity(i);
+		    }
+		});
 		gridView.setAdapter(new BoxAdapter(getActivity()));
 		
 		return v;
@@ -137,5 +146,6 @@ public class SubWorldFragment extends Fragment {
                 R.drawable.ic_open_box_one, R.drawable.ic_open_box_nine,
                 R.drawable.ic_close_box, R.drawable.ic_half_closed_box
         };
+        
     }
 }

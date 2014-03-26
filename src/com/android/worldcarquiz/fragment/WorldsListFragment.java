@@ -19,9 +19,11 @@ import android.widget.TextView;
 import android.text.style.TypefaceSpan;
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.World;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.json.WorldQuizJSONSerializer;
 
 public class WorldsListFragment extends ListFragment {
-	
+	//Array de mundos
 	private ArrayList<World> mWorlds;
 	//Tipografia
 	private Typeface RobotoThin;
@@ -31,16 +33,10 @@ public class WorldsListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		
-		mWorlds = new ArrayList<World>();
-		for (int i = 0; i<10; i++) {
-			mWorlds.add(new World(i));
-		}
+		mWorlds = WorldCarQuizLab.get(getActivity()).getWorlds();
 		
 		WorldAdapter adapter = new WorldAdapter(mWorlds);
-		setListAdapter(adapter);
-		
-		//Two lines in buttons
-		
+		setListAdapter(adapter);		
 	}
 	
 	

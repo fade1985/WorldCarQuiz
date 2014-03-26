@@ -3,16 +3,19 @@ package com.android.worldcarquiz.data;
 
 public class World {
 	private static final int sWorldsToUnlock = 40;
-	
+
+	public static int getmUnlockedQuestions() {
+		return mUnlockedQuestions;
+	}
+
 	private SubWorld[] mSubWorlds;
-	private int mUnlockedQuestions;
+	private static int mUnlockedQuestions;
 	
 	public World(int i) {
 		mUnlockedQuestions = 0;
 	}
 
-	public int getUnlockedQuestions() {
-		updateUnlockedQuestions();
+	public static int getUnlockedQuestions() {
 		return mUnlockedQuestions;
 	}
 
@@ -21,6 +24,10 @@ public class World {
 		for (SubWorld s : mSubWorlds) {
 			mUnlockedQuestions += s.getUnlockedQuestions();
 		}
+	}
+	
+	public static int getWorldstoUnlock() {
+		return sWorldsToUnlock;
 	}
 		
 }
