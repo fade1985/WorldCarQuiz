@@ -5,7 +5,6 @@ public class Question {
 	private int mValor;
 	private int mFinalValor;
 	private int mTrys;
-	private String[] mOptions;
 	
 	public Question(int valor) {
 		mSolved = false;
@@ -45,8 +44,5 @@ public class Question {
 	public void setTrys(int trys) {
 		mTrys = trys;
 	}
-	
-	public void setOptions(String[] options) {
-		mOptions = options;
-	}
+
 }
