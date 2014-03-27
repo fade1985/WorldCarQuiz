@@ -14,7 +14,7 @@ public class SubWorld {
 		mQuestions = new ArrayList<Question>();
 		
 		for (int i = 0; i < NUM_QUESTIONS; i++) {
-			mQuestions.add(new Question(valor, false, 0));
+			mQuestions.add(new Question(valor));
 		}
 	}
 
@@ -31,4 +31,5 @@ public class SubWorld {
 			}
 		}
 	}
+	
 }

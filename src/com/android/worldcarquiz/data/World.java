@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class World {
-	private static final int QUESTIONS_TO_UNLOCK = 40;
+	public static final int QUESTIONS_TO_UNLOCK = 40;
 	private static final int NUM_SUBWORLDS = 3;
 
 	private ArrayList<SubWorld> mSubWorlds;

@@ -3,13 +3,23 @@ package com.android.worldcarquiz.data;
 public class Question {
 	private boolean mSolved;
 	private int mValor;
+	private int mFinalValor;
 	private int mTrys;
 	private String[] mOptions;
 	
-	public Question(int valor, boolean solved, int trys) {
-		mSolved = solved;
+	public Question(int valor) {
+		mSolved = false;
 		mValor = valor;
-		mTrys = trys;
+		mFinalValor = 0;
+		mTrys = 0;
+	}
+
+	public int getFinalValor() {
+		return mFinalValor;
+	}
+
+	public void setFinalValor(int mFinalValor) {
+		this.mFinalValor = mFinalValor;
 	}
 
 	public boolean isSolved() {

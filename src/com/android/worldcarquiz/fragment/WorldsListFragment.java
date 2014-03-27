@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.text.style.TypefaceSpan;
 import com.android.worldcarquiz.R;
@@ -58,33 +59,47 @@ public class WorldsListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
-			if(mWorlds.get(position).getSubWorlds() != null)
+			if(mWorlds.get(position).getSubWorlds() != null){
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
-			else
+				
+				//Titulo de los puntos en el mundo
+				TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
+				circlePoints.setText("Falta" + " Points won!");
+				circlePoints.setTextSize(10);
+				circlePoints.setPadding(0, 10, 0, 0);
+				
+				//Numero de acertados dentro del mundo
+				TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
+				worldTitle.setText(mWorlds.get(position).getUnlockedQuestions() + " Out of " + World.QUESTIONS_TO_UNLOCK + " Cars");
+				
+				//Porcentaje del mundo
+				TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
+				percentWorld.setText((mWorlds.get(position).getUnlockedQuestions()*100)/World.QUESTIONS_TO_UNLOCK);
+			}
+			else {
+				
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
-			
-			
+				
+				//Titulo de los puntos en el mundo
+				TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
+				circlePoints.setText(String.valueOf(position) + " Points won!");
+				circlePoints.setTextSize(10);
+				circlePoints.setPadding(0, 10, 0, 0);
+				
+				//Numero de acertados dentro del mundo
+				TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
+				worldTitle.setText("0 Out of 40 Cars");
+				
+				//Porcentaje del mundo
+				TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
+				percentWorld.setText("0%");
+			}
+				
 			
 			//Titulo del mundo
 			TextView circleWorld = (TextView)convertView.findViewById(R.id.circle_list_worlds);
 			circleWorld.setText("Wold " + String.valueOf(position+1));
-			circleWorld.setTextSize(25);
-			//circleWorld.setPadding(0, 20, 0, 0);
-			
-			//Titulo de los puntos en el mundo
-			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			circlePoints.setText(String.valueOf(position) + " Points won!");
-			circlePoints.setTextSize(10);
-			circlePoints.setPadding(0, 10, 0, 0);
-			
-			//Numero de acertados dentro del mundo
-			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			worldTitle.setText(String.valueOf(position) + " Out of " + String.valueOf(position) + " Cars");
-			
-			//Porcentaje del mundo
-			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
-			percentWorld.setText("15%");
-		
+			circleWorld.setTextSize(25);			
 		
 			return convertView;
 			
