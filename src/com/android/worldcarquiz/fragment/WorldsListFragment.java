@@ -57,12 +57,12 @@ public class WorldsListFragment extends ListFragment {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				if(mWorlds.get(position).getSubWorlds() != null)
-					convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
-				else
-					convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
-			}
+			
+			if(mWorlds.get(position).getSubWorlds() != null)
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
+			else
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
+			
 			
 			
 			//Titulo del mundo
