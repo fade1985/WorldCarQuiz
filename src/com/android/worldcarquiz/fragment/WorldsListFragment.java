@@ -60,10 +60,26 @@ public class WorldsListFragment extends ListFragment {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
 			}
 			
-			Button buttonWorld = (Button)convertView.findViewById(R.id.image_list_worlds);
+			//Titulo del mundo
+			TextView circleWorld = (TextView)convertView.findViewById(R.id.circle_list_worlds);
+			circleWorld.setText("Wold " + String.valueOf(position+1));
+			circleWorld.setTextSize(25);
+			//circleWorld.setPadding(0, 20, 0, 0);
 			
+			//Titulo de los puntos en el mundo
+			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
+			circlePoints.setText(String.valueOf(position) + " Points won!");
+			circlePoints.setTextSize(10);
+			circlePoints.setPadding(0, 10, 0, 0);
+			
+			//Numero de acertados dentro del mundo
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			worldTitle.setText("World" + String.valueOf(position));
+			worldTitle.setText(String.valueOf(position) + " Out of " + String.valueOf(position) + " Cars");
+			
+			//Porcentaje del mundo
+			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
+			percentWorld.setText("15%");
+		
 		
 			return convertView;
 			
