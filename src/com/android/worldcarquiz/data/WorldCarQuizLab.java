@@ -16,7 +16,8 @@ public class WorldCarQuizLab {
 		mAppContext = appContext;
 		mWorlds = new ArrayList<World>();
 		
-		for (int i = 0; i < NUM_WORLDS; i++) {
+		mWorlds.add(new World(0,true));
+		for (int i = 1; i < NUM_WORLDS; i++) {
 			mWorlds.add(new World(i, false));
 		}
 	}

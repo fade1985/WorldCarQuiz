@@ -11,6 +11,7 @@ public class SubWorld {
 	
 	public SubWorld(int valor) {
 		mUnlockedQuestions = 0;
+		mQuestions = new ArrayList<Question>();
 		
 		for (int i = 0; i < NUM_QUESTIONS; i++) {
 			mQuestions.add(new Question(valor, false, 0));

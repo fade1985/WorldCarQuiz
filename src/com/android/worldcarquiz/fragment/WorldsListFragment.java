@@ -35,6 +35,7 @@ public class WorldsListFragment extends ListFragment {
 		
 		mWorlds = WorldCarQuizLab.get(getActivity()).getWorlds();
 		
+		
 		WorldAdapter adapter = new WorldAdapter(mWorlds);
 		setListAdapter(adapter);		
 	}
@@ -57,8 +58,12 @@ public class WorldsListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
-				convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
+				if(mWorlds.get(position).getSubWorlds() != null)
+					convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
+				else
+					convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
 			}
+			
 			
 			//Titulo del mundo
 			TextView circleWorld = (TextView)convertView.findViewById(R.id.circle_list_worlds);
