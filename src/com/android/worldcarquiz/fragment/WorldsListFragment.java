@@ -58,7 +58,7 @@ public class WorldsListFragment extends ListFragment {
 				//Titulo de los puntos en el mundo
 				TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
 				circlePoints.setText("Falta" + " Points won!");
-				circlePoints.setTextSize(10);
+				circlePoints.setTextSize(14);
 				circlePoints.setPadding(0, 10, 0, 0);
 				
 				//Numero de acertados dentro del mundo
@@ -77,7 +77,7 @@ public class WorldsListFragment extends ListFragment {
 				TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
 				int carsLeft = mWorlds.get(position).getQuestionsToUnlock();
 				circlePoints.setText(carsLeft + " cars left\nto unlock");
-				circlePoints.setTextSize(10);
+				circlePoints.setTextSize(14);
 				circlePoints.setPadding(0, 10, 0, 0);
 				
 				//Numero de acertados dentro del mundo

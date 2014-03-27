@@ -132,7 +132,7 @@ public class SubWorldFragment extends Fragment {
                 
                 imageView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                imageView.setPadding(30, 30, 30, 30);
+                imageView.setPadding(50,50,50,50);
             } else {
                 imageView = (ImageView) convertView;
             }
