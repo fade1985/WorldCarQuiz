@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 
 public class World {
-	public static final int QUESTIONS_TO_UNLOCK = 40;
 	private static final int NUM_SUBWORLDS = 3;
 
 	private ArrayList<SubWorld> mSubWorlds;
 	private int mUnlockedQuestions;
+	private int mQuestionsToUnlock;
 	private int mNumWorld;
 	
-	public World(int i, boolean create) {
+	public World(int i, boolean create, int qtu) {
 		mUnlockedQuestions = 0;
 		mNumWorld = i;
 		mSubWorlds = null;
+		mQuestionsToUnlock = qtu;
 		
 		if (create) { 
 			mSubWorlds = new ArrayList<SubWorld>();
@@ -44,5 +45,13 @@ public class World {
 	
 	public ArrayList<SubWorld> getSubWorlds(){
 		return mSubWorlds;
+	}
+	
+	public void correctAnswer() {
+		mQuestionsToUnlock--;
+	}
+	
+	public int getQuestionsToUnlock() {
+		return mQuestionsToUnlock;
 	}
 }

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import android.content.Context;
 
 public class WorldCarQuizLab {
+	public static final int QUESTIONS_TO_UNLOCK = 40;
 	private static final int NUM_WORLDS = 10;
+	
 	private static WorldCarQuizLab sWorldCarQuizLab;
 	
 	private ArrayList<World> mWorlds;
@@ -16,9 +18,9 @@ public class WorldCarQuizLab {
 		mAppContext = appContext;
 		mWorlds = new ArrayList<World>();
 		
-		mWorlds.add(new World(0,true));
+		mWorlds.add(new World(0, true, 0));
 		for (int i = 1; i < NUM_WORLDS; i++) {
-			mWorlds.add(new World(i, false));
+			mWorlds.add(new World(i, false, QUESTIONS_TO_UNLOCK * i));
 		}
 	}
 	
