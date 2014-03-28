@@ -9,7 +9,9 @@
     <string name="worlds">Worlds</string>
     <string name="tutorial">Tutorial</string>
     <string name="next_car">Next Car</string>
-    
-    <string name="div">2</string>
+    <string name="stats">Stats</string>
+    <string name="awards">Awards</string>
+    <string name="stamps">Stamps</string>
+    <string name="div">3</string>
 
 </resources>
