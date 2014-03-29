@@ -72,7 +72,7 @@ public class QuestionAdapter extends BaseAdapter {
             
             imageView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            imageView.setPadding(50,50,50,50);
+            imageView.setPadding(10, 5, 10, 5);
         } else {
             imageView = (ImageView) convertView;
         }
@@ -83,8 +83,8 @@ public class QuestionAdapter extends BaseAdapter {
     
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.ic_open_box_one, R.drawable.ic_open_box_nine,
-            R.drawable.ic_close_box, R.drawable.ic_half_closed_box
+            R.drawable.ic_open_box_eight, R.drawable.ic_open_box_four,
+            R.drawable.ic_half_closed_box, R.drawable.ic_close_box
     };
     
 }
