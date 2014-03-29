@@ -1,14 +1,11 @@
 package com.android.worldcarquiz.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -16,9 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.activity.QuestionActivity;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class MainMenuFragment extends Fragment {
 	
@@ -33,6 +30,32 @@ public class MainMenuFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
+		
+        WorldQuizDatabaseHelper wqdbh =
+                new WorldQuizDatabaseHelper(getActivity());
+     
+            SQLiteDatabase db = wqdbh.getWritableDatabase();
+            
+            //Si hemos abierto correctamente la base de datos
+            if(db != null)
+            {
+            	//db.execSQL("DROP TABLE IF EXISTS worlds");
+            	
+                //Insertamos 5 usuarios de ejemplo
+                for(int i=1; i<=5; i++)
+                {
+                    //Generamos los datos
+                    int codigo = i;
+                    String nombre = "Usuario" + i;
+     
+                    //Insertamos los datos en la tabla Usuarios
+                    db.execSQL("INSERT INTO worlds (name) " +
+                               "VALUES ('Mundo " + i +"')");
+                }
+     
+                //Cerramos la base de datos
+                db.close();
+            }
 	}
 		
 	@Override
