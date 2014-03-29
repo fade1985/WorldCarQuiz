@@ -19,8 +19,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="0.5"
-		            android:minHeight="50dp"
-		            android:layout_marginTop="15dp"
+		            android:layout_marginTop="5dp"
 		            android:layout_marginLeft="10dp"
 		            android:layout_marginRight="5dp"
 		            android:background="@drawable/button_selector"
@@ -32,8 +31,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="0.5"
-		            android:minHeight="50dp"
-		            android:layout_marginTop="15dp"
+		            android:layout_marginTop="5dp"
 		            android:layout_marginLeft="5dp"
 		            android:layout_marginRight="10dp"
 		             android:background="@drawable/button_selector"
@@ -49,8 +47,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="0.5"
-		            android:minHeight="50dp"
-		            android:layout_marginTop="20dp"
+		            android:layout_marginTop="10dp"
 		            android:layout_marginLeft="10dp"
 		            android:layout_marginRight="5dp"
 		            android:background="@drawable/button_selector"
@@ -62,8 +59,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="0.5"
-		            android:minHeight="50dp"
-		            android:layout_marginTop="20dp"
+		            android:layout_marginTop="10dp"
 		            android:layout_marginLeft="5dp"
 		            android:layout_marginRight="10dp"
 		            android:background="@drawable/button_selector"
@@ -71,8 +67,5 @@
 		            android:textColor="#ffffff"
 		            />
 		    </LinearLayout>
-
-
-
   	</LinearLayout>
 </RelativeLayout>
