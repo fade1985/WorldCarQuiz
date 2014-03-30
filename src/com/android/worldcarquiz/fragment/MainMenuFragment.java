@@ -34,28 +34,7 @@ public class MainMenuFragment extends Fragment {
         WorldQuizDatabaseHelper wqdbh =
                 new WorldQuizDatabaseHelper(getActivity());
      
-            SQLiteDatabase db = wqdbh.getWritableDatabase();
-            
-            //Si hemos abierto correctamente la base de datos
-            if(db != null)
-            {
-            	//db.execSQL("DROP TABLE IF EXISTS worlds");
-            	
-                //Insertamos 5 usuarios de ejemplo
-                for(int i=1; i<=5; i++)
-                {
-                    //Generamos los datos
-                    int codigo = i;
-                    String nombre = "Usuario" + i;
-     
-                    //Insertamos los datos en la tabla Usuarios
-                    db.execSQL("INSERT INTO worlds (name) " +
-                               "VALUES ('Mundo " + i +"')");
-                }
-     
-                //Cerramos la base de datos
-                db.close();
-            }
+            //SQLiteDatabase db = wqdbh.getWritableDatabase();
 	}
 		
 	@Override

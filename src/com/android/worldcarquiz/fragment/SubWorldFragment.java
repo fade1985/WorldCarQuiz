@@ -18,6 +18,8 @@ import com.android.worldcarquiz.activity.QuestionActivity;
 import com.android.worldcarquiz.provider.QuestionAdapter;
 
 public class SubWorldFragment extends Fragment {
+	public static final String EXTRA_NUM_SUBWORLD = "extra_num_subWorld";
+	
 	private ImageButton mButton;
 	private int mPos;
 	
@@ -48,9 +50,9 @@ public class SubWorldFragment extends Fragment {
 		return v;
 	}
 	
-	public static SubWorldFragment newInstance(int pos) {
+	public static SubWorldFragment newInstance(int numSubWorld) {
 		Bundle arg = new Bundle();
-		arg.putInt("PRUEBA", pos);
+		arg.putInt("PRUEBA", numSubWorld);
 		SubWorldFragment fragment = new SubWorldFragment();
 		fragment.setArguments(arg);
 		

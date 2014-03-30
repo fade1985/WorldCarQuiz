@@ -18,11 +18,14 @@ import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class WorldPagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
+	private int mNumSubWorld;
 	private ArrayList<SubWorld> mSubWorld;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		
+		mNumSubWorld = getIntent().getIntExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, 0);
 	   	   
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
@@ -40,7 +43,7 @@ public class WorldPagerActivity extends FragmentActivity {
 			
 			@Override
 			public Fragment getItem(int arg0) {
-				return SubWorldFragment.newInstance(arg0);
+				return SubWorldFragment.newInstance(mNumSubWorld);
 			}
 		});
 		
