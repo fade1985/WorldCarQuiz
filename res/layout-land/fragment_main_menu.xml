@@ -148,6 +148,6 @@
       	android:layout_height="wrap_content"
       	android:layout_alignParentBottom="true"
       	android:scaleType="fitEnd"
-        android:src="@drawable/fondob" />
+        android:src="@drawable/fondo" />
 
 </RelativeLayout>

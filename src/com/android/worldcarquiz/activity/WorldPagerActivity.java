@@ -38,7 +38,7 @@ public class WorldPagerActivity extends FragmentActivity {
 			
 			@Override
 			public int getCount() {
-				return 3;
+				return 2;
 			}
 			
 			@Override
@@ -93,7 +93,7 @@ public class WorldPagerActivity extends FragmentActivity {
 			   .setText("Rookie").setTabListener(tabListener));
 	   actionBar.addTab(actionBar.newTab()
 			   .setText("Expert").setTabListener(tabListener));	    
-	   actionBar.addTab(actionBar.newTab()
-			   .setText("Pro").setTabListener(tabListener));
+	   /*actionBar.addTab(actionBar.newTab()
+			   .setText("Pro").setTabListener(tabListener));*/
 	}
 }

@@ -40,6 +40,7 @@ public class SubWorldFragment extends Fragment {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 		    {
+		    	
 		        // this 'mActivity' parameter is Activity object, you can send the current activity.
 		        Intent i = new Intent(getActivity(), QuestionActivity.class);
 		        startActivity(i);

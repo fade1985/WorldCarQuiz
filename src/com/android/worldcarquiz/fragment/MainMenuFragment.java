@@ -27,6 +27,7 @@ public class MainMenuFragment extends Fragment {
 	private Typeface RobotoThin;
 	private Typeface RobotoRegular;
 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
@@ -67,6 +68,7 @@ public class MainMenuFragment extends Fragment {
 			
 			@Override
 			public void onClick(View arg0) {
+				
 				Intent i = new Intent(getActivity(), WorldsListActivity.class);
 				startActivity(i);
 			}

@@ -44,9 +44,10 @@ public class QuestionAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
-        ImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
+		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box, null);
+		
+        //if (convertView == null) {  // if it's not recycled, initialize some attributes
+        	ImageView  imageView = (ImageView)convertView.findViewById(R.id.image_box);
             
             int Measuredwidth = 0;
             int Measuredheight = 0;
@@ -73,9 +74,9 @@ public class QuestionAdapter extends BaseAdapter {
             imageView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             imageView.setPadding(10, 5, 10, 5);
-        } else {
+       /* } else {
             imageView = (ImageView) convertView;
-        }
+        }*/
 
         imageView.setImageResource(mThumbIds[i%4]);
         return imageView;
@@ -84,7 +85,7 @@ public class QuestionAdapter extends BaseAdapter {
     // references to our images
     private Integer[] mThumbIds = {
             R.drawable.ic_open_box_eight, R.drawable.ic_open_box_four,
-            R.drawable.ic_half_closed_box, R.drawable.ic_close_box
+            R.drawable.button_subworld_change_image, R.drawable.ic_close_box
     };
     
 }

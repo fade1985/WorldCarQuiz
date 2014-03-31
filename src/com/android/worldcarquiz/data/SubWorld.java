@@ -3,8 +3,8 @@ package com.android.worldcarquiz.data;
 import java.util.ArrayList;
 
 public class SubWorld {
-	private static final int NUM_QUESTIONS = 20;
-	private static final int QUESTIONS_TO_UNLOCK = 10;
+	private static final int NUM_QUESTIONS = 30;
+	private static final int QUESTIONS_TO_UNLOCK = 15;
 	
 	private int mUnlockedQuestions;
 	private ArrayList<Question> mQuestions;
@@ -31,5 +31,4 @@ public class SubWorld {
 			}
 		}
 	}
-	
 }
