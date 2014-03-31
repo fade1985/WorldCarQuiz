@@ -12,6 +12,7 @@ public class WorldCarQuizLab {
 	private static final int NUM_WORLDS = 10;
 	
 	private static WorldCarQuizLab sWorldCarQuizLab;
+	private WorldQuizDatabaseHelper mWqdbh;
 	
 	private ArrayList<World> mWorlds;
 	private Stadistics mStadistics;
@@ -21,14 +22,18 @@ public class WorldCarQuizLab {
 		mAppContext = appContext;
 		mWorlds = new ArrayList<World>();
 		
-        WorldQuizDatabaseHelper wqdbh =
-                new WorldQuizDatabaseHelper(mAppContext);
+		mWqdbh = new WorldQuizDatabaseHelper(mAppContext);
         
-        SQLiteDatabase db = wqdbh.getWritableDatabase();
+        SQLiteDatabase db = mWqdbh.getWritableDatabase();
                
-		mWorlds.add(new World(0, true, 0));
+		mWorlds.add(new World(0, true));
 		for (int i = 1; i < NUM_WORLDS; i++) {
-			mWorlds.add(new World(i, false, QUESTIONS_TO_UNLOCK * i));
+			if (!mWqdbh.isWorldLocked(db, i)) {
+				mWorlds.add(new World(i, true));
+			} else {
+				mWorlds.add(new World(i, false));
+			}
+			
 		}
 		
 		db.close();
@@ -47,6 +52,10 @@ public class WorldCarQuizLab {
 	
 	public ArrayList<World> getWorlds() {
 		return mWorlds;
+	}
+	
+	public WorldQuizDatabaseHelper getWqdbh() {
+		return mWqdbh;
 	}
 
 }
