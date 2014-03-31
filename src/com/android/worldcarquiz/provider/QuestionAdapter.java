@@ -25,7 +25,7 @@ public class QuestionAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 20;
+        return 30;
     }
 
     @Override
@@ -44,48 +44,46 @@ public class QuestionAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
-		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box, null);
-		
-        //if (convertView == null) {  // if it's not recycled, initialize some attributes
-        	ImageView  imageView = (ImageView)convertView.findViewById(R.id.image_box);
-            
-            int Measuredwidth = 0;
-            int Measuredheight = 0;
-            Point size = new Point();
-            WindowManager w = ((Activity)mContext).getWindowManager();
+        if (convertView == null) {  // if it's not recycled, initialize some attributes
+        	convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box, null);
+        }
+        
+    	ImageView  imageView = (ImageView)convertView.findViewById(R.id.image_box);
+        
+        int Measuredwidth = 0;
+        int Measuredheight = 0;
+        Point size = new Point();
+        WindowManager w = ((Activity)mContext).getWindowManager();
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
-            {
-                w.getDefaultDisplay().getSize(size);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
+        {
+            w.getDefaultDisplay().getSize(size);
 
-                Measuredwidth = size.x;
-                Measuredheight = size.y;
-            }
-            else
-            {
-                Display d = w.getDefaultDisplay();
-                Measuredwidth = d.getWidth();
-                Measuredheight = d.getHeight();
-            }
-            
-            String s = ((Activity)mContext).getResources().getString(R.string.div) ;
-            int div = Integer.valueOf(s);
-            
-            imageView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            imageView.setPadding(10, 5, 10, 5);
-       /* } else {
-            imageView = (ImageView) convertView;
-        }*/
-
+            Measuredwidth = size.x;
+            Measuredheight = size.y;
+        }
+        else
+        {
+            Display d = w.getDefaultDisplay();
+            Measuredwidth = d.getWidth();
+            Measuredheight = d.getHeight();
+        }
+        
+        String s = ((Activity)mContext).getResources().getString(R.string.div) ;
+        int div = Integer.valueOf(s);
+        
+        convertView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setPadding(10, 5, 10, 5);
+    
         imageView.setImageResource(mThumbIds[i%4]);
-        return imageView;
+        return convertView;
     }
     
     // references to our images
     private Integer[] mThumbIds = {
             R.drawable.ic_open_box_eight, R.drawable.ic_open_box_four,
-            R.drawable.button_subworld_change_image, R.drawable.ic_close_box
+            R.drawable.ic_open_box_seven, R.drawable.ic_close_box
     };
     
 }
