@@ -1,6 +1,7 @@
 package com.android.worldcarquiz.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -21,19 +22,19 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase sqlitedatabase) {
 		//Creamos la tabla de mundos
 		sqlitedatabase.execSQL("create table worlds (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				" name TEXT)");
+				" name TEXT, locked INTEGER)");
 		initializeTableWorlds(sqlitedatabase);
 		
+		//Creamos la tabla de preguntas
+		sqlitedatabase.execSQL("create table questions (world_id INTEGER references worlds(_id)," +
+				" _id INTEGER PRIMARY KEY AUTOINCREMENT, difficulty INTEGER," +
+				" locked INTEGER, trys INTEGER)");
+		
 		//Creamos la tabla de coches
-		sqlitedatabase.execSQL("create table cars (world_id INTEGER references worlds(_id)," +
+		sqlitedatabase.execSQL("create table cars (question_id INTEGER references questions(_id)," +
 				" _id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT," +
 				" model TEXT, segment TEXT, complexity INTEGER, year INTEGER," +
 				" file_name TEXT)");
-		
-		//Creamos la tabla de preguntas
-		sqlitedatabase.execSQL("create table questions (car_id INTEGER references cars(_id)," +
-				" _id INTEGER PRIMARY KEY AUTOINCREMENT, difficulty INTEGER," +
-				" blocked INTEGER, trys INTEGER)");
 	}
 
 	@Override
@@ -46,8 +47,37 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
         for(int i = 1; i <= 5; i++)
         {
             //Insertamos los datos en la tabla Usuarios
-            sqlitedatabase.execSQL("INSERT INTO worlds (name) " +
-                       "VALUES ('World " + i +"')");
+            sqlitedatabase.execSQL("INSERT INTO worlds (name, locked) " +
+                       "VALUES ('World " + i +"', 1)");
         }
+	}
+	
+	public boolean isWorldLocked(SQLiteDatabase sqlitedatabase, int numWorld) {
+		Cursor c = sqlitedatabase.rawQuery("SELECT locked FROM worlds WHERE _id=" + numWorld, null);
+		boolean locked;
+		
+		c.moveToFirst();
+		locked = c.getInt(0) == 1;
+		return locked;
+	}
+	
+	public int questionsLocked(SQLiteDatabase sqlitedatabase, int numWorld) {
+		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id=" + numWorld
+				+" and locked = 1", null);
+		int numLocked;
+		
+		c.moveToFirst();
+		numLocked = c.getInt(0);
+		return numLocked;
+	}
+	
+	public int questionsUnLocked(SQLiteDatabase sqlitedatabase, int numWorld) {
+		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id=" + numWorld
+				+" and locked = 0", null);
+		int numLocked;
+		
+		c.moveToFirst();
+		numLocked = c.getInt(0);
+		return numLocked;
 	}
 }

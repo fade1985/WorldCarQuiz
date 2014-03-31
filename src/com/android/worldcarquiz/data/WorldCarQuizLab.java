@@ -3,6 +3,9 @@ package com.android.worldcarquiz.data;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class WorldCarQuizLab {
 	public static final int QUESTIONS_TO_UNLOCK = 40;
@@ -18,10 +21,17 @@ public class WorldCarQuizLab {
 		mAppContext = appContext;
 		mWorlds = new ArrayList<World>();
 		
+        WorldQuizDatabaseHelper wqdbh =
+                new WorldQuizDatabaseHelper(mAppContext);
+        
+        SQLiteDatabase db = wqdbh.getWritableDatabase();
+               
 		mWorlds.add(new World(0, true, 0));
 		for (int i = 1; i < NUM_WORLDS; i++) {
 			mWorlds.add(new World(i, false, QUESTIONS_TO_UNLOCK * i));
 		}
+		
+		db.close();
 	}
 	
 	public static WorldCarQuizLab get(Context c) {

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class MainMenuFragment extends Fragment {
@@ -32,10 +33,7 @@ public class MainMenuFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		
-        WorldQuizDatabaseHelper wqdbh =
-                new WorldQuizDatabaseHelper(getActivity());
-     
-            //SQLiteDatabase db = wqdbh.getWritableDatabase();
+		WorldCarQuizLab worldCarQuizLab = WorldCarQuizLab.get(getActivity());
 	}
 		
 	@Override
