@@ -8,10 +8,12 @@ import android.os.Build;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ViewSwitcher;
 
 import com.android.worldcarquiz.R;
 
@@ -44,11 +46,20 @@ public class QuestionAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
+    	
+    	
         if (convertView == null) {  // if it's not recycled, initialize some attributes
-        	convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box, null);
+        	//Esta condicion se tiene que cambiar y será cuando esté bloqueado
+        	if(i >1)
+        	{
+        		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_blocked, null);
+        	}
+        	else {
+        	convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);
+        	}
         }
         
-    	ImageView  imageView = (ImageView)convertView.findViewById(R.id.image_box);
+    	ViewSwitcher  viewSwitcher = (ViewSwitcher)convertView.findViewById(R.id.switcher);
         
         int Measuredwidth = 0;
         int Measuredheight = 0;
@@ -73,10 +84,10 @@ public class QuestionAdapter extends BaseAdapter {
         int div = Integer.valueOf(s);
         
         convertView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        imageView.setPadding(10, 5, 10, 5);
+       // viewSwitcher.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        viewSwitcher.setPadding(10, 5, 10, 5);
     
-        imageView.setImageResource(mThumbIds[i%4]);
+       // viewSwitcher.setImageResource(mThumbIds[i%4]);
         return convertView;
     }
     
