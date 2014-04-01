@@ -46,18 +46,14 @@ public class QuestionAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
-    	
-    	
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
         	//Esta condicion se tiene que cambiar y será cuando esté bloqueado
-        	if(i >1)
+        	if(i >0)
         	{
         		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_blocked, null);
         	}
         	else {
         	convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);
         	}
-        }
         
     	ViewSwitcher  viewSwitcher = (ViewSwitcher)convertView.findViewById(R.id.switcher);
         
@@ -91,10 +87,10 @@ public class QuestionAdapter extends BaseAdapter {
         return convertView;
     }
     
-    // references to our images
+  /*  // references to our images
     private Integer[] mThumbIds = {
             R.drawable.ic_open_box_eight, R.drawable.ic_open_box_four,
             R.drawable.ic_open_box_seven, R.drawable.ic_close_box
-    };
+    };*/
     
 }
