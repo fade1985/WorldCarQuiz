@@ -11,18 +11,19 @@
         android:id="@+id/fragment_photo"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_weight="0.4"/>
+    	android:layout_weight="0.3"/>
     
     <FrameLayout 
         android:id="@+id/fragment_result"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_weight="0.6"/>        
+    	android:layout_weight="0.7"
+    	android:background="@drawable/road_vertical"/>        
         
     <FrameLayout 
         android:id="@+id/fragment_banner"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
 />
-    
+         
 </LinearLayout>

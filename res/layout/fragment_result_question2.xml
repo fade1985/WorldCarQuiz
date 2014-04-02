@@ -6,52 +6,52 @@
    <LinearLayout 
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:orientation="vertical">     
+       android:orientation="vertical"
+       android:gravity="center_vertical">     
        	 
        	 <!-- Botones Respuestas -->
        	 	 
 		        <Button
 		            android:id="@+id/solution_one"
 		            android:layout_width="match_parent"
-		            android:layout_height="42dp"
-		            android:background="@drawable/button_selector"
-		            android:layout_marginTop="5dp"
-		            android:layout_marginLeft="20dp"
-		            android:layout_marginRight="20dp"
-		            android:text="Var Respuesta 1"
+		            android:layout_height="35dp"
+		            android:background="@drawable/button_thin_selector"
+		            android:layout_marginLeft="35dp"
+		            android:layout_marginRight="35dp"
+		            android:text="Renault Megane"
 		            android:textColor="#ffffff"
 		             />
 		        <Button
 		            android:id="@+id/solution_two"
 		            android:layout_width="match_parent"
-		            android:layout_height="42dp"
-		            android:background="@drawable/button_selector"
-		            android:layout_marginTop="5dp"
-		            android:layout_marginLeft="20dp"
-		            android:layout_marginRight="20dp"
-		            android:text="Var Respuesta 2"
+		            android:layout_height="35dp"
+		            android:background="@drawable/button_thin_selector"
+		            android:layout_marginTop="15dp"
+		            android:layout_marginLeft="35dp"
+		            android:layout_marginRight="35dp"
+		            android:text="Fiat Punto"
 		            android:textColor="#ffffff"
 		             />
 		         <Button
 		            android:id="@+id/solution_three"
 		            android:layout_width="match_parent"
-		            android:layout_height="42dp"
-		            android:background="@drawable/button_selector"
-		            android:layout_marginTop="5dp"
-		            android:layout_marginLeft="20dp"
-		            android:layout_marginRight="20dp"
-		            android:text="Var Respuesta 3"
+		            android:layout_height="35dp"
+		            android:background="@drawable/button_thin_selector"
+		            android:layout_marginTop="15dp"
+		            android:layout_marginLeft="35dp"
+		            android:layout_marginRight="35dp"
+		            android:text="Citroen C4"
 		            android:textColor="#ffffff"
 		             />
 		          <Button
 		            android:id="@+id/solution_four"
 		            android:layout_width="match_parent"
-		            android:layout_height="42dp"
-		            android:layout_marginLeft="20dp"
-		            android:layout_marginRight="20dp"
-		            android:background="@drawable/button_selector"
-		            android:layout_marginTop="5dp"
-		            android:text="Var Respuesta 4"
+		            android:layout_height="35dp"
+		            android:layout_marginLeft="35dp"
+		            android:layout_marginRight="35dp"
+		            android:background="@drawable/button_thin_selector"
+		            android:layout_marginTop="15dp"
+		            android:text="Ford Focus"
 		            android:textColor="#ffffff"
 		            />
 

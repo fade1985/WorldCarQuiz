@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
+    <!-- Imagen del coche -->
+           <ImageView 
+               android:id="@+id/photo_question"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:scaleType="centerCrop"
+               android:src="@drawable/ford_focus_2014"/>
+            <ImageButton
+	           android:id="@+id/share_button"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/button_right_rounded_selector"
+	           android:src="@drawable/ic_action_share" />
+            <ImageButton
+                android:id="@+id/help_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_left_rounded_selector"
+                android:src="@drawable/ic_action_help" />
+             <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_below="@id/photo_question"
+                android:scaleType="centerCrop"
+                android:src="@drawable/shadow"/>
+           
+</RelativeLayout>
