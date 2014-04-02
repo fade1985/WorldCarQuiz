@@ -2,31 +2,34 @@ package com.android.worldcarquiz.data;
 
 import java.util.ArrayList;
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
+
 
 public class World {
-	private static final int NUM_SUBWORLDS = 3;
+	private static final int NUM_SUBWORLDS = 2;
 
 	private ArrayList<SubWorld> mSubWorlds;
 	private int mUnlockedQuestions;
-	private int mQuestionsToUnlock;
 	private int mNumWorld;
 
-	public World(int i, boolean create, int qtu) {
+	public World(int i, WorldQuizDatabaseHelper database) {
+		mUnlockedQuestions = 0;
+		mNumWorld = i;
+		mSubWorlds = new ArrayList<SubWorld>();
+
+		for (int j = 1; j <= NUM_SUBWORLDS; j++) {
+			mSubWorlds.add(new SubWorld(mNumWorld, j, database));
+		}
+	}
+	
+	public World(int i) {
 		mUnlockedQuestions = 0;
 		mNumWorld = i;
 		mSubWorlds = null;
-		mQuestionsToUnlock = qtu;
-
-		if (create) { 
-			mSubWorlds = new ArrayList<SubWorld>();
-
-			for (int j = 1; j <= NUM_SUBWORLDS; j++) {
-				mSubWorlds.add(new SubWorld(j));
-			}
-
-		}
 	}
-
+	
 	public int getUnlockedQuestions() {
 		updateUnlockedQuestions();
 		return mUnlockedQuestions;
@@ -47,11 +50,4 @@ public class World {
 		return mSubWorlds;
 	}
 
-	public void correctAnswer() {
-		mQuestionsToUnlock--;
-	}
-
-	public int getQuestionsToUnlock() {
-		return mQuestionsToUnlock;
-	}
 }

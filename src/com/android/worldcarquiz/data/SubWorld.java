@@ -2,33 +2,46 @@ package com.android.worldcarquiz.data;
 
 import java.util.ArrayList;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
+
 public class SubWorld {
-	private static final int NUM_QUESTIONS = 30;
-	private static final int QUESTIONS_TO_UNLOCK = 15;
+	public static final int NUM_QUESTIONS = 30;
+	public static final int QUESTIONS_TO_UNLOCK = 6;
 	
 	private int mUnlockedQuestions;
+	private int mAnsweredQuestions;
 	private ArrayList<Question> mQuestions;
 	
-	public SubWorld(int valor) {
-		mUnlockedQuestions = 0;
+	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database) {
 		mQuestions = new ArrayList<Question>();
 		
-		for (int i = 0; i < NUM_QUESTIONS; i++) {
-			mQuestions.add(new Question(valor));
-		}
+		SQLiteDatabase db = database.getReadableDatabase();
+		
+		Cursor c = db.rawQuery("SELECT locked, trys FROM questions WHERE world_id =" + numWorld
+				+" and subWorld = " + numSubWorld, null);
+		
+		if (c.moveToFirst()) {
+		     //Recorremos el cursor hasta que no haya más registros
+		     do {
+		          int locked = c.getInt(0);
+		          int trys = c.getInt(1);
+		          mQuestions.add(new Question(locked, trys));
+		     } while(c.moveToNext());
+		} 		
+		
+		mUnlockedQuestions = database.questionsUnLocked(db, numWorld, numSubWorld);
+		mAnsweredQuestions = database.answeredQuestions(db, numWorld, numSubWorld);
 	}
 
 	public int getUnlockedQuestions() {
-		mUnlockedQuestions = 0;
-		updateUnlockedQuestions();
 		return mUnlockedQuestions;
 	}
 	
-	public void updateUnlockedQuestions() {
-		for (Question q : mQuestions) {
-			if (q.isSolved()) {
-				mUnlockedQuestions++;
-			}
-		}
+	public int getAnsweredQuestions() {
+		return mAnsweredQuestions;
 	}
+	
 }

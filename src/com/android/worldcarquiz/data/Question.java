@@ -1,32 +1,13 @@
 package com.android.worldcarquiz.data;
 
 public class Question {
-	private boolean mSolved;
+	private int mLocked;
 	private int mValor;
-	private int mFinalValor;
 	private int mTrys;
 	
-	public Question(int valor) {
-		mSolved = false;
-		mValor = valor;
-		mFinalValor = 0;
-		mTrys = 0;
-	}
-
-	public int getFinalValor() {
-		return mFinalValor;
-	}
-
-	public void setFinalValor(int mFinalValor) {
-		this.mFinalValor = mFinalValor;
-	}
-
-	public boolean isSolved() {
-		return mSolved;
-	}
-
-	public void setSolved(boolean solved) {
-		mSolved = solved;
+	public Question(int locked, int trys) {
+		mLocked = locked;
+		mTrys = trys;
 	}
 
 	public int getValor() {
@@ -43,6 +24,14 @@ public class Question {
 
 	public void setTrys(int trys) {
 		mTrys = trys;
+	}
+
+	public boolean isLocked() {
+		return mLocked == 1;
+	}
+
+	public void setLocked() {
+		mLocked = 0;
 	}
 
 }
