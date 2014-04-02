@@ -17,7 +17,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
     
 	public WorldQuizDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
-		context.deleteDatabase(DB_NAME);
+		//context.deleteDatabase(DB_NAME);
 	}
 
 	@Override
