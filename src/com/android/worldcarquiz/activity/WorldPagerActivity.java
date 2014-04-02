@@ -18,14 +18,14 @@ import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class WorldPagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
-	private int mNumSubWorld;
+	private int mNumWorld;
 	private ArrayList<SubWorld> mSubWorld;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
-		mNumSubWorld = getIntent().getIntExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, 0);
+		mNumWorld = getIntent().getIntExtra(SubWorldFragment.EXTRA_NUM_WORLD, 0);
 	   	   
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.viewPager);
@@ -43,15 +43,15 @@ public class WorldPagerActivity extends FragmentActivity {
 			
 			@Override
 			public Fragment getItem(int arg0) {
-				return SubWorldFragment.newInstance(mNumSubWorld);
+				return SubWorldFragment.newInstance(mNumWorld, arg0);
 			}
 		});
 		
 		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			
 			@Override
-			public void onPageSelected(int arg0) {
-				getActionBar().setSelectedNavigationItem(arg0);
+			public void onPageSelected(int pos) {
+				getActionBar().setSelectedNavigationItem(pos);
 			}
 			
 			@Override
@@ -93,7 +93,5 @@ public class WorldPagerActivity extends FragmentActivity {
 			   .setText("Rookie").setTabListener(tabListener));
 	   actionBar.addTab(actionBar.newTab()
 			   .setText("Expert").setTabListener(tabListener));	    
-	   /*actionBar.addTab(actionBar.newTab()
-			   .setText("Pro").setTabListener(tabListener));*/
 	}
 }

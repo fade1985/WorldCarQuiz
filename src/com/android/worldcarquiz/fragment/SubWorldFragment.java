@@ -23,9 +23,11 @@ import com.android.worldcarquiz.provider.QuestionAdapter;
 
 public class SubWorldFragment extends Fragment {
 	public static final String EXTRA_NUM_SUBWORLD = "extra_num_subWorld";
+	public static final String EXTRA_NUM_WORLD = "extra_num_world";
 	
 	private ImageButton mButton;
-	private int mPos;
+	private int mNumSubWorld;
+	private int mNumWorld;
 	private Handler mHandler = new Handler();
 	private Vibrator vibrator;
 	
@@ -37,8 +39,8 @@ public class SubWorldFragment extends Fragment {
 		vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE) ;
 		
 		setHasOptionsMenu(true);
-		mPos = getArguments().getInt("PRUEBA");		
-		
+		mNumWorld = getArguments().getInt(EXTRA_NUM_WORLD);		
+		mNumSubWorld = getArguments().getInt(EXTRA_NUM_SUBWORLD);
 	}
 	
 	@Override
@@ -71,14 +73,15 @@ public class SubWorldFragment extends Fragment {
 		       
 		    }
 		});
-		gridView.setAdapter(new QuestionAdapter(getActivity()));
+		gridView.setAdapter(new QuestionAdapter(getActivity(), mNumWorld, mNumSubWorld));
 		
 		return v;
 	}
 	
-	public static SubWorldFragment newInstance(int numSubWorld) {
+	public static SubWorldFragment newInstance(int numWorld, int numSubWorld) {
 		Bundle arg = new Bundle();
-		arg.putInt("PRUEBA", numSubWorld);
+		arg.putInt(EXTRA_NUM_WORLD, numWorld);
+		arg.putInt(EXTRA_NUM_SUBWORLD, numSubWorld);
 		SubWorldFragment fragment = new SubWorldFragment();
 		fragment.setArguments(arg);
 		

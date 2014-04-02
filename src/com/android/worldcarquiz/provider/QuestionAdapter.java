@@ -16,18 +16,24 @@ import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.SubWorld;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class QuestionAdapter extends BaseAdapter {
     private Context mContext;
+    private int mNumWorld;
+    private int mNumSubWorld;
 
-    public QuestionAdapter(Context context)
+    public QuestionAdapter(Context context, int numWorld, int numSubWorld)
     {
         mContext = context;
+        mNumWorld = numWorld;
+        mNumSubWorld = numSubWorld;
     }
 
     @Override
     public int getCount() {
-        return 30;
+        return SubWorld.NUM_QUESTIONS;
     }
 
     @Override
@@ -46,14 +52,13 @@ public class QuestionAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
-        	//Esta condicion se tiene que cambiar y será cuando esté bloqueado
-        	if(i >0)
-        	{
-        		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_blocked, null);
-        	}
-        	else {
-        	convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);
-        	}
+        
+    	if(WorldCarQuizLab.get(mContext).questionLocked(mNumWorld, mNumSubWorld, i))
+    		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_blocked, null);
+    	else if (WorldCarQuizLab.get(mContext).questionUnlocked(mNumWorld, mNumSubWorld, i))
+    		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);
+    	/*else
+    		Fragment pregunta respondida*/
         
     	ViewSwitcher  viewSwitcher = (ViewSwitcher)convertView.findViewById(R.id.switcher);
         

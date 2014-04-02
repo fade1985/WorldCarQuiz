@@ -45,4 +45,15 @@ public class SubWorld {
 		return mAnsweredQuestions;
 	}
 	
+	public boolean questionLocked(int question) {
+		return mQuestions.get(question).isLocked();
+	}
+	
+	public boolean questionAnswered(int question) {
+		return mQuestions.get(question).isAnswered();
+	}
+	
+	public boolean questionUnlocked(int question) {
+		return mQuestions.get(question).isUnLocked();
+	}
 }

@@ -38,8 +38,8 @@ public class Question {
 		return mLocked == 2;
 	}
 
-	public void unLocked() {
-		mLocked = 0;
+	public boolean isUnLocked() {
+		return mLocked == 0;
 	}
 
 	public void answered() {

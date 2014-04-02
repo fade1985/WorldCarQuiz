@@ -56,5 +56,19 @@ public class WorldCarQuizLab {
 	public ArrayList<World> getWorlds() {
 		return mWorlds;
 	}
+	
+	public boolean questionLocked(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.questionLocked(question);
+	}
 
+	public boolean questionAnswered(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.questionAnswered(question);
+	}
+		
+	public boolean questionUnlocked(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.questionUnlocked(question);
+	}
 }

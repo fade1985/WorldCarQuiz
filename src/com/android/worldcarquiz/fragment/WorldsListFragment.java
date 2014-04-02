@@ -46,7 +46,7 @@ public class WorldsListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), WorldPagerActivity.class);
-		i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, position);
+		i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, position);
 		startActivity(i);		
 	}
 	
