@@ -25,7 +25,7 @@ public class WorldCarQuizLab {
 		mWorlds = new ArrayList<World>();
 		
 		//Abrimos la base de datos
-		WorldQuizDatabaseHelper mDatabase = new WorldQuizDatabaseHelper(appContext);
+		WorldQuizDatabaseHelper mDatabase = new WorldQuizDatabaseHelper(mAppContext);
 		SQLiteDatabase db = mDatabase.getWritableDatabase();
 
 		//El primer mundo siempre se crea

@@ -1,11 +1,19 @@
 package com.android.worldcarquiz.database;
 
-import com.android.worldcarquiz.data.SubWorld;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.android.worldcarquiz.data.SubWorld;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "worldCarQuiz.sqlite";
@@ -14,10 +22,13 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_WORLDS = "worlds";
 	private static final String TABLE_CARS = "cars";
 	private static final String TABLE_QUESTIONS = "questions";
-    
+	
+	Context mContext;
+	   
 	public WorldQuizDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
-		//context.deleteDatabase(DB_NAME);
+		mContext = context.getApplicationContext();
+		context.deleteDatabase(DB_NAME);
 	}
 
 	@Override
@@ -32,13 +43,14 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 				" locked INTEGER, trys INTEGER)");
 		
 		//Creamos la tabla de coches
-		sqlitedatabase.execSQL("create table cars (question_id INTEGER references questions(_id)," +
+		sqlitedatabase.execSQL("create table cars (world_id INTEGER references worlds(_id)," +
 				" _id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT," +
 				" model TEXT, segment TEXT, complexity INTEGER, year INTEGER," +
 				" file_name TEXT)");
 		
 		//Inicializamos el primer mundo
-		insertNewWorld(sqlitedatabase, 0);
+		insertNewWorld(sqlitedatabase, 1);
+		insertCars(sqlitedatabase, 1);
 	}
 
 	@Override
@@ -122,7 +134,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public int answeredQuestions(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
 		//Select que devuelve el numero de preguntas acertadas, si no existe el mundo devuelve 0
 		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id =" + numWorld
-				+" and locked = 0 and trys > 0 and subWorld = " + subWorld, null);
+				+" and locked = 2 and subWorld = " + subWorld, null);
 		int answered;
 		
 		if (c.moveToFirst()) {
@@ -130,5 +142,33 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 			return answered;
 		} else 
 			return 0;
+	}
+	
+	public void insertCars(SQLiteDatabase db, int numWorld) {
+	    InputStream is = null;
+	    try {
+	         is = mContext.getAssets().open("dbWorlds/world" + numWorld + ".sql");
+	         if (is != null) {
+	             db.beginTransaction();
+	             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	             String line = reader.readLine();
+	             while (!TextUtils.isEmpty(line)) {
+	                 db.execSQL(line);
+	                 line = reader.readLine();
+	             }
+	             db.setTransactionSuccessful();
+	         }
+	    } catch (Exception ex) {
+	        Log.d("SQL_ERROR", ex.getMessage());      
+	    } finally {
+	        db.endTransaction();
+	        if (is != null) {
+	            try {
+	                is.close();
+	            } catch (IOException e) {
+	                // Muestra log
+	            }                
+	        }
+	    }
 	}
 }

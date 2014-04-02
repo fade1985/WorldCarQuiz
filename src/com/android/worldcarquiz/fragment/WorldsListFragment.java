@@ -1,5 +1,7 @@
 package com.android.worldcarquiz.fragment;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -27,9 +29,9 @@ public class WorldsListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		
+
 		mWorlds = WorldCarQuizLab.get(getActivity()).getWorlds();
-		
+
 		WorldAdapter adapter = new WorldAdapter(getActivity(), mWorlds);
 		setListAdapter(adapter);		
 	}

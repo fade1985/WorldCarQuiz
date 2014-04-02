@@ -20,7 +20,7 @@ public class SubWorld {
 		
 		SQLiteDatabase db = database.getReadableDatabase();
 		
-		Cursor c = db.rawQuery("SELECT locked, trys FROM questions WHERE world_id =" + numWorld
+		Cursor c = db.rawQuery("SELECT locked, trys, _id FROM questions WHERE world_id =" + numWorld
 				+" and subWorld = " + numSubWorld, null);
 		
 		if (c.moveToFirst()) {
@@ -28,7 +28,8 @@ public class SubWorld {
 		     do {
 		          int locked = c.getInt(0);
 		          int trys = c.getInt(1);
-		          mQuestions.add(new Question(locked, trys));
+		          int id = c.getInt(2);
+		          mQuestions.add(new Question(id, locked, trys, 0));
 		     } while(c.moveToNext());
 		} 		
 		

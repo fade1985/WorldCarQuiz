@@ -85,12 +85,5 @@ public class QuestionAdapter extends BaseAdapter {
     
        // viewSwitcher.setImageResource(mThumbIds[i%4]);
         return convertView;
-    }
-    
-  /*  // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.ic_open_box_eight, R.drawable.ic_open_box_four,
-            R.drawable.ic_open_box_seven, R.drawable.ic_close_box
-    };*/
-    
+    }    
 }
