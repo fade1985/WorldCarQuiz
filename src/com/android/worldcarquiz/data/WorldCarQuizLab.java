@@ -29,13 +29,13 @@ public class WorldCarQuizLab {
 		SQLiteDatabase db = mDatabase.getWritableDatabase();
 
 		//El primer mundo siempre se crea
-		mWorlds.add(new World(1, mDatabase));
+		mWorlds.add(new World(1, mDatabase, mAppContext));
 		for (int i = 2; i <= NUM_WORLDS; i++) {
 			//Recorremos la lista de mundos preguntando si están bloqueados o no
 			if (!mDatabase.isWorldLocked(db, i)) {
-				mWorlds.add(new World(i, mDatabase));
+				mWorlds.add(new World(i, mDatabase, mAppContext));
 			} else {
-				mWorlds.add(new World(i));
+				mWorlds.add(new World(i, mAppContext));
 			}
 		}
 		
@@ -70,5 +70,10 @@ public class WorldCarQuizLab {
 	public boolean questionUnlocked(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.questionUnlocked(question);
+	}
+	
+	public int getImageId(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.getImageId(question);
 	}
 }

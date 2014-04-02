@@ -2,6 +2,7 @@ package com.android.worldcarquiz.data;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -15,21 +16,26 @@ public class SubWorld {
 	private int mAnsweredQuestions;
 	private ArrayList<Question> mQuestions;
 	
-	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database) {
+	private Context mAppContext;
+	
+	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database, Context appContext) {
 		mQuestions = new ArrayList<Question>();
+		mAppContext = appContext;
 		
 		SQLiteDatabase db = database.getReadableDatabase();
 		
-		Cursor c = db.rawQuery("SELECT locked, trys, _id FROM questions WHERE world_id =" + numWorld
-				+" and subWorld = " + numSubWorld, null);
-		
+		Cursor c = db.rawQuery("SELECT locked, trys, questions._id, file_name FROM questions, cars" +
+				" WHERE questions.world_id = " + numWorld +" and questions.subWorld = " + numSubWorld + 
+				" and questions.subWorld = cars.complexity and questions._id = cars._id", null);
+	
 		if (c.moveToFirst()) {
 		     //Recorremos el cursor hasta que no haya más registros
 		     do {
 		          int locked = c.getInt(0);
 		          int trys = c.getInt(1);
 		          int id = c.getInt(2);
-		          mQuestions.add(new Question(id, locked, trys, 0));
+		          int resImage = mAppContext.getResources().getIdentifier(c.getString(3), "drawable", mAppContext.getPackageName());
+		          mQuestions.add(new Question(id, locked, trys, resImage));
 		     } while(c.moveToNext());
 		} 		
 		
@@ -55,5 +61,9 @@ public class SubWorld {
 	
 	public boolean questionUnlocked(int question) {
 		return mQuestions.get(question).isUnLocked();
+	}
+	
+	public int getImageId(int question) {
+		return mQuestions.get(question).getImageId();
 	}
 }

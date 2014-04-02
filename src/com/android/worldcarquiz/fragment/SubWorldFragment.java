@@ -28,6 +28,7 @@ public class SubWorldFragment extends Fragment {
 	private ImageButton mButton;
 	private int mNumSubWorld;
 	private int mNumWorld;
+	private int mNumQuestion;
 	private Handler mHandler = new Handler();
 	private Vibrator vibrator;
 	
@@ -52,7 +53,7 @@ public class SubWorldFragment extends Fragment {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 		    {	
-		    	
+		    	mNumQuestion = position;
 		    	//falta una condición que si la pregunta está bloqueada no entre
 		    	
 		    	

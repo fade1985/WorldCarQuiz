@@ -2,7 +2,7 @@ package com.android.worldcarquiz.data;
 
 import java.util.ArrayList;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Context;
 
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
@@ -13,20 +13,24 @@ public class World {
 	private ArrayList<SubWorld> mSubWorlds;
 	private int mUnlockedQuestions;
 	private int mNumWorld;
+	
+	private Context mAppContext;
 
-	public World(int i, WorldQuizDatabaseHelper database) {
+	public World(int i, WorldQuizDatabaseHelper database, Context appContext) {
 		mUnlockedQuestions = 0;
 		mNumWorld = i;
 		mSubWorlds = new ArrayList<SubWorld>();
-
+		mAppContext = appContext;
+		
 		for (int j = 1; j <= NUM_SUBWORLDS; j++) {
-			mSubWorlds.add(new SubWorld(mNumWorld, j, database));
+			mSubWorlds.add(new SubWorld(mNumWorld, j, database, appContext));
 		}
 	}
 	
-	public World(int i) {
+	public World(int i, Context appContext) {
 		mUnlockedQuestions = 0;
 		mNumWorld = i;
+		mAppContext = appContext;
 		mSubWorlds = null;
 	}
 	
