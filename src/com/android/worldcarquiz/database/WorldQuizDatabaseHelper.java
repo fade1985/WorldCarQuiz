@@ -20,8 +20,8 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final int VERSION = 1;
 	
 	private static final String TABLE_WORLDS = "worlds";
-	private static final String TABLE_CARS = "cars";
 	private static final String TABLE_QUESTIONS = "questions";
+	private static final String TABLE_CARS = "cars";
 	
 	Context mContext;
 	   
@@ -34,16 +34,16 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase sqlitedatabase) {
 		//Creamos la tabla de mundos
-		sqlitedatabase.execSQL("create table worlds (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+		sqlitedatabase.execSQL("create table " + TABLE_WORLDS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				" name TEXT, locked INTEGER)");
 		
 		//Creamos la tabla de preguntas
-		sqlitedatabase.execSQL("create table questions (world_id INTEGER references worlds(_id)," +
+		sqlitedatabase.execSQL("create table " + TABLE_QUESTIONS + " (world_id INTEGER references worlds(_id)," +
 				" _id INTEGER PRIMARY KEY AUTOINCREMENT, subWorld INTEGER," +
 				" locked INTEGER, trys INTEGER)");
 		
 		//Creamos la tabla de coches
-		sqlitedatabase.execSQL("create table cars (world_id INTEGER references worlds(_id)," +
+		sqlitedatabase.execSQL("create table " + TABLE_CARS + " (world_id INTEGER references worlds(_id)," +
 				" _id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT," +
 				" model TEXT, segment TEXT, complexity INTEGER, year INTEGER," +
 				" file_name TEXT)");
@@ -95,33 +95,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		} else
 			return true;
 	}
-	
-	/*public int questionsLocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
-		//Select que devuelve el numero de preguntas bloqueadas, si no existe el mundo devuelve el máximo
-		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id =" + numWorld
-				+" and locked = 1 and subWorld = " + subWorld, null);
-		int numLocked;
 		
-		if (c.moveToFirst()) {
-			numLocked = c.getInt(0);
-			return numLocked;
-		} else 
-			return SubWorld.NUM_QUESTIONS;
-	}
-	
-	public int questionsUnLocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
-		//Select que devuelve el numero de preguntas desbloqueadas, si no existe el mundo devuelve el mínimo
-		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id =" + numWorld
-				+" and locked = 0 and subWorld = " + subWorld, null);
-		int numLocked;
-		
-		if (c.moveToFirst()) {
-			numLocked = c.getInt(0);
-			return numLocked;
-		} else 
-			return 0;
-	}*/
-	
 	public void insertNewWorld(SQLiteDatabase sqlitedatabase, int numWorld) {
         //Insertamos los datos en la tabla Usuarios
         sqlitedatabase.execSQL("INSERT INTO worlds (name, locked) " +
@@ -130,20 +104,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
         //Inicializamos sus preguntas
         initializeTableQuestion(sqlitedatabase, numWorld);
 	}
-	
-	public int answeredQuestions(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
-		//Select que devuelve el numero de preguntas acertadas, si no existe el mundo devuelve 0
-		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id =" + numWorld
-				+" and locked = 2 and subWorld = " + subWorld, null);
-		int answered;
 		
-		if (c.moveToFirst()) {
-			answered = c.getInt(0);
-			return answered;
-		} else 
-			return 0;
-	}
-	
 	public void insertCars(SQLiteDatabase db, int numWorld) {
 	    InputStream is = null;
 	    try {

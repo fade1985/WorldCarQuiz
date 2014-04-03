@@ -2,17 +2,16 @@ package com.android.worldcarquiz.data;
 
 /**
  * Clase correspondiente a cada pregunta del Quiz.
- * @author Sito
  *
  */
 public class Question {
 	/**
-	 * Atributos privados de la clase
-	 * mId: id de la pregunta.
-	 * mStatus: estado de la pregunta. 0 = desbloqueada, 1 = bloqueada, 2 = respondida.
-	 * mValor: puntuación final de la pregunta.
-	 * mTrys: intentos de acierto sobre la pregunta.
-	 * mImageId: id del recurso del drawable de la imagen.
+	 * Atributos privados de la clase: 
+	 * -mId: id de la pregunta.
+	 * -mStatus: estado de la pregunta. 0 = desbloqueada, 1 = bloqueada, 2 = respondida.
+	 * -mValor: puntuación final de la pregunta.
+	 * -mTrys: intentos de acierto sobre la pregunta.
+	 * -mImageId: id del recurso del drawable de la imagen.
 	 */
 	private int mId;
 	private int mStatus;
