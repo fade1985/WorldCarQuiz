@@ -7,8 +7,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.World;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
@@ -25,18 +25,19 @@ public class WorldAdapter extends ArrayAdapter<World>{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		if(mWorlds.get(position).getSubWorlds() != null){
-			//convertView = getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE ).inflate(R.layout.fragment_list_worlds, null);
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds2, null);
+			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
 			circlePoints.setText("25" + " Points won");
 			circlePoints.setTextSize(12);
-			//circlePoints.setPadding(0, 10, 0, 0);
 			
 			//Numero de acertados dentro del mundo
+			int progress = mWorlds.get(position).getAnsweredQuestions();
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			worldTitle.setText(mWorlds.get(position).getUnlockedQuestions() + " Out of " + WorldCarQuizLab.QUESTIONS_TO_UNLOCK + " Cars");
+			worldTitle.setText(progress + " Out of " + WorldCarQuizLab.QUESTIONS_TO_UNLOCK + " Cars");
+			ProgressBar worldBar = (ProgressBar)convertView.findViewById(R.id.progress_bar_worlds);
+			worldBar.setProgress(progress);
 			
 			//Porcentaje del mundo
 			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
@@ -44,7 +45,7 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		}
 		else {
 			
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked2, null);
+			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
@@ -64,8 +65,8 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		
 		//Titulo del mundo
 		TextView circleWorld = (TextView)convertView.findViewById(R.id.circle_list_worlds);
-		circleWorld.setText("World " + String.valueOf(position+1) + " - " + "90's Cars");
-		circleWorld.setTextSize(25);
+		circleWorld.setText("90's Cars Garage");
+		circleWorld.setTextSize(22);
 	
 		return convertView;
 		

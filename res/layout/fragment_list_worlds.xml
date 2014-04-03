@@ -2,37 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
     <RelativeLayout 
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginTop="18dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+    	android:layout_marginBottom="10dp"
         android:background="@drawable/button_circle_shape"> 
-	    <TextView 
-			android:id="@+id/circle_list_worlds"
-		    android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:gravity="center_horizontal"
-			android:layout_marginTop="25dp"
-			android:textColor="#ffffff"
-		    />
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+		    <ImageView 
+				android:id="@+id/image_world"
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="25dp"
+				android:scaleType="centerCrop"
+				android:src="@drawable/nineteen"
+			    />
+	    </RelativeLayout>
+	    
 	    <TextView 
 			android:id="@+id/points_list_worlds"
 		    android:layout_width="match_parent"
 			android:layout_height="wrap_content"	
-			android:layout_below="@id/circle_list_worlds"	
 			android:gravity="center_horizontal|center_vertical"
-			android:textColor="#065a9d" />
+			android:layout_marginTop="87dp"
+			android:textColor="#065a9d"
+			android:text="25 Litres won!" />
     </RelativeLayout>
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="15dp">
+	    
+        <TextView 
+			android:id="@+id/circle_list_worlds"
+		    android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginRight="5dp"
+			android:gravity="center_horizontal|center_vertical"
+			android:textColor="#ffffff"
+			android:text="World 1: 50`s Cars"
+		    />
+	    
 		<TextView
 		    android:id="@+id/text_list_worlds"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
+		    android:layout_below="@id/circle_list_worlds"
 		    android:textSize="12sp"
 		    android:textColor="#ffffff"
 		    android:gravity="center_horizontal|center_vertical"
