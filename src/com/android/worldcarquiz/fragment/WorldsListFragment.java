@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
@@ -22,14 +23,12 @@ import com.android.worldcarquiz.provider.WorldAdapter;
 public class WorldsListFragment extends ListFragment {
 	//Array de mundos
 	private ArrayList<World> mWorlds;
-	//Tipografia
-	private Typeface RobotoThin;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-
+		
 		mWorlds = WorldCarQuizLab.get(getActivity()).getWorlds();
 
 		WorldAdapter adapter = new WorldAdapter(getActivity(), mWorlds);

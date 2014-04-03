@@ -57,6 +57,7 @@ public class SubWorldFragment extends Fragment {
 		    	//falta una condición que si la pregunta está bloqueada no entre
 		    	
 		    	
+		    	
 		    	//efecto de cambiar de imagen
 		    	ViewSwitcher switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
 		    	// Vibrate for 500 milliseconds

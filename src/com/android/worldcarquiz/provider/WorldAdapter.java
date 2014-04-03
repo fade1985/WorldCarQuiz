@@ -26,13 +26,13 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		
 		if(mWorlds.get(position).getSubWorlds() != null){
 			//convertView = getContext().getSystemService( Context.LAYOUT_INFLATER_SERVICE ).inflate(R.layout.fragment_list_worlds, null);
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
+			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds2, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			circlePoints.setText("Falta" + " Points won!");
-			circlePoints.setTextSize(14);
-			circlePoints.setPadding(0, 10, 0, 0);
+			circlePoints.setText("25" + " Points won");
+			circlePoints.setTextSize(12);
+			//circlePoints.setPadding(0, 10, 0, 0);
 			
 			//Numero de acertados dentro del mundo
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
@@ -44,14 +44,14 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		}
 		else {
 			
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
+			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked2, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
 			//int carsLeft = mWorlds.get(position).getQuestionsToUnlock();
-			//circlePoints.setText(carsLeft + " cars left\nto unlock");
+			circlePoints.setText("12" + " cars left\nto unlock");
 			circlePoints.setTextSize(14);
-			circlePoints.setPadding(0, 10, 0, 0);
+			//circlePoints.setPadding(0, 10, 0, 0);
 			
 			//Numero de acertados dentro del mundo
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
@@ -64,8 +64,8 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		
 		//Titulo del mundo
 		TextView circleWorld = (TextView)convertView.findViewById(R.id.circle_list_worlds);
-		circleWorld.setText("World " + String.valueOf(position+1));
-		circleWorld.setTextSize(25);			
+		circleWorld.setText("World " + String.valueOf(position+1) + " - " + "90's Cars");
+		circleWorld.setTextSize(25);
 	
 		return convertView;
 		
