@@ -1,25 +1,47 @@
 package com.android.worldcarquiz.data;
 
+/**
+ * Clase correspondiente a cada pregunta del Quiz.
+ * @author Sito
+ *
+ */
 public class Question {
+	/**
+	 * Atributos privados de la clase
+	 * mId: id de la pregunta.
+	 * mStatus: estado de la pregunta. 0 = desbloqueada, 1 = bloqueada, 2 = respondida.
+	 * mValor: puntuación final de la pregunta.
+	 * mTrys: intentos de acierto sobre la pregunta.
+	 * mImageId: id del recurso del drawable de la imagen.
+	 */
 	private int mId;
-	private int mLocked;
-	private int mPoints;
+	private int mStatus;
+	private int mValor;
 	private int mTrys;
-	private int mImage_id;
+	private int mImageId;
+
 	
-	public Question(int id, int locked, int trys, int image_id) {
+	/**
+	 * CONSTRUCTOR
+	 */
+	public Question(int id, int status, int trys, int imageId) {
 		mId = id;
-		mLocked = locked;
+		mStatus = status;
 		mTrys = trys;
-		mImage_id = image_id;
+		mImageId = imageId;
 	}
 
-	public int getPoints() {
-		return mPoints;
+	
+	/**
+	 * GETTERS Y SETTERS
+	 */
+	
+	public int getValor() {
+		return mValor;
 	}
 
-	public void setPoints(int points) {
-		mPoints = points;
+	public void setValor(int valor) {
+		mValor = valor;
 	}
 
 	public int getTrys() {
@@ -29,28 +51,37 @@ public class Question {
 	public void setTrys(int trys) {
 		mTrys = trys;
 	}
-
-	public boolean isLocked() {
-		return mLocked == 1;
-	}
-	
-	public boolean isAnswered() {
-		return mLocked == 2;
-	}
-
-	public boolean isUnLocked() {
-		return mLocked == 0;
-	}
-
-	public void answered() {
-		mLocked = 2;
-	}
 	
 	public int getId() {
 		return mId;
 	}
 	
 	public int getImageId() {
-		return mImage_id;
+		return mImageId;
 	}
+
+	/**
+	 * Devuelve true si la pregunta esta desbloqueda.
+	 * @return
+	 */
+	public boolean isUnLocked() {
+		return mStatus == 0;
+	}
+	
+	/**
+	 * Devuelve true si la pregunta esta bloqueada.
+	 * @return
+	 */
+	public boolean isLocked() {
+		return mStatus == 1;
+	}
+	
+	/**
+	 * Devuelve true si la pregunta se ha acertado.
+	 * @return
+	 */
+	public boolean isAnswered() {
+		return mStatus == 2;
+	}
+
 }
