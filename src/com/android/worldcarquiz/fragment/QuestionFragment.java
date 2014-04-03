@@ -1,8 +1,5 @@
 package com.android.worldcarquiz.fragment;
 
-import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.data.WorldCarQuizLab;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,18 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class QuestionFragment{
+import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
+
+public class QuestionFragment extends Fragment{
 	public static final String EXTRA_NUM_QUESTION = "extra_num_question";
-	
-	private int mNumSubWorld;
-	private int mNumWorld;
-	private int mNumQuestion;
-	
-	public static Fragment newInstance(int type) {
-		Fragment fragment;
 		
+	public static Fragment newInstance(int type, int world, int subWorld, int question) {
+		Fragment fragment;
+
 		if (type == 0) {
-			fragment = new QuestionPhotoFragment();
+			fragment = QuestionPhotoFragment.newInstance(world, subWorld, question);
 		} else if (type == 1) {
 			fragment = new QuestionResultFragment();
 		} else {
@@ -31,14 +27,38 @@ public class QuestionFragment{
 	}
 	
 	public static class QuestionPhotoFragment extends Fragment {
+		private int mNumWorld;
+		private int mNumSubWorld;
+		private int mNumQuestion;
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			
+			mNumWorld = getArguments().getInt(SubWorldFragment.EXTRA_NUM_WORLD);
+			mNumSubWorld = getArguments().getInt(SubWorldFragment.EXTRA_NUM_SUBWORLD);
+			mNumQuestion = getArguments().getInt(EXTRA_NUM_QUESTION);
+		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View v = inflater.inflate(R.layout.fragment_photo_question2, null);
-			//ImageView iv = (ImageView)v.findViewById(R.id.photo_question);
-			//iv.setImageResource(WorldCarQuizLab.get(getActivity()).getImageId(numWorld, numSubWorld, question));
+			ImageView iv = (ImageView)v.findViewById(R.id.photo_question);
+			int id = WorldCarQuizLab.get(getActivity()).getImageId(mNumWorld, mNumSubWorld, mNumQuestion);
+			iv.setImageResource(id);
 			return v;
+		}
+		
+		public static Fragment newInstance(int world, int subWorld, int question) {
+			Bundle arg = new Bundle();
+			arg.putInt(SubWorldFragment.EXTRA_NUM_WORLD, world);
+			arg.putInt(SubWorldFragment.EXTRA_NUM_SUBWORLD, subWorld);
+			arg.putInt(EXTRA_NUM_QUESTION, question);
+			QuestionPhotoFragment fragment = new QuestionPhotoFragment();
+			fragment.setArguments(arg);
+			
+			return fragment;
 		}
 	}
 	
