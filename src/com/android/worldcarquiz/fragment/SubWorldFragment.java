@@ -19,6 +19,7 @@ import android.widget.ViewSwitcher;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.QuestionActivity;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 import com.android.worldcarquiz.provider.QuestionAdapter;
 
 public class SubWorldFragment extends Fragment {
@@ -54,10 +55,7 @@ public class SubWorldFragment extends Fragment {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 		    {	
 		    	mNumQuestion = position;
-		    	//falta una condición que si la pregunta está bloqueada no entre
-		    	
-		    	
-		    	
+		   
 		    	//efecto de cambiar de imagen
 		    	ViewSwitcher switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
 		    	// Vibrate for 500 milliseconds
@@ -69,11 +67,10 @@ public class SubWorldFragment extends Fragment {
                     switcher.showPrevious();
                 }
                 
-                //Retraso el cambio de activity
-                mHandler.postDelayed(mUpdateTimeTask, 500);
-                switcher.showPrevious();
-		    	
-		       
+                if (!WorldCarQuizLab.get(getActivity()).questionLocked(mNumWorld, mNumSubWorld, mNumQuestion)) {
+                	//Retraso el cambio de activity
+                    mHandler.postDelayed(mUpdateTimeTask, 500);
+                }	    	      
 		    }
 		});
 		gridView.setAdapter(new QuestionAdapter(getActivity(), mNumWorld, mNumSubWorld));
@@ -98,6 +95,12 @@ public class SubWorldFragment extends Fragment {
 		inflater.inflate(R.menu.fragment_subworld, menu);
 	}
 	
+	/*@Override
+	public void onResume() {
+		super.onResume();
+		((QuestionAdapter)getListAdapter()).notifyDataSetChanged();
+	}*/
+	
 	private Runnable mUpdateTimeTask = new Runnable() {
 		   public void run() {
 			   //Despues del Delay lanzamos la actividad
@@ -107,5 +110,5 @@ public class SubWorldFragment extends Fragment {
 			   i.putExtra(QuestionFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 		       startActivity(i);
 		   }
-		};
+	};
 }
