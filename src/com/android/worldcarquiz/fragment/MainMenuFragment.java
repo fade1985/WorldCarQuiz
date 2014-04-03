@@ -3,10 +3,12 @@ package com.android.worldcarquiz.fragment;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,8 @@ public class MainMenuFragment extends Fragment {
 	//Tipografia
 	private Typeface RobotoThin;
 	private Typeface RobotoRegular;
+	//vibración
+	private Vibrator vibrator;
 	
 	
 	@Override
@@ -37,6 +41,7 @@ public class MainMenuFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		
 		WorldCarQuizLab worldCarQuizLab = WorldCarQuizLab.get(getActivity());
+		vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE) ;
 	}
 		
 	@Override
@@ -60,6 +65,7 @@ public class MainMenuFragment extends Fragment {
 			public void onClick(View v) {
 				Intent i = new Intent(getActivity(), WorldPagerActivity.class);
 				startActivity(i);
+				vibrator.vibrate(20);
 			}
 		});
 		
@@ -72,6 +78,7 @@ public class MainMenuFragment extends Fragment {
 				
 				Intent i = new Intent(getActivity(), WorldsListActivity.class);
 				startActivity(i);
+				vibrator.vibrate(20);
 			}
 		});
 		

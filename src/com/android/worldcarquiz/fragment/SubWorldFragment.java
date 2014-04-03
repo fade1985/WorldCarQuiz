@@ -61,7 +61,7 @@ public class SubWorldFragment extends Fragment {
 		    	//efecto de cambiar de imagen
 		    	ViewSwitcher switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
 		    	// Vibrate for 500 milliseconds
-		    	 vibrator.vibrate(100);
+		    	 vibrator.vibrate(20);
 
                 if (switcher.getDisplayedChild() == 0) {
                     switcher.showNext();

@@ -27,21 +27,22 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		if(mWorlds.get(position).getSubWorlds() != null){
 			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
 			
-			//Titulo de los puntos en el mundo
+			//Puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
 			circlePoints.setText("25" + " Points won");
 			circlePoints.setTextSize(12);
 			
 			//Numero de acertados dentro del mundo
-			int progress = mWorlds.get(position).getAnsweredQuestions();
+			int answeredQuestions = mWorlds.get(position).getAnsweredQuestions();
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			worldTitle.setText(progress + " Out of " + WorldCarQuizLab.QUESTIONS_TO_UNLOCK + " Cars");
-			ProgressBar worldBar = (ProgressBar)convertView.findViewById(R.id.progress_bar_worlds);
-			worldBar.setProgress(progress);
+			worldTitle.setText(answeredQuestions + " Out of " + WorldCarQuizLab.QUESTIONS_TO_UNLOCK + " Cars");
+			
 			
 			//Porcentaje del mundo
 			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
 			percentWorld.setText((mWorlds.get(position).getUnlockedQuestions()*100)/WorldCarQuizLab.QUESTIONS_TO_UNLOCK + "%");
+			ProgressBar worldBar = (ProgressBar)convertView.findViewById(R.id.progress_bar_worlds);
+			worldBar.setProgress(answeredQuestions);
 		}
 		else {
 			
@@ -52,7 +53,6 @@ public class WorldAdapter extends ArrayAdapter<World>{
 			//int carsLeft = mWorlds.get(position).getQuestionsToUnlock();
 			circlePoints.setText("12" + " cars left\nto unlock");
 			circlePoints.setTextSize(14);
-			//circlePoints.setPadding(0, 10, 0, 0);
 			
 			//Numero de acertados dentro del mundo
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
