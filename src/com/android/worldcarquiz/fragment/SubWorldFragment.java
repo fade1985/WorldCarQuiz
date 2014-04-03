@@ -31,6 +31,7 @@ public class SubWorldFragment extends Fragment {
 	private int mNumQuestion;
 	private Handler mHandler = new Handler();
 	private Vibrator vibrator;
+	private ViewSwitcher switcher;
 	
 	
 	@Override
@@ -59,7 +60,7 @@ public class SubWorldFragment extends Fragment {
 		    	
 		    	
 		    	//efecto de cambiar de imagen
-		    	ViewSwitcher switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
+		    	switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
 		    	// Vibrate for 500 milliseconds
 		    	 vibrator.vibrate(20);
 
@@ -71,7 +72,7 @@ public class SubWorldFragment extends Fragment {
                 
                 //Retraso el cambio de activity
                 mHandler.postDelayed(mUpdateTimeTask, 500);
-                switcher.showPrevious();
+                
 		    	
 		       
 		    }
@@ -106,6 +107,7 @@ public class SubWorldFragment extends Fragment {
 			   i.putExtra(EXTRA_NUM_SUBWORLD, mNumSubWorld);
 			   i.putExtra(QuestionFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 		       startActivity(i);
+		       switcher.showPrevious();
 		   }
 		};
 }
