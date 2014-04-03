@@ -71,6 +71,7 @@ public class SubWorldFragment extends Fragment {
                 
                 //Retraso el cambio de activity
                 mHandler.postDelayed(mUpdateTimeTask, 500);
+                switcher.showPrevious();
 		    	
 		       
 		    }
