@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class QuestionFragment{
+	public static final String EXTRA_NUM_QUESTION = "extra_num_question";
+	
 	private int mNumSubWorld;
 	private int mNumWorld;
 	private int mNumQuestion;
