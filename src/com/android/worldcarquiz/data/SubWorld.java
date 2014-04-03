@@ -12,8 +12,6 @@ public class SubWorld {
 	public static final int NUM_QUESTIONS = 30;
 	public static final int QUESTIONS_TO_UNLOCK = 6;
 	
-	private int mUnlockedQuestions;
-	private int mAnsweredQuestions;
 	private ArrayList<Question> mQuestions;
 	
 	private Context mAppContext;
@@ -38,20 +36,46 @@ public class SubWorld {
 		          mQuestions.add(new Question(id, locked, trys, resImage));
 		     } while(c.moveToNext());
 		} 		
-		
-		mUnlockedQuestions = database.questionsUnLocked(db, numWorld, numSubWorld);
-		mAnsweredQuestions = database.answeredQuestions(db, numWorld, numSubWorld);
 	}
 
 	public int getUnlockedQuestions() {
-		return mUnlockedQuestions;
+		int unlockedQuestions = 0;
+		
+		for (int i = 0; i < NUM_QUESTIONS; i++) {
+			if (mQuestions.get(i).isUnLocked()) {
+				unlockedQuestions++;
+			}
+		}
+		return unlockedQuestions;
 	}
 	
 	public int getAnsweredQuestions() {
-		return mAnsweredQuestions;
+		int answeredQuestions = 0;
+		
+		for (int i = 0; i < NUM_QUESTIONS; i++) {
+			if (mQuestions.get(i).isAnswered()) {
+				answeredQuestions++;
+			}
+		}
+		return answeredQuestions;
 	}
 	
-	public boolean questionLocked(int question) {
+	public int getLockedQuestions() {
+		int lockedQuestions = 0;
+		
+		for (int i = 0; i < NUM_QUESTIONS; i++) {
+			if (mQuestions.get(i).isLocked()) {
+				lockedQuestions++;
+			}
+		}
+		return lockedQuestions;
+	}
+	
+	public ArrayList<Question> getQuestions() {
+		return mQuestions;
+	}
+	
+	/*public boolean questionLocked(int question) {
 		return mQuestions.get(question).isLocked();
 	}
 	
@@ -65,5 +89,5 @@ public class SubWorld {
 	
 	public int getImageId(int question) {
 		return mQuestions.get(question).getImageId();
-	}
+	}*/
 }

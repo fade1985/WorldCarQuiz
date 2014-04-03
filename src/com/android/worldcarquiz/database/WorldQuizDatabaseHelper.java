@@ -96,7 +96,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 			return true;
 	}
 	
-	public int questionsLocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
+	/*public int questionsLocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld) {
 		//Select que devuelve el numero de preguntas bloqueadas, si no existe el mundo devuelve el máximo
 		Cursor c = sqlitedatabase.rawQuery("SELECT count(*) FROM questions WHERE world_id =" + numWorld
 				+" and locked = 1 and subWorld = " + subWorld, null);
@@ -120,7 +120,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 			return numLocked;
 		} else 
 			return 0;
-	}
+	}*/
 	
 	public void insertNewWorld(SQLiteDatabase sqlitedatabase, int numWorld) {
         //Insertamos los datos en la tabla Usuarios

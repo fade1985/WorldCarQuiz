@@ -11,13 +11,11 @@ public class World {
 	private static final int NUM_SUBWORLDS = 2;
 
 	private ArrayList<SubWorld> mSubWorlds;
-	private int mUnlockedQuestions;
 	private int mNumWorld;
 	
 	private Context mAppContext;
 
 	public World(int i, WorldQuizDatabaseHelper database, Context appContext) {
-		mUnlockedQuestions = 0;
 		mNumWorld = i;
 		mSubWorlds = new ArrayList<SubWorld>();
 		mAppContext = appContext;
@@ -28,22 +26,39 @@ public class World {
 	}
 	
 	public World(int i, Context appContext) {
-		mUnlockedQuestions = 0;
 		mNumWorld = i;
 		mAppContext = appContext;
 		mSubWorlds = null;
 	}
 	
 	public int getUnlockedQuestions() {
-		updateUnlockedQuestions();
-		return mUnlockedQuestions;
-	}
-
-	public void updateUnlockedQuestions() {
-		mUnlockedQuestions = 0;	
-		for (SubWorld s : mSubWorlds) {
-			mUnlockedQuestions += s.getUnlockedQuestions();
+		int unlockedQuestions = 0;
+		
+		for (int i = 0; i < NUM_SUBWORLDS; i++) {
+			unlockedQuestions += mSubWorlds.get(i).getUnlockedQuestions();
 		}
+		
+		return unlockedQuestions;
+	}
+	
+	public int getAnsweredQuestions() {
+		int answeredQuestions = 0;
+		
+		for (int i = 0; i < NUM_SUBWORLDS; i++) {
+			answeredQuestions += mSubWorlds.get(i).getAnsweredQuestions();
+		}
+		
+		return answeredQuestions;
+	}
+	
+	public int getLockedQuestions() {
+		int lockedQuestions = 0;
+		
+		for (int i = 0; i < NUM_SUBWORLDS; i++) {
+			lockedQuestions += mSubWorlds.get(i).getLockedQuestions();
+		}
+		
+		return lockedQuestions;
 	}
 
 	public int getNumWorld() {

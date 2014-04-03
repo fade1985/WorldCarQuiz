@@ -59,21 +59,21 @@ public class WorldCarQuizLab {
 	
 	public boolean questionLocked(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.questionLocked(question);
+				.getQuestions().get(question).isLocked();
 	}
 
 	public boolean questionAnswered(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.questionAnswered(question);
+				.getQuestions().get(question).isAnswered();
 	}
 		
 	public boolean questionUnlocked(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.questionUnlocked(question);
+				.getQuestions().get(question).isUnLocked();
 	}
 	
 	public int getImageId(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.getImageId(question);
+				.getQuestions().get(question).getImageId();
 	}
 }
