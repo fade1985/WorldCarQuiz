@@ -3,7 +3,7 @@ package com.android.worldcarquiz.data;
 public class Question {
 	private int mId;
 	private int mLocked;
-	private int mValor;
+	private int mPoints;
 	private int mTrys;
 	private int mImage_id;
 	
@@ -14,12 +14,12 @@ public class Question {
 		mImage_id = image_id;
 	}
 
-	public int getValor() {
-		return mValor;
+	public int getPoints() {
+		return mPoints;
 	}
 
-	public void setValor(int valor) {
-		mValor = valor;
+	public void setPoints(int points) {
+		mPoints = points;
 	}
 
 	public int getTrys() {
