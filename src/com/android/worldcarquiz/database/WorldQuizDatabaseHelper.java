@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -132,4 +132,35 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	        }
 	    }
 	}
+	
+	public ArrayList getpossibleanswers(SQLiteDatabase db, String segment, int year)
+	{
+		//select para obtener coches del mismo segmento y año
+		Cursor cursor = db.rawQuery("SELECT model, brand FROM cars WHERE segment=" + segment + " AND year=" + year , null);
+		ArrayList<String> arrayAnswers = new ArrayList<String>();
+		
+		if(cursor.moveToFirst()){
+			while(!cursor.isAfterLast())
+			{
+				String brand = cursor.getString(1);
+				String model = cursor.getString(0);
+				arrayAnswers.add( brand + " " + model);
+				cursor.moveToNext();
+			}
+			cursor.close();
+		}
+		
+		//recorremos el array hasta encontrar uno de su marca
+		int i = 0;
+		while (i < arrayAnswers.size())
+		{
+			ArrayList<String>aux = new ArrayList<String>();
+			if(arrayAnswers.get(i) == )
+				
+		}
+		
+		
+		
+	}
+	
 }
