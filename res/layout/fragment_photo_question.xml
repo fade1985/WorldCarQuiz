@@ -1,40 +1,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
    xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:weightSum="1" >
-   <LinearLayout 
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:weightSum="1"
-       android:orientation="vertical">
-         <!-- Imagen del coche -->
+   android:layout_height="match_parent">
+   
+    <!-- Imagen del coche -->
+    
            <ImageView 
+               android:id="@+id/photo_question"
                android:layout_width="match_parent"
-               android:layout_height="0dip"
-               android:scaleType="fitXY"
-               android:layout_weight="0.85"
+               android:layout_height="wrap_content"
+               android:scaleType="centerCrop"
+               android:adjustViewBounds="true"
                android:src="@drawable/ford_focus_2014"/>
-         <!-- Botones de ayuda -->
-       	 <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content" >
-		        <ImageButton
-		            android:id="@+id/share_button"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginRight="0.2dp"
-		            android:background="@drawable/button_no_corners_selector"
-		            android:src="@drawable/ic_action_share" />
-		        <ImageButton
-		            android:id="@+id/help_button"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginLeft="0.2dp"
-		            android:background="@drawable/button_no_corners_selector"
-		            android:src="@drawable/ic_action_help" />
-		    </LinearLayout>    
-  	</LinearLayout>
+           
+           <ImageView
+                 android:id="@+id/shadoww"
+                 android:layout_width="match_parent"
+                 android:layout_height="12dp"
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/shadow" />
+           
+            <ImageButton
+	           android:id="@+id/share_button"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/button_right_rounded_selector"
+	           android:src="@drawable/ic_action_share" />
+            
+            <ImageButton
+                android:id="@+id/help_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/button_left_rounded_selector"
+                android:src="@drawable/ic_action_help" />
+
 </RelativeLayout>

@@ -133,7 +133,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	    }
 	}
 	
-	public ArrayList getpossibleanswers(SQLiteDatabase db, String segment, int year)
+	/*public ArrayList getpossibleanswers(SQLiteDatabase db, String segment, int year)
 	{
 		//select para obtener coches del mismo segmento y año
 		Cursor cursor = db.rawQuery("SELECT model, brand FROM cars WHERE segment=" + segment + " AND year=" + year , null);
@@ -161,6 +161,6 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		
 		
 		
-	}
+	}*/
 	
 }

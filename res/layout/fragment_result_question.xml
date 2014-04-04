@@ -1,73 +1,67 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:layout_gravity="center_vertical|center_horizontal"
-   android:weightSum="1"
-    >
-   <LinearLayout 
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:weightSum="1"
-       android:layout_gravity="center_vertical|center_horizontal"
-       android:orientation="vertical">     
-       	 
-       	 <!-- Botones Respuestas -->
-       	 	 <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content">
-		        <Button
-		            android:id="@+id/solution_one"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginTop="5dp"
-		            android:layout_marginLeft="10dp"
-		            android:layout_marginRight="5dp"
-		            android:background="@drawable/button_selector"
-		            android:text="Var Respuesta 1"
-		            android:textColor="#ffffff"
-		             />
-		        <Button
-		            android:id="@+id/solution_two"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginTop="5dp"
-		            android:layout_marginLeft="5dp"
-		            android:layout_marginRight="10dp"
-		             android:background="@drawable/button_selector"
-		             android:text="Var Respuesta 2"
-		             android:textColor="#ffffff"
-		             />
-		    </LinearLayout>
-       	 	 <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content" >
-		        <Button
-		            android:id="@+id/solution_three"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginTop="10dp"
-		            android:layout_marginLeft="10dp"
-		            android:layout_marginRight="5dp"
-		            android:background="@drawable/button_selector"
-		            android:text="Var Respuesta 3"
-		            android:textColor="#ffffff"
-		             />
-		        <Button
-		            android:id="@+id/solution_four"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="0.5"
-		            android:layout_marginTop="10dp"
-		            android:layout_marginLeft="5dp"
-		            android:layout_marginRight="10dp"
-		            android:background="@drawable/button_selector"
-		            android:text="Var Respuesta 4"
-		            android:textColor="#ffffff"
-		            />
-		    </LinearLayout>
-  	</LinearLayout>
-</RelativeLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+	<ImageView
+	    android:id="@+id/shadoww2"
+	    android:layout_width="match_parent"
+	    android:layout_height="12dp"
+	    android:scaleType="center"
+	    android:src="@drawable/shadow2" /> 
+
+	<LinearLayout 
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center_vertical">     
+      	 
+      	 <!-- Botones Respuestas -->
+
+	        <Button
+	            android:id="@+id/solution_one"
+	            android:layout_width="match_parent"
+	            android:layout_height="35dp"
+	            android:background="@drawable/button_thin_selector"
+	            android:layout_marginLeft="35dp"
+	            android:layout_marginRight="35dp"
+	            android:text="Renault Megane"
+	            android:textColor="#ffffff"
+	             />
+	        <Button
+	            android:id="@+id/solution_two"
+	            android:layout_width="match_parent"
+	            android:layout_height="35dp"
+	            android:background="@drawable/button_thin_selector"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginLeft="35dp"
+	            android:layout_marginRight="35dp"
+	            android:text="Fiat Punto"
+	            android:textColor="#ffffff"
+	             />
+	         <Button
+	            android:id="@+id/solution_three"
+	            android:layout_width="match_parent"
+	            android:layout_height="35dp"
+	            android:background="@drawable/button_thin_selector"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginLeft="35dp"
+	            android:layout_marginRight="35dp"
+	            android:text="Citroen C4"
+	            android:textColor="#ffffff"
+	             />
+	          <Button
+	            android:id="@+id/solution_four"
+	            android:layout_width="match_parent"
+	            android:layout_height="35dp"
+	            android:layout_marginLeft="35dp"
+	            android:layout_marginRight="35dp"
+	            android:background="@drawable/button_thin_selector"
+	            android:layout_marginTop="15dp"
+	            android:text="Ford Focus"
+	            android:textColor="#ffffff"
+	            />
+
+ 	</LinearLayout>
+ 	
+</FrameLayout>  	
