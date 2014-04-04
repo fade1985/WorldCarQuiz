@@ -68,18 +68,10 @@ public class SubWorldFragment extends Fragment {
                     switcher.showPrevious();
                 }
                 
-<<<<<<< HEAD
-                //Retraso el cambio de activity
-                mHandler.postDelayed(mUpdateTimeTask, 500);
-                
-		    	
-		       
-=======
-                if (!WorldCarQuizLab.get(getActivity()).questionLocked(mNumWorld, mNumSubWorld, mNumQuestion)) {
-                	//Retraso el cambio de activity
-                    mHandler.postDelayed(mUpdateTimeTask, 500);
-                }	    	      
->>>>>>> d0f61f4b5e05d96f710b81e86b6c7703b2343b61
+				if (!WorldCarQuizLab.get(getActivity()).questionLocked(mNumWorld, mNumSubWorld, mNumQuestion)) {
+					//Retraso el cambio de activity
+				    mHandler.postDelayed(mUpdateTimeTask, 500);
+				}    	      
 		    }
 		});
 		gridView.setAdapter(new QuestionAdapter(getActivity(), mNumWorld, mNumSubWorld));

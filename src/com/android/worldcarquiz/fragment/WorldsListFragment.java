@@ -1,6 +1,7 @@
 package com.android.worldcarquiz.fragment;
 
 import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.data.World;
@@ -42,10 +45,15 @@ public class WorldsListFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Intent i = new Intent(getActivity(), WorldPagerActivity.class);
-		i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, position);
-		vibrator.vibrate(20);
-		startActivity(i);		
+		
+		if (mWorlds.get(position).getSubWorlds() != null) {
+			Intent i = new Intent(getActivity(), WorldPagerActivity.class);
+			i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, position);
+			vibrator.vibrate(20);
+			startActivity(i);
+		} else {
+			Toast.makeText(getActivity(), (CharSequence)"Mundo bloqueado bitch!!", Toast.LENGTH_SHORT).show();
+		}		
 	}
 	
 	@Override
