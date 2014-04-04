@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
+/**
+ * Singleton que contiene toda la información de la aplicación (ArrayList de
+ * mundos, submundos, preguntas), además de la base de datos y las estadísticas.
+ */
 public class WorldCarQuizLab {
 	public static final int QUESTIONS_TO_UNLOCK = 40;
 	private static final int NUM_WORLDS = 10;
@@ -16,8 +20,12 @@ public class WorldCarQuizLab {
 	private WorldQuizDatabaseHelper mDatabase;
 	private ArrayList<World> mWorlds;
 	private Stadistics mStadistics;
+	
 	private Context mAppContext;
 
+	/**
+	 * Constructor del singleton.
+	 */
 	private WorldCarQuizLab(Context appContext) { 
 		mAppContext = appContext;
 		
@@ -42,6 +50,9 @@ public class WorldCarQuizLab {
 		mDatabase.close();
 	}
 
+	/**
+	 * Si no existe instancia de la clase, la creamos.
+	 */
 	public static WorldCarQuizLab get(Context c) {
 		if (sWorldCarQuizLab == null) {
 			sWorldCarQuizLab = new WorldCarQuizLab(c.getApplicationContext());
@@ -49,29 +60,47 @@ public class WorldCarQuizLab {
 		return sWorldCarQuizLab;
 	}
 
+	/**
+	 * Devuelve el mundo 'numWorld'.
+	 */
 	public World getWorld(int numWorld) {
 		return mWorlds.get(numWorld);
 	}
 
+	/**
+	 * Devuelve el ArrayList de mundos.
+	 */
 	public ArrayList<World> getWorlds() {
 		return mWorlds;
 	}
 	
+	/**
+	 * Devuelve true si la pregunta del mundo 'numWorld' y del submundo 'numSubWorld' esta bloqueada.
+	 */
 	public boolean questionLocked(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).isLocked();
 	}
 
+	/**
+	 * Devuelve true si la pregunta del mundo 'numWorld' y del submundo 'numSubWorld' ha sido resuelta.
+	 */
 	public boolean questionAnswered(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).isAnswered();
 	}
 		
+	/**
+	 * Devuelve true si la pregunta del mundo 'numWorld' y del submundo 'numSubWorld' esta desbloqueada.
+	 */
 	public boolean questionUnlocked(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).isUnLocked();
 	}
 	
+	/**
+	 * Devuelve el id del recurso asociado al drawable de la pregunta.
+	 */
 	public int getImageId(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).getImageId();

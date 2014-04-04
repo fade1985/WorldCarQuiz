@@ -8,7 +8,18 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
+/**
+ * Clase correspondiente a los subniveles de cada mundo (Principiante y experto.)
+ *
+ */
 public class SubWorld {
+	/**
+	 * Atributos de la clase:
+	 * -NUM_QUESTIONS: número de preguntas por subnivel. Constante.
+	 * -QUESTIONS_TO_UNLOCK: número de preguntas desbloqueadas inicialmente. Constante.
+	 * -mQuestions: ArrayList de tamaño NUM_QUESTIONS, que contiene instancias de la clase Question.
+	 * -mAppContext: Contexto de la actividad.
+	 */
 	public static final int NUM_QUESTIONS = 30;
 	public static final int QUESTIONS_TO_UNLOCK = 6;
 	
@@ -16,6 +27,9 @@ public class SubWorld {
 	
 	private Context mAppContext;
 	
+	/**
+	 * CONSTRUCTOR
+	 */
 	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database, Context appContext) {
 		mQuestions = new ArrayList<Question>();
 		mAppContext = appContext;
@@ -75,19 +89,4 @@ public class SubWorld {
 		return mQuestions;
 	}
 	
-	/*public boolean questionLocked(int question) {
-		return mQuestions.get(question).isLocked();
-	}
-	
-	public boolean questionAnswered(int question) {
-		return mQuestions.get(question).isAnswered();
-	}
-	
-	public boolean questionUnlocked(int question) {
-		return mQuestions.get(question).isUnLocked();
-	}
-	
-	public int getImageId(int question) {
-		return mQuestions.get(question).getImageId();
-	}*/
 }
