@@ -35,5 +35,13 @@
                 android:layout_alignParentTop="true"
                 android:background="@drawable/button_left_rounded_selector"
                 android:src="@drawable/ic_action_help" />
+            
+			<ImageView
+			    android:id="@+id/shadoww2"
+			    android:layout_width="match_parent"
+			    android:layout_height="12dp"
+			    android:scaleType="center"
+			    android:layout_alignBottom="@id/photo_question"
+			    android:src="@drawable/shadow2" /> 
 
 </RelativeLayout>
