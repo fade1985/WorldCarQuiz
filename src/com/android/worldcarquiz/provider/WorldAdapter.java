@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.data.World;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
@@ -29,18 +30,20 @@ public class WorldAdapter extends ArrayAdapter<World>{
 			
 			//Puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			circlePoints.setText("25" + " Points won");
+			int worldPoints = mWorlds.get(position).getWorldScore(); 
+			circlePoints.setText(worldPoints + " Points won");
 			circlePoints.setTextSize(12);
 			
 			//Numero de acertados dentro del mundo
-			int answeredQuestions = mWorlds.get(position).getAnsweredQuestions();
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			worldTitle.setText(answeredQuestions + " Out of " + WorldCarQuizLab.QUESTIONS_TO_UNLOCK + " Cars");
+			int answeredQuestions = mWorlds.get(position).getAnsweredQuestions();
+			int totalQuestions = SubWorld.NUM_QUESTIONS * mWorlds.get(position).getSubWorlds().size();
+			worldTitle.setText(answeredQuestions + " Out of " + totalQuestions + " Cars");
 			
 			
 			//Porcentaje del mundo
 			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
-			percentWorld.setText((mWorlds.get(position).getUnlockedQuestions()*100)/WorldCarQuizLab.QUESTIONS_TO_UNLOCK + "%");
+			percentWorld.setText((mWorlds.get(position).getAnsweredQuestions()*100)/totalQuestions + "%");
 			ProgressBar worldBar = (ProgressBar)convertView.findViewById(R.id.progress_bar_worlds);
 			worldBar.setProgress(answeredQuestions);
 		}

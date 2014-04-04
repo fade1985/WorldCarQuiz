@@ -52,6 +52,9 @@ public class SubWorld {
 		} 		
 	}
 
+	/**
+	 * Devuelve el número de preguntas desbloqueadas del submundo.
+	 */
 	public int getUnlockedQuestions() {
 		int unlockedQuestions = 0;
 		
@@ -63,6 +66,9 @@ public class SubWorld {
 		return unlockedQuestions;
 	}
 	
+	/**
+	 * Devuelve el número de preguntas acertadas del submundo.
+	 */
 	public int getAnsweredQuestions() {
 		int answeredQuestions = 0;
 		
@@ -74,6 +80,9 @@ public class SubWorld {
 		return answeredQuestions;
 	}
 	
+	/**
+	 * Devuelve el número de preguntas bloqueadas del submundo.
+	 */
 	public int getLockedQuestions() {
 		int lockedQuestions = 0;
 		
@@ -85,6 +94,24 @@ public class SubWorld {
 		return lockedQuestions;
 	}
 	
+	/**
+	 * Devuelve la puntuación total del submundo
+	 */
+	public int getSubWorldScore() {
+		int score = 0;
+		
+		for (int i = 0; i < NUM_QUESTIONS; i++) {
+			if (mQuestions.get(i).isAnswered()) {
+				score += mQuestions.get(i).getScore();
+			}
+		}
+		
+		return score;
+	}
+	
+	/**
+	 * Devuelve el ArrayList de preguntas.
+	 */
 	public ArrayList<Question> getQuestions() {
 		return mQuestions;
 	}

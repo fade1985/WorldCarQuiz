@@ -15,7 +15,7 @@ public class Question {
 	 */
 	private int mId;
 	private int mStatus;
-	private int mValor;
+	private int mScore;
 	private int mTrys;
 	private int mImageId;
 
@@ -35,12 +35,12 @@ public class Question {
 	 * GETTERS Y SETTERS
 	 */
 	
-	public int getValor() {
-		return mValor;
+	public int getScore() {
+		return mScore;
 	}
 
-	public void setValor(int valor) {
-		mValor = valor;
+	public void setScore(int valor) {
+		mScore = valor;
 	}
 
 	public int getTrys() {

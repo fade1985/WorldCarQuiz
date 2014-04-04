@@ -64,6 +64,16 @@ public class World {
 	public int getNumWorld() {
 		return mNumWorld;
 	}
+	
+	public int getWorldScore() {
+		int score = 0;
+		
+		for (int i = 0; i < NUM_SUBWORLDS; i++) {
+			score += mSubWorlds.get(i).getSubWorldScore();
+		}
+		
+		return score;
+	}
 
 	public ArrayList<SubWorld> getSubWorlds(){
 		return mSubWorlds;
