@@ -1,11 +1,7 @@
 package com.android.worldcarquiz.fragment;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -21,7 +17,6 @@ import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
-import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class MainMenuFragment extends Fragment {
 	
