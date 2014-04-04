@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ViewSwitcher;
 
 import com.android.worldcarquiz.R;
@@ -33,6 +36,7 @@ public class SubWorldFragment extends Fragment {
 	private Handler mHandler = new Handler();
 	private Vibrator vibrator;
 	private ViewSwitcher switcher;
+	private GridView mGridView;
 	
 	
 	@Override
@@ -51,8 +55,8 @@ public class SubWorldFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_subworld, null);
 		
-		GridView gridView = (GridView) v.findViewById(R.id.gridview);
-		gridView.setOnItemClickListener(new OnItemClickListener() {
+		mGridView = (GridView) v.findViewById(R.id.gridview);
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 		    {	
 		    	mNumQuestion = position;
@@ -74,7 +78,7 @@ public class SubWorldFragment extends Fragment {
 				}    	      
 		    }
 		});
-		gridView.setAdapter(new QuestionAdapter(getActivity(), mNumWorld, mNumSubWorld));
+		mGridView.setAdapter(new QuestionAdapter(getActivity(), mNumWorld, mNumSubWorld));
 		
 		return v;
 	}
@@ -96,11 +100,11 @@ public class SubWorldFragment extends Fragment {
 		inflater.inflate(R.menu.fragment_subworld, menu);
 	}
 	
-	/*@Override
+	@Override
 	public void onResume() {
 		super.onResume();
-		((QuestionAdapter)getListAdapter()).notifyDataSetChanged();
-	}*/
+		((BaseAdapter)mGridView.getAdapter()).notifyDataSetChanged();
+	}
 	
 	private Runnable mUpdateTimeTask = new Runnable() {
 		   public void run() {
@@ -110,7 +114,7 @@ public class SubWorldFragment extends Fragment {
 			   i.putExtra(EXTRA_NUM_SUBWORLD, mNumSubWorld);
 			   i.putExtra(QuestionFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 		       startActivity(i);
-		       switcher.showPrevious();
+		       //switcher.showPrevious();
 		   }
 	};
 }
