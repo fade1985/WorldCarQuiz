@@ -15,46 +15,52 @@ import com.android.worldcarquiz.data.World;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class WorldAdapter extends ArrayAdapter<World>{
-    private ArrayList<World> mWorlds;
+    private Context mContext;
     
 	public WorldAdapter(Context context, ArrayList<World> worlds){
 		super(context, 0, worlds);
-		mWorlds = worlds;
+		mContext = context;
 	}
 	
+	/**
+	 * Método que pinta cada fila de la lista, que corresponde a cada uno de los mundos disponibles
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		if(mWorlds.get(position).getSubWorlds() != null){
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds, null);
+		//Mundo desbloqueado
+		if(WorldCarQuizLab.get(mContext).getWorlds().get(position).getSubWorlds() != null){
+			convertView = ((Activity)getContext()).getLayoutInflater()
+					.inflate(R.layout.fragment_list_worlds, null);
 			
 			//Puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			int worldPoints = mWorlds.get(position).getWorldScore(); 
+			int worldPoints = WorldCarQuizLab.get(mContext).getWorlds().get(position).getWorldScore(); 
 			circlePoints.setText(worldPoints + " Points won");
 			circlePoints.setTextSize(12);
 			
 			//Numero de acertados dentro del mundo
 			TextView worldTitle = (TextView)convertView.findViewById(R.id.text_list_worlds);
-			int answeredQuestions = mWorlds.get(position).getAnsweredQuestions();
-			int totalQuestions = SubWorld.NUM_QUESTIONS * mWorlds.get(position).getSubWorlds().size();
+			int answeredQuestions = WorldCarQuizLab.get(mContext).getWorlds().get(position).getAnsweredQuestions();
+			int totalQuestions = SubWorld.NUM_QUESTIONS * WorldCarQuizLab.get(mContext).getWorlds().get(position).getSubWorlds().size();
 			worldTitle.setText(answeredQuestions + " Out of " + totalQuestions + " Cars");
 			
 			
 			//Porcentaje del mundo
 			TextView percentWorld = (TextView)convertView.findViewById(R.id.percent_list_worlds);
-			percentWorld.setText((mWorlds.get(position).getAnsweredQuestions()*100)/totalQuestions + "%");
+			percentWorld.setText((WorldCarQuizLab.get(mContext).getWorlds().get(position).getAnsweredQuestions()*100)/totalQuestions + "%");
 			ProgressBar worldBar = (ProgressBar)convertView.findViewById(R.id.progress_bar_worlds);
 			worldBar.setProgress(answeredQuestions);
 		}
+		//Mundo desbloqueado
 		else {
 			
 			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			//int carsLeft = mWorlds.get(position).getQuestionsToUnlock();
-			circlePoints.setText("12" + " cars left\nto unlock");
+			int carsLeft = (WorldCarQuizLab.QUESTIONS_TO_UNLOCK_WORLD * (position + 1)) - WorldCarQuizLab.get(mContext).getTotalAnsweredQuestion();
+			circlePoints.setText(carsLeft + " cars left\nto unlock");
 			circlePoints.setTextSize(14);
 			
 			//Numero de acertados dentro del mundo

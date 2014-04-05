@@ -12,7 +12,7 @@ import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
  * mundos, submundos, preguntas), además de la base de datos y las estadísticas.
  */
 public class WorldCarQuizLab {
-	public static final int QUESTIONS_TO_UNLOCK = 40;
+	public static final int QUESTIONS_TO_UNLOCK_WORLD = 40;
 	private static final int NUM_WORLDS = 10;
 
 	private static WorldCarQuizLab sWorldCarQuizLab;
@@ -112,5 +112,21 @@ public class WorldCarQuizLab {
 	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int points) {
 		mWorlds.get(numWorld).getSubWorlds().get(numSubWorld).getQuestions()
 			.get(numQuestion).setAnswered(points);
+	}
+	
+	/**
+	 * Método que recupera el total de preguntas acertadas hasta el momento
+	 */
+	public int getTotalAnsweredQuestion() {
+		int total = 0;
+		
+		for (int i = 0; i < WorldCarQuizLab.NUM_WORLDS; i++) {
+			//Preguntamos si existe el mundo
+			if (getWorlds().get(i).getSubWorlds() != null) {
+				total += getWorlds().get(i).getAnsweredQuestions();
+			}
+		}
+		
+		return total;
 	}
 }
