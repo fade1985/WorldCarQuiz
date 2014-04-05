@@ -11,26 +11,30 @@ public class World {
 	private static final int NUM_SUBWORLDS = 2;
 
 	private ArrayList<SubWorld> mSubWorlds;
-	private int mNumWorld;
 	
-	private Context mAppContext;
-
-	public World(int i, WorldQuizDatabaseHelper database, Context appContext) {
-		mNumWorld = i;
+	/**
+	 * CONSTRUCTOR 1
+	 * Inicializa los submundos recuperando la información de la base de datos.
+	 */
+	public World(int numWorld, WorldQuizDatabaseHelper database, Context appContext) {
 		mSubWorlds = new ArrayList<SubWorld>();
-		mAppContext = appContext;
 		
 		for (int j = 1; j <= NUM_SUBWORLDS; j++) {
-			mSubWorlds.add(new SubWorld(mNumWorld, j, database, appContext));
+			mSubWorlds.add(new SubWorld(numWorld, j, database, appContext));
 		}
 	}
 	
+	/**
+	 * CONSTRUCTOR 2
+	 * Crea el mundo con los submundos vacíos.
+	 */
 	public World(int i, Context appContext) {
-		mNumWorld = i;
-		mAppContext = appContext;
 		mSubWorlds = null;
 	}
 	
+	/**
+	 * Método que devuelve el número de preguntas desbloqueadas del mundo.
+	 */
 	public int getUnlockedQuestions() {
 		int unlockedQuestions = 0;
 		
@@ -41,6 +45,9 @@ public class World {
 		return unlockedQuestions;
 	}
 	
+	/**
+	 * Método que devuelve el número de preguntas respondidas del mundo.
+	 */
 	public int getAnsweredQuestions() {
 		int answeredQuestions = 0;
 		
@@ -51,6 +58,9 @@ public class World {
 		return answeredQuestions;
 	}
 	
+	/**
+	 * Método que devuelve el número de preguntas bloqueadas del mundo
+	 */
 	public int getLockedQuestions() {
 		int lockedQuestions = 0;
 		
@@ -61,10 +71,6 @@ public class World {
 		return lockedQuestions;
 	}
 
-	public int getNumWorld() {
-		return mNumWorld;
-	}
-	
 	public int getWorldScore() {
 		int score = 0;
 		

@@ -60,21 +60,22 @@ public class SubWorldFragment extends Fragment {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 		    {	
 		    	mNumQuestion = position;
-		   
-		    	//efecto de cambiar de imagen
-		    	switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
-		    	// Vibrate for 500 milliseconds
-		    	 vibrator.vibrate(20);
+		    	if (!WorldCarQuizLab.get(getActivity()).questionAnswered(mNumWorld, mNumSubWorld, mNumQuestion)) {
+			    	//efecto de cambiar de imagen
+			    	switcher = (ViewSwitcher) v.findViewById(R.id.switcher);
+			    	// Vibrate for 500 milliseconds
+			    	 vibrator.vibrate(20);
 
-                if (switcher.getDisplayedChild() == 0) {
-                    switcher.showNext();
-                } else {
-                    switcher.showPrevious();
-                }
-                
+	                if (switcher.getDisplayedChild() == 0) {
+	                    switcher.showNext();
+	                } else {
+	                    switcher.showPrevious();
+	                }
+		    	}
+           
 				if (!WorldCarQuizLab.get(getActivity()).questionLocked(mNumWorld, mNumSubWorld, mNumQuestion)) {
 					//Retraso el cambio de activity
-				    mHandler.postDelayed(mUpdateTimeTask, 500);
+				    mHandler.postDelayed(mUpdateTimeTask, 400);
 				}    	      
 		    }
 		});
@@ -114,7 +115,6 @@ public class SubWorldFragment extends Fragment {
 			   i.putExtra(EXTRA_NUM_SUBWORLD, mNumSubWorld);
 			   i.putExtra(QuestionFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 		       startActivity(i);
-		       //switcher.showPrevious();
 		   }
 	};
 }

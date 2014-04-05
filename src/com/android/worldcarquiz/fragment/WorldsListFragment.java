@@ -61,4 +61,10 @@ public class WorldsListFragment extends ListFragment {
 		super.onCreateOptionsMenu(menu1, menuinflater);
 		menuinflater.inflate(R.menu.fragment_subworld, menu1);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		((WorldAdapter)getListAdapter()).notifyDataSetChanged();
+	}
 }

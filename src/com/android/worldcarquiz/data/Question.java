@@ -39,8 +39,14 @@ public class Question {
 		return mScore;
 	}
 
-	public void setScore(int valor) {
-		mScore = valor;
+	/**
+	 * Método que marca la respuesta acertada y le asigna su puntuacion
+	 */
+	public void setAnswered(int points) {
+		mScore = points;
+		mStatus = 2;
+		
+		//LLamar al Lab pa modificar la base de datos
 	}
 
 	public int getTrys() {

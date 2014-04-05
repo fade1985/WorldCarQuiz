@@ -48,47 +48,19 @@ public class QuestionAdapter extends BaseAdapter {
         return 0;
     }
 
-    @TargetApi(13)
+
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup)
     {
         
-    	if(WorldCarQuizLab.get(mContext).questionLocked(mNumWorld, mNumSubWorld, i))
+    	if(WorldCarQuizLab.get(mContext).questionLocked(mNumWorld, mNumSubWorld, i)) 
     		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_blocked, null);
     	else if (WorldCarQuizLab.get(mContext).questionUnlocked(mNumWorld, mNumSubWorld, i))
-    		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);
-    	/*else
-    		Fragment pregunta respondida*/
+    		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_open, null);	
+    	else
+    		convertView = ((Activity)mContext).getLayoutInflater().inflate(R.layout.fragment_box_solved, null);
         
-    	ViewSwitcher  viewSwitcher = (ViewSwitcher)convertView.findViewById(R.id.switcher);
-        
-        int Measuredwidth = 0;
-        int Measuredheight = 0;
-        Point size = new Point();
-        WindowManager w = ((Activity)mContext).getWindowManager();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
-        {
-            w.getDefaultDisplay().getSize(size);
-
-            Measuredwidth = size.x;
-            Measuredheight = size.y;
-        }
-        else
-        {
-            Display d = w.getDefaultDisplay();
-            Measuredwidth = d.getWidth();
-            Measuredheight = d.getHeight();
-        }
-        
-        String s = ((Activity)mContext).getResources().getString(R.string.div) ;
-        int div = Integer.valueOf(s);
-        
-        convertView.setLayoutParams(new GridView.LayoutParams(Measuredwidth/div, Measuredwidth/div));
-       // viewSwitcher.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        viewSwitcher.setPadding(10, 5, 10, 5);
-    
-       // viewSwitcher.setImageResource(mThumbIds[i%4]);
         return convertView;
     }    
+    
 }

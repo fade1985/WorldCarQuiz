@@ -105,4 +105,12 @@ public class WorldCarQuizLab {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).getImageId();
 	}
+	
+	/**
+	 * Modifica la pregunta como acertada y le asigna su puntuacion.
+	 */
+	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int points) {
+		mWorlds.get(numWorld).getSubWorlds().get(numSubWorld).getQuestions()
+			.get(numQuestion).setAnswered(points);
+	}
 }

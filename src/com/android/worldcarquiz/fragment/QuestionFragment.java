@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.android.worldcarquiz.R;
@@ -31,6 +34,8 @@ public class QuestionFragment extends Fragment{
 		private int mNumSubWorld;
 		private int mNumQuestion;
 		
+		private ImageButton mHelp;
+		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -45,8 +50,20 @@ public class QuestionFragment extends Fragment{
 				Bundle savedInstanceState) {
 			View v = inflater.inflate(R.layout.fragment_photo_question, null);
 			ImageView iv = (ImageView)v.findViewById(R.id.photo_question);
-			int id = WorldCarQuizLab.get(getActivity()).getImageId(mNumWorld, mNumSubWorld, mNumQuestion);
+			int id = WorldCarQuizLab.get(getActivity())
+						.getImageId(mNumWorld, mNumSubWorld, mNumQuestion);
 			iv.setImageResource(id);
+			
+			mHelp = (ImageButton) v.findViewById(R.id.help_button);
+			mHelp.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					WorldCarQuizLab.get(getActivity())
+						.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion+1);
+				}
+			});
+			
 			return v;
 		}
 		

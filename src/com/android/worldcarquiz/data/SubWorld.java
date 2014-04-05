@@ -18,21 +18,17 @@ public class SubWorld {
 	 * -NUM_QUESTIONS: número de preguntas por subnivel. Constante.
 	 * -QUESTIONS_TO_UNLOCK: número de preguntas desbloqueadas inicialmente. Constante.
 	 * -mQuestions: ArrayList de tamaño NUM_QUESTIONS, que contiene instancias de la clase Question.
-	 * -mAppContext: Contexto de la actividad.
 	 */
 	public static final int NUM_QUESTIONS = 30;
 	public static final int QUESTIONS_TO_UNLOCK = 6;
 	
 	private ArrayList<Question> mQuestions;
 	
-	private Context mAppContext;
-	
 	/**
 	 * CONSTRUCTOR
 	 */
 	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database, Context appContext) {
 		mQuestions = new ArrayList<Question>();
-		mAppContext = appContext;
 		
 		SQLiteDatabase db = database.getReadableDatabase();
 		
@@ -46,7 +42,7 @@ public class SubWorld {
 		          int locked = c.getInt(0);
 		          int trys = c.getInt(1);
 		          int id = c.getInt(2);
-		          int resImage = mAppContext.getResources().getIdentifier(c.getString(3), "drawable", mAppContext.getPackageName());
+		          int resImage = appContext.getResources().getIdentifier(c.getString(3), "drawable", appContext.getPackageName());
 		          mQuestions.add(new Question(id, locked, trys, resImage));
 		     } while(c.moveToNext());
 		} 		
