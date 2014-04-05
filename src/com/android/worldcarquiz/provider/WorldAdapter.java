@@ -59,7 +59,7 @@ public class WorldAdapter extends ArrayAdapter<World>{
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
-			int carsLeft = (WorldCarQuizLab.QUESTIONS_TO_UNLOCK_WORLD * (position + 1)) - WorldCarQuizLab.get(mContext).getTotalAnsweredQuestion();
+			int carsLeft = (WorldCarQuizLab.QUESTIONS_TO_UNLOCK_WORLD * position) - WorldCarQuizLab.get(mContext).getTotalAnsweredQuestion();
 			circlePoints.setText(carsLeft + " cars left\nto unlock");
 			circlePoints.setTextSize(14);
 			
