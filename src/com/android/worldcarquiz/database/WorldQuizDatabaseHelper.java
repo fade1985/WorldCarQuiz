@@ -50,7 +50,6 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		
 		//Inicializamos el primer mundo
 		insertNewWorld(sqlitedatabase, 1);
-		insertCars(sqlitedatabase, 1);
 	}
 
 	@Override
@@ -103,6 +102,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
         
         //Inicializamos sus preguntas
         initializeTableQuestion(sqlitedatabase, numWorld);
+		insertCars(sqlitedatabase, numWorld);
 	}
 		
 	public void insertCars(SQLiteDatabase db, int numWorld) {
@@ -131,6 +131,10 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	            }                
 	        }
 	    }
+	}
+	
+	public void setQuestionAnswered(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld, int question) {
+		
 	}
 	
 	/*public ArrayList getpossibleanswers(SQLiteDatabase db, String segment, int year)
