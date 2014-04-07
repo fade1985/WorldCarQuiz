@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.worldcarquiz.data.SubWorld;
+import com.android.worldcarquiz.data.World;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "worldCarQuiz.sqlite";
@@ -34,7 +35,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase sqlitedatabase) {
 		//Creamos la tabla de mundos
-		sqlitedatabase.execSQL("create table " + TABLE_WORLDS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+		/*sqlitedatabase.execSQL("create table " + TABLE_WORLDS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				" name TEXT, locked INTEGER)");
 		
 		//Creamos la tabla de preguntas
@@ -43,12 +44,23 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 				"trys INTEGER INTEGER DEFAULT 0, points INTEGER INTEGER DEFAULT 0)");
 		
 		//Creamos la tabla de coches
-		sqlitedatabase.execSQL("create table " + TABLE_CARS + " (world_id INTEGER references worlds(_id)," +
-				" _id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, model TEXT, segment TEXT," +
-				" complexity INTEGER, year INTEGER, file_name TEXT)");
+		sqlitedatabase.execSQL("create table " + TABLE_CARS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+				" world_id INTEGER references worlds(_id), subworld INTEGER, brand TEXT, model TEXT," +
+				" segment TEXT, year INTEGER, file_name TEXT)");
 		
 		//Inicializamos el primer mundo
-		insertNewWorld(sqlitedatabase, 1);
+		insertNewWorld(sqlitedatabase, 1);*/
+		
+		//Creamos la tabla de preguntas
+		sqlitedatabase.execSQL("create table " + TABLE_QUESTIONS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+				" locked INTEGER, trys INTEGER INTEGER DEFAULT 0, points INTEGER INTEGER DEFAULT 0)");
+		
+		//Creamos la tabla de coches
+		sqlitedatabase.execSQL("create table " + TABLE_CARS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+				" brand TEXT, model TEXT, segment TEXT, year INTEGER, file_name TEXT)");
+		
+		//Inicializamos el primer mundo
+		insertNewWorld(sqlitedatabase);		
 	}
 
 	@Override
@@ -56,7 +68,38 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		
 	}
 	
-	public void initializeTableQuestion(SQLiteDatabase sqlitedatabase, int world) {
+	public void insertNewWorld(SQLiteDatabase sqlitedatabase) {
+	    //Inicializamos sus preguntas
+	    initializeTableQuestion(sqlitedatabase);
+		insertCars(sqlitedatabase);
+	}
+	
+	/*public void insertNewWorld(SQLiteDatabase sqlitedatabase, int numWorld) {
+        //Insertamos los datos en la tabla Usuarios
+        sqlitedatabase.execSQL("INSERT INTO worlds (name, locked) " +
+                   "VALUES ('World " + numWorld + "', 0)");
+        
+        //Inicializamos sus preguntas
+        initializeTableQuestion(sqlitedatabase, numWorld);
+		insertCars(sqlitedatabase, numWorld);
+	}*/
+	
+	public void initializeTableQuestion(SQLiteDatabase sqlitedatabase) {
+		//Insertamos 5 preguntas desbloquedas
+	    for(int i = 0; i < SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS; i++)
+	    {
+	    	int locked = (i < SubWorld.QUESTIONS_TO_UNLOCK) ? 0 : 1;
+	        //Insertamos los datos en la tabla Usuarios
+	        sqlitedatabase.execSQL("INSERT INTO questions (locked) VALUES (" + locked + ")");
+	    }
+	}
+	
+	public int getWorldsUnblocked(SQLiteDatabase sqlitedatabase) {
+		int worldsUnblocked = 0;
+		
+		
+	}
+/*	public void initializeTableQuestion(SQLiteDatabase sqlitedatabase, int world) {
 		
 		//Insertamos 5 preguntas desbloquedas
         for(int i = 1; i <= SubWorld.QUESTIONS_TO_UNLOCK; i++)
@@ -80,7 +123,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
             sqlitedatabase.execSQL("INSERT INTO questions (world_id, num_question, subworld, locked) " +
             		"VALUES (" + world + "," + i + ", 2, 1)");
         }
-	}
+	}*/
 	
 	public boolean isWorldLocked(SQLiteDatabase sqlitedatabase, int numWorld) {
 		//Select que consulta si el mundo esta bloqueado
@@ -93,18 +136,35 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		} else
 			return true;
 	}
-		
-	public void insertNewWorld(SQLiteDatabase sqlitedatabase, int numWorld) {
-        //Insertamos los datos en la tabla Usuarios
-        sqlitedatabase.execSQL("INSERT INTO worlds (name, locked) " +
-                   "VALUES ('World " + numWorld + "', 0)");
-        
-        //Inicializamos sus preguntas
-        initializeTableQuestion(sqlitedatabase, numWorld);
-		insertCars(sqlitedatabase, numWorld);
-	}
-		
-	public void insertCars(SQLiteDatabase db, int numWorld) {
+	
+	public void insertCars(SQLiteDatabase db) {
+	    InputStream is = null;
+	    try {
+	         is = mContext.getAssets().open("dbWorlds/world1.sql");
+	         if (is != null) {
+	             db.beginTransaction();
+	             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	             String line = reader.readLine();
+	             while (!TextUtils.isEmpty(line)) {
+	                 db.execSQL(line);
+	                 line = reader.readLine();
+	             }
+	             db.setTransactionSuccessful();
+	         }
+	    } catch (Exception ex) {
+	        Log.d("SQL_ERROR", ex.getMessage());      
+	    } finally {
+	        db.endTransaction();
+	        if (is != null) {
+	            try {
+	                is.close();
+	            } catch (IOException e) {
+	                // Muestra log
+	            }                
+	        }
+	    }
+	}	
+	/*public void insertCars(SQLiteDatabase db, int numWorld) {
 	    InputStream is = null;
 	    try {
 	         is = mContext.getAssets().open("dbWorlds/world" + numWorld + ".sql");
@@ -130,14 +190,14 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	            }                
 	        }
 	    }
-	}
+	}*/
 	
 	public void setQuestionAnswered(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld, int question, int points) {
 		//Establecemos los campos-valores a actualizar
 		ContentValues valores = new ContentValues();
 		valores.put("locked","usunuevo");
 		
-		sqlitedatabase.update(table, values, whereClause, whereArgs)
+		//sqlitedatabase.update(table, values, whereClause, whereArgs)
 	}
 	
 	public void setQuestionUnlocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld, int question) {

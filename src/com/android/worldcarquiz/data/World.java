@@ -8,7 +8,7 @@ import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 
 public class World {
-	private static final int NUM_SUBWORLDS = 2;
+	public static final int NUM_SUBWORLDS = 2;
 
 	private ArrayList<SubWorld> mSubWorlds;
 	
