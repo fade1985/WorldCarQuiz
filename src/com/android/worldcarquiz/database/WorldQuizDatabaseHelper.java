@@ -18,7 +18,7 @@ import com.android.worldcarquiz.data.World;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "worldCarQuiz.sqlite";
-	private static final int VERSION = 1;
+	private static final int VERSION = 2;
 	
 	//private static final String TABLE_WORLDS = "worlds";
 	private static final String TABLE_QUESTIONS = "questions";
@@ -64,7 +64,10 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase sqlitedatabase, int i, int j) {
-		
+		if (i < j) {
+			mContext.deleteDatabase(DB_NAME);
+			onCreate(sqlitedatabase);
+		}
 	}
 	
 	public void insertNewWorld(SQLiteDatabase sqlitedatabase) {
