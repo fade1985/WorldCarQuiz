@@ -49,8 +49,9 @@ public class QuestionPhotoFragment extends Fragment {
 					.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
 				
 				FragmentManager fm = getActivity().getSupportFragmentManager();
-				fm.beginTransaction().setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
-					.replace(R.id.fragment_result, new QuestionSolvedFragment()).commit();
+				Fragment fragment = new QuestionSolvedFragment();
+				fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+					.replace(R.id.fragment_result, fragment).commit();
 			}
 		});
 		
