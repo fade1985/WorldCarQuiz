@@ -53,7 +53,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		
 		//Creamos la tabla de preguntas
 		sqlitedatabase.execSQL("create table " + TABLE_QUESTIONS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				" locked INTEGER, trys INTEGER INTEGER DEFAULT 0, points INTEGER INTEGER DEFAULT 0)");
+				" locked INTEGER, trys INTEGER INTEGER DEFAULT 0, score INTEGER INTEGER DEFAULT 0)");
 		
 		//Creamos la tabla de coches
 		sqlitedatabase.execSQL("create table " + TABLE_CARS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -94,10 +94,21 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	    }
 	}
 	
-	public int getWorldsUnblocked(SQLiteDatabase sqlitedatabase) {
-		int worldsUnblocked = 0;
+	/*public int getWorldsUnblocked(SQLiteDatabase sqlitedatabase) {	
+		Cursor mCount= sqlitedatabase.rawQuery("SELECT COUNT(*) FROM questions", null);
+		mCount.moveToFirst();
+		return mCount.getInt(0)/(SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS);
+	}*/
+	
+	public Cursor getWorldQuestions(SQLiteDatabase sqlitedatabase, int world) {
+		int firstQuestion = (SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS) * (world - 1);
+		int lastQuestion = (SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS) * world;
 		
+		Cursor c = sqlitedatabase.rawQuery("SELECT locked, trys, score, file_name FROM questions, cars" +
+						" WHERE questions._id = cars._id and questions._id <= " + lastQuestion +
+						" and questions._id > " + firstQuestion, null);
 		
+		return c;
 	}
 /*	public void initializeTableQuestion(SQLiteDatabase sqlitedatabase, int world) {
 		

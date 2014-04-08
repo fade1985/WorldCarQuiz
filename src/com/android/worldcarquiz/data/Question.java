@@ -13,7 +13,7 @@ public class Question {
 	 * -mTrys: intentos de acierto sobre la pregunta.
 	 * -mImageId: id del recurso del drawable de la imagen.
 	 */
-	private int mId;
+	//private int mId;
 	private int mStatus;
 	private int mScore;
 	private int mTrys;
@@ -23,9 +23,10 @@ public class Question {
 	/**
 	 * CONSTRUCTOR
 	 */
-	public Question(int id, int status, int trys, int imageId) {
-		mId = id;
+	public Question(int status, int trys, int score, int imageId) {
+		//mId = id;
 		mStatus = status;
+		mScore = score;
 		mTrys = trys;
 		mImageId = imageId;
 	}
@@ -42,8 +43,8 @@ public class Question {
 	/**
 	 * Método que marca la respuesta acertada y le asigna su puntuacion
 	 */
-	public void setAnswered(int points) {
-		mScore = points;
+	public void setAnswered(int score) {
+		mScore = score;
 		mStatus = 2;
 		
 		//LLamar al Lab pa modificar la base de datos
@@ -57,10 +58,10 @@ public class Question {
 		mTrys = trys;
 	}
 	
-	public int getId() {
+	/*public int getId() {
 		return mId;
 	}
-	
+	*/
 	public int getImageId() {
 		return mImageId;
 	}

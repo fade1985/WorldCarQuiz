@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 /**
  * Clase correspondiente a los subniveles de cada mundo (Principiante y experto.)
@@ -27,25 +24,18 @@ public class SubWorld {
 	/**
 	 * CONSTRUCTOR
 	 */
-	public SubWorld(int numWorld, int numSubWorld, WorldQuizDatabaseHelper database, Context appContext) {
+	public SubWorld(Cursor cursor, Context appContext) {
 		mQuestions = new ArrayList<Question>();
 		
-		SQLiteDatabase db = database.getReadableDatabase();
-		
-		Cursor c = db.rawQuery("SELECT locked, trys, questions._id, file_name FROM questions, cars" +
-				" WHERE questions.world_id = " + numWorld +" and questions.subWorld = " + numSubWorld + 
-				" and questions.subWorld = cars.complexity and questions._id = cars._id", null);
-	
-		if (c.moveToFirst()) {
-		     //Recorremos el cursor hasta que no haya más registros
-		     do {
-		          int locked = c.getInt(0);
-		          int trys = c.getInt(1);
-		          int id = c.getInt(2);
-		          int resImage = appContext.getResources().getIdentifier(c.getString(3), "drawable", appContext.getPackageName());
-		          mQuestions.add(new Question(id, locked, trys, resImage));
-		     } while(c.moveToNext());
-		} 		
+	     //Recorremos el cursor hasta que no haya más registros
+	     for (int  i = 0; i <SubWorld.NUM_QUESTIONS; i++) {
+	          int locked = cursor.getInt(0);
+	          int trys = cursor.getInt(1);
+	          int score  = cursor.getInt(2);
+	          int resImage = appContext.getResources().getIdentifier(cursor.getString(3), "drawable", appContext.getPackageName());
+	          mQuestions.add(new Question(locked, trys, score, resImage));
+	          cursor.moveToNext();
+	     } 		
 	}
 
 	/**

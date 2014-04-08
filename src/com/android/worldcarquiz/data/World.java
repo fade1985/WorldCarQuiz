@@ -3,8 +3,7 @@ package com.android.worldcarquiz.data;
 import java.util.ArrayList;
 
 import android.content.Context;
-
-import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
+import android.database.Cursor;
 
 
 public class World {
@@ -16,21 +15,25 @@ public class World {
 	 * CONSTRUCTOR 1
 	 * Inicializa los submundos recuperando la información de la base de datos.
 	 */
-	public World(int numWorld, WorldQuizDatabaseHelper database, Context appContext) {
-		mSubWorlds = new ArrayList<SubWorld>();
-		
-		for (int j = 1; j <= NUM_SUBWORLDS; j++) {
-			mSubWorlds.add(new SubWorld(numWorld, j, database, appContext));
-		}
+	public World(Cursor cursor, Context appContext) {
+		mSubWorlds = null;
+
+		if (cursor.moveToFirst()) {
+			mSubWorlds = new ArrayList<SubWorld>();
+			
+			for (int j = 1; j <= NUM_SUBWORLDS; j++) {
+				mSubWorlds.add(new SubWorld(cursor, appContext));
+			}		
+		} 
 	}
 	
 	/**
 	 * CONSTRUCTOR 2
 	 * Crea el mundo con los submundos vacíos.
 	 */
-	public World(int i, Context appContext) {
+	/*public World(int i, Context appContext) {
 		mSubWorlds = null;
-	}
+	}*/
 	
 	/**
 	 * Método que devuelve el número de preguntas desbloqueadas del mundo.

@@ -3,6 +3,7 @@ package com.android.worldcarquiz.data;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
@@ -17,7 +18,6 @@ public class WorldCarQuizLab {
 
 	private static WorldCarQuizLab sWorldCarQuizLab;
 
-	private WorldQuizDatabaseHelper mDatabase;
 	private ArrayList<World> mWorlds;
 	private Stadistics mStadistics;
 	
@@ -33,21 +33,17 @@ public class WorldCarQuizLab {
 		mWorlds = new ArrayList<World>();
 		
 		//Abrimos la base de datos
-		WorldQuizDatabaseHelper mDatabase = new WorldQuizDatabaseHelper(mAppContext);
-		SQLiteDatabase db = mDatabase.getWritableDatabase();
-
-		//El primer mundo siempre se crea
-		mWorlds.add(new World(1, mDatabase, mAppContext));
-		for (int i = 2; i <= NUM_WORLDS; i++) {
-			//Recorremos la lista de mundos preguntando si están bloqueados o no
-			if (!mDatabase.isWorldLocked(db, i)) {
-				mWorlds.add(new World(i, mDatabase, mAppContext));
-			} else {
-				mWorlds.add(new World(i, mAppContext));
-			}
+		WorldQuizDatabaseHelper database = new WorldQuizDatabaseHelper(mAppContext);
+		SQLiteDatabase db = database.getWritableDatabase();
+		Cursor cursor;
+		
+		for (int i = 1; i <= NUM_WORLDS; i++) {
+			//Recorremos la lista de mundos
+			cursor = database.getWorldQuestions(db, i);
+			mWorlds.add(new World(cursor, mAppContext));
 		}
 		
-		mDatabase.close();
+		database.close();
 	}
 
 	/**
@@ -109,9 +105,9 @@ public class WorldCarQuizLab {
 	/**
 	 * Modifica la pregunta como acertada y le asigna su puntuacion.
 	 */
-	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int points) {
+	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int score) {
 		mWorlds.get(numWorld).getSubWorlds().get(numSubWorld).getQuestions()
-			.get(numQuestion).setAnswered(points);
+			.get(numQuestion).setAnswered(score);
 	}
 	
 	/**
