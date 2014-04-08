@@ -15,9 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.ViewSwitcher;
 
 import com.android.worldcarquiz.R;
@@ -29,7 +26,6 @@ public class SubWorldFragment extends Fragment {
 	public static final String EXTRA_NUM_SUBWORLD = "extra_num_subWorld";
 	public static final String EXTRA_NUM_WORLD = "extra_num_world";
 	
-	private ImageButton mButton;
 	private int mNumSubWorld;
 	private int mNumWorld;
 	private int mNumQuestion;

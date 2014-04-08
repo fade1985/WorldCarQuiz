@@ -17,7 +17,7 @@ public class SubWorld {
 	 * -mQuestions: ArrayList de tamaño NUM_QUESTIONS, que contiene instancias de la clase Question.
 	 */
 	public static final int NUM_QUESTIONS = 30;
-	public static final int QUESTIONS_TO_UNLOCK = 10;
+	public static final int QUESTIONS_TO_UNLOCK = 40;
 	
 	private ArrayList<Question> mQuestions;
 	

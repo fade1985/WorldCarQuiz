@@ -17,6 +17,7 @@ import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldPagerActivity;
 import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class MainMenuFragment extends Fragment {
 	
@@ -35,7 +36,7 @@ public class MainMenuFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		
-		WorldCarQuizLab worldCarQuizLab = WorldCarQuizLab.get(getActivity());
+		//WorldCarQuizLab worldCarQuizLab = WorldCarQuizLab.get(getActivity());
 		vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE) ;
 	}
 		
@@ -58,9 +59,8 @@ public class MainMenuFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), WorldPagerActivity.class);
-				startActivity(i);
-				vibrator.vibrate(20);
+				/***TEST: BORRAR BBDD***/
+				WorldCarQuizLab.get(getActivity()).resetDatabase();
 			}
 		});
 		

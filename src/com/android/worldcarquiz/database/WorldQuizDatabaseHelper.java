@@ -15,12 +15,13 @@ import android.util.Log;
 
 import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.data.World;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "worldCarQuiz.sqlite";
 	private static final int VERSION = 1;
 	
-	private static final String TABLE_WORLDS = "worlds";
+	//private static final String TABLE_WORLDS = "worlds";
 	private static final String TABLE_QUESTIONS = "questions";
 	private static final String TABLE_CARS = "cars";
 	
@@ -29,7 +30,6 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public WorldQuizDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		mContext = context.getApplicationContext();
-		context.deleteDatabase(DB_NAME);
 	}
 
 	@Override
@@ -203,12 +203,16 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	    }
 	}*/
 	
-	public void setQuestionAnswered(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld, int question, int points) {
+	public void setQuestionAnswered(SQLiteDatabase db, int numWorld, int subWorld, int question, int score) {
 		//Establecemos los campos-valores a actualizar
-		ContentValues valores = new ContentValues();
-		valores.put("locked","usunuevo");
+		int numQuestion = 1 + ((SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS) * numWorld) +
+				(SubWorld.NUM_QUESTIONS * subWorld) + question;
+				
+		ContentValues values = new ContentValues();
+		values.put("locked","2");
+		values.put("score",score);
 		
-		//sqlitedatabase.update(table, values, whereClause, whereArgs)
+		db.update(TABLE_QUESTIONS, values, "questions._id = " + numQuestion, null);
 	}
 	
 	public void setQuestionUnlocked(SQLiteDatabase sqlitedatabase, int numWorld, int subWorld, int question) {
@@ -245,9 +249,8 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 			if(arrayAnswers.get(i) == )
 				
 		}
-		
-		
-		
 	}*/
-	
+	public void resetDatabase() { 
+		mContext.deleteDatabase(DB_NAME);
+	}
 }

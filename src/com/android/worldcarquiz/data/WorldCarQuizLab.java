@@ -17,9 +17,10 @@ public class WorldCarQuizLab {
 	private static final int NUM_WORLDS = 10;
 
 	private static WorldCarQuizLab sWorldCarQuizLab;
-
+	WorldQuizDatabaseHelper mDatabase; 
+	
 	private ArrayList<World> mWorlds;
-	private Stadistics mStadistics;
+	//private Stadistics mStadistics;
 	
 	private Context mAppContext;
 
@@ -33,17 +34,17 @@ public class WorldCarQuizLab {
 		mWorlds = new ArrayList<World>();
 		
 		//Abrimos la base de datos
-		WorldQuizDatabaseHelper database = new WorldQuizDatabaseHelper(mAppContext);
-		SQLiteDatabase db = database.getWritableDatabase();
+		mDatabase = new WorldQuizDatabaseHelper(mAppContext);
+		SQLiteDatabase db = mDatabase.getWritableDatabase();
 		Cursor cursor;
 		
 		for (int i = 1; i <= NUM_WORLDS; i++) {
 			//Recorremos la lista de mundos
-			cursor = database.getWorldQuestions(db, i);
+			cursor = mDatabase.getWorldQuestions(db, i);
 			mWorlds.add(new World(cursor, mAppContext));
 		}
 		
-		database.close();
+		mDatabase.close();
 	}
 
 	/**
@@ -54,13 +55,6 @@ public class WorldCarQuizLab {
 			sWorldCarQuizLab = new WorldCarQuizLab(c.getApplicationContext());
 		}
 		return sWorldCarQuizLab;
-	}
-
-	/**
-	 * Devuelve el mundo 'numWorld'.
-	 */
-	public World getWorld(int numWorld) {
-		return mWorlds.get(numWorld);
 	}
 
 	/**
@@ -108,6 +102,11 @@ public class WorldCarQuizLab {
 	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int score) {
 		mWorlds.get(numWorld).getSubWorlds().get(numSubWorld).getQuestions()
 			.get(numQuestion).setAnswered(score);
+		
+		SQLiteDatabase db = mDatabase.getWritableDatabase();
+		//Modificamos en la base de datos
+		mDatabase.setQuestionAnswered(db, numWorld, numSubWorld, numQuestion, score);
+		db.close();
 	}
 	
 	/**
@@ -124,5 +123,9 @@ public class WorldCarQuizLab {
 		}
 		
 		return total;
+	}
+	
+	public void resetDatabase() {
+		mDatabase.resetDatabase();
 	}
 }

@@ -1,7 +1,5 @@
 package com.android.worldcarquiz.activity;
 
-import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.os.Bundle;
@@ -9,17 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class WorldPagerActivity extends FragmentActivity {
 	private ViewPager mViewPager;
 	private int mNumWorld;
-	private ArrayList<SubWorld> mSubWorld;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -60,7 +59,7 @@ public class QuestionFragment extends Fragment{
 				@Override
 				public void onClick(View arg0) {
 					WorldCarQuizLab.get(getActivity())
-						.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion+1);
+						.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
 				}
 			});
 			
