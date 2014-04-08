@@ -15,7 +15,6 @@ import android.util.Log;
 
 import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.data.World;
-import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DB_NAME = "worldCarQuiz.sqlite";

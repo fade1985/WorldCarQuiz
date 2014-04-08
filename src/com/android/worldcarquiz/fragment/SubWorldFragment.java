@@ -109,7 +109,7 @@ public class SubWorldFragment extends Fragment {
 			   Intent i = new Intent(getActivity(), QuestionActivity.class);
 			   i.putExtra(EXTRA_NUM_WORLD, mNumWorld);
 			   i.putExtra(EXTRA_NUM_SUBWORLD, mNumSubWorld);
-			   i.putExtra(QuestionFragment.EXTRA_NUM_QUESTION, mNumQuestion);
+			   i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 		       startActivity(i);
 		   }
 	};

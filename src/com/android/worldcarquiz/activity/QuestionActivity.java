@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.fragment.QuestionFragment;
+import com.android.worldcarquiz.fragment.QuestionBannerFragment;
+import com.android.worldcarquiz.fragment.QuestionPhotoFragment;
+import com.android.worldcarquiz.fragment.QuestionResultFragment;
 import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class QuestionActivity extends FragmentActivity{
@@ -21,17 +23,17 @@ public class QuestionActivity extends FragmentActivity{
 		
 		mNumWorld = getIntent().getIntExtra(SubWorldFragment.EXTRA_NUM_WORLD, 0);
 		mNumSubWorld = getIntent().getIntExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, 0);
-		mNumQuestion = getIntent().getIntExtra(QuestionFragment.EXTRA_NUM_QUESTION, 0);
+		mNumQuestion = getIntent().getIntExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, 0);
 		
 		FragmentManager fm = getSupportFragmentManager();
 		
-		Fragment fragment = QuestionFragment.newInstance(0, mNumWorld, mNumSubWorld, mNumQuestion);
-		Fragment fragment2 = QuestionFragment.newInstance(1, mNumWorld, mNumSubWorld, mNumQuestion);
-		Fragment fragment3 = QuestionFragment.newInstance(2, mNumWorld, mNumSubWorld, mNumQuestion);
+		Fragment fragmentPhoto = QuestionPhotoFragment.newInstance(mNumWorld, mNumSubWorld, mNumQuestion);
+		Fragment fragmentResult = new QuestionResultFragment();
+		Fragment fragmentBanner = new QuestionBannerFragment();
 		fm.beginTransaction()
-		.add(R.id.fragment_photo, fragment)
-		.add(R.id.fragment_result, fragment2)
-		.add(R.id.fragment_banner, fragment3)
+		.add(R.id.fragment_photo, fragmentPhoto)
+		.add(R.id.fragment_result, fragmentResult)
+		.add(R.id.fragment_banner, fragmentBanner)
 		.commit();
 		
 	}

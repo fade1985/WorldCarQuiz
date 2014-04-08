@@ -41,7 +41,7 @@ public class WorldPagerActivity extends FragmentActivity {
 				return SubWorldFragment.newInstance(mNumWorld, arg0);
 			}
 		});
-		
+				
 		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			
 			@Override
