@@ -50,7 +50,7 @@ public class QuestionPhotoFragment extends Fragment {
 				
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				Fragment fragment = new QuestionSolvedFragment();
-				fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+				fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
 					.replace(R.id.fragment_result, fragment).commit();
 			}
 		});
