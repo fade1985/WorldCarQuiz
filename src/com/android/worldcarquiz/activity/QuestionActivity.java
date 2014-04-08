@@ -6,9 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.fragment.QuestionBannerFragment;
 import com.android.worldcarquiz.fragment.QuestionPhotoFragment;
-import com.android.worldcarquiz.fragment.QuestionResultFragment;
+import com.android.worldcarquiz.fragment.QuestionAnswerFragment;
 import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class QuestionActivity extends FragmentActivity{
@@ -28,11 +29,12 @@ public class QuestionActivity extends FragmentActivity{
 		FragmentManager fm = getSupportFragmentManager();
 		
 		Fragment fragmentPhoto = QuestionPhotoFragment.newInstance(mNumWorld, mNumSubWorld, mNumQuestion);
-		Fragment fragmentResult = new QuestionResultFragment();
+		Fragment fragmentAnswer = QuestionAnswerFragment.newInstance(mNumSubWorld);		
 		Fragment fragmentBanner = new QuestionBannerFragment();
+		
 		fm.beginTransaction()
 		.add(R.id.fragment_photo, fragmentPhoto)
-		.add(R.id.fragment_result, fragmentResult)
+		.add(R.id.fragment_answer, fragmentAnswer)
 		.add(R.id.fragment_banner, fragmentBanner)
 		.commit();
 		

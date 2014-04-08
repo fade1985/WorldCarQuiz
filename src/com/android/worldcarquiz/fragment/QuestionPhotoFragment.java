@@ -51,18 +51,18 @@ public class QuestionPhotoFragment extends Fragment {
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				Fragment fragment = new QuestionSolvedFragment();
 				fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-					.replace(R.id.fragment_result, fragment).commit();
+					.replace(R.id.fragment_answer, fragment).commit();
 			}
 		});
 		
 		return v;
 	}
 	
-	public static Fragment newInstance(int world, int subWorld, int question) {
+	public static Fragment newInstance(int numWorld, int numSubWorld, int numQuestion) {
 		Bundle arg = new Bundle();
-		arg.putInt(SubWorldFragment.EXTRA_NUM_WORLD, world);
-		arg.putInt(SubWorldFragment.EXTRA_NUM_SUBWORLD, subWorld);
-		arg.putInt(EXTRA_NUM_QUESTION, question);
+		arg.putInt(SubWorldFragment.EXTRA_NUM_WORLD, numWorld);
+		arg.putInt(SubWorldFragment.EXTRA_NUM_SUBWORLD, numSubWorld);
+		arg.putInt(EXTRA_NUM_QUESTION, numQuestion);
 		QuestionPhotoFragment fragment = new QuestionPhotoFragment();
 		fragment.setArguments(arg);
 		
