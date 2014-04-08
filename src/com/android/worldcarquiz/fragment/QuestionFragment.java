@@ -47,7 +47,7 @@ public class QuestionFragment extends Fragment{
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View v = inflater.inflate(R.layout.fragment_photo_question, null);
+			View v = inflater.inflate(R.layout.fragment_question_photo, null);
 			ImageView iv = (ImageView)v.findViewById(R.id.photo_question);
 			int id = WorldCarQuizLab.get(getActivity())
 						.getImageId(mNumWorld, mNumSubWorld, mNumQuestion);
@@ -84,7 +84,7 @@ public class QuestionFragment extends Fragment{
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
-			return inflater.inflate(R.layout.fragment_result_question, null);
+			return inflater.inflate(R.layout.fragment_question_options, null);
 		}
 	}
 		
@@ -94,7 +94,7 @@ public class QuestionFragment extends Fragment{
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
-			return inflater.inflate(R.layout.fragment_banner_question, null);
+			return inflater.inflate(R.layout.fragment_question_banner, null);
 		}
 	}
 }

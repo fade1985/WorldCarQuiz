@@ -31,7 +31,7 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		//Mundo desbloqueado
 		if(WorldCarQuizLab.get(mContext).getWorlds().get(position).getSubWorlds() != null){
 			convertView = ((Activity)getContext()).getLayoutInflater()
-					.inflate(R.layout.fragment_list_worlds, null);
+					.inflate(R.layout.fragment_world, null);
 			
 			//Puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
@@ -55,7 +55,7 @@ public class WorldAdapter extends ArrayAdapter<World>{
 		//Mundo desbloqueado
 		else {
 			
-			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_list_worlds_blocked, null);
+			convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.fragment_world_blocked, null);
 			
 			//Titulo de los puntos en el mundo
 			TextView circlePoints = (TextView)convertView.findViewById(R.id.points_list_worlds);
