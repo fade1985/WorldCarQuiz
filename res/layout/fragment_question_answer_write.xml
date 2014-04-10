@@ -3,16 +3,26 @@
    android:layout_width="match_parent"
    android:layout_height="match_parent">
 
-    <EditText
+   <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:inputType="text"
         android:ems="10" >
 
-        <requestFocus />
     </EditText>
+    
+   <TableLayout 
+       android:id="@+id/table"
+       android:gravity="center_horizontal"
+       android:layout_alignParentBottom="true"
+       android:layout_marginBottom="20dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       
+   </TableLayout>
   
 </RelativeLayout>

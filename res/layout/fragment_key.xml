@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id= "@+id/key"
-    android:layout_height="22dp"
-    android:layout_width="22dp"
-    android:background="@drawable/button_shape" >
-    
-</Button>
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+	<Button 
+	    android:id= "@+id/key"
+	    android:layout_height="40dp"
+	    android:layout_width="30dp"
+	    android:textSize="12sp"
+	    android:layout_marginLeft="2dp"
+	    android:layout_marginRight="2dp"
+	    android:text="A"
+	    android:textColor="#ffffff"
+	    android:background="@drawable/button_thin_shape" >
+	    
+	</Button>
+</FrameLayout>
