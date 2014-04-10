@@ -6,7 +6,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -29,39 +28,37 @@ public class QuestionAnswerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		if (mNumSubWorld > 0) {
-			View v = inflater.inflate(R.layout.fragment_question_answer_write, null);
+		View v = inflater.inflate(R.layout.fragment_question_answer_write, null);
+		
+		mKeyBoard = (TableLayout) v.findViewById(R.id.table);
+		for (int i = 0; i < 4; i++) {
+			TableRow tr = new TableRow(getActivity());
+			TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+
+			int limite = 10;
+			if (i == 3) 
+				params.setMargins(0, 20, 0, 0);
+			else 
+				params.setMargins(0, 10, 0, 0);
+			tr.setLayoutParams(params);
 			
-			mKeyBoard = (TableLayout) v.findViewById(R.id.table);
-			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			for (int i = 0; i < 4; i++) {
-				TableRow tr = new TableRow(getActivity());
-				int limite = 10;
-				if (i == 3) 
-					params.setMargins(0, 50, 0, 50);
-				else 
-					params.setMargins(0, 20, 0, 20);
-				
-				if (i == 1)
-					limite = 9;
-				else if (i == 2) 
-					limite = 7;
-				
-				for (int j = 0; j < limite; j++) {
-					View key = inflater.inflate(R.layout.fragment_key, null);
-
-					tr.addView(key);
-				}
-
-				tr.setLayoutParams(params);
-				tr.setGravity(Gravity.CENTER);
-				mKeyBoard.addView(tr);
+			if (i == 1)
+				limite = 9;
+			else if (i == 2) 
+				limite = 7;
+			
+			for (int j = 0; j < limite; j++) {
+				View keyView = inflater.inflate(R.layout.fragment_key, null);
+			    
+				tr.addView(keyView);
 			}
-			
-			return v;
-		} else {
-			return inflater.inflate(R.layout.fragment_question_answer_options, null);
+
+			tr.setLayoutParams(params);
+			tr.setGravity(Gravity.CENTER);
+			mKeyBoard.addView(tr);
 		}
+		
+		return v;
 	}
 	
 	public static Fragment newInstance(int numSubWorld) {

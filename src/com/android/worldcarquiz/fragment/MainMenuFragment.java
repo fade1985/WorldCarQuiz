@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class MainMenuFragment extends Fragment {
 	
@@ -58,7 +59,7 @@ public class MainMenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				/***TEST: BORRAR BBDD***/
-				WorldCarQuizLab.get(getActivity()).resetDatabase();
+				getActivity().deleteDatabase(WorldQuizDatabaseHelper.DB_NAME);
 			}
 		});
 		

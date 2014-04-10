@@ -44,7 +44,7 @@ public class WorldCarQuizLab {
 			mWorlds.add(new World(cursor, mAppContext));
 		}
 		
-		mDatabase.close();
+		db.close();
 	}
 
 	/**
@@ -123,9 +123,5 @@ public class WorldCarQuizLab {
 		}
 		
 		return total;
-	}
-	
-	public void resetDatabase() {
-		mDatabase.resetDatabase();
 	}
 }

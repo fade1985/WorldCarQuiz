@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.World;
 import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class WorldPagerActivity extends FragmentActivity {
@@ -33,7 +34,7 @@ public class WorldPagerActivity extends FragmentActivity {
 			
 			@Override
 			public int getCount() {
-				return 2;
+				return World.NUM_SUBWORLDS;
 			}
 			
 			@Override
@@ -85,8 +86,12 @@ public class WorldPagerActivity extends FragmentActivity {
 		
 	    // Se añaden los titulos de las tablas
 	   actionBar.addTab(actionBar.newTab()
-			   .setText("Rookie").setTabListener(tabListener));
+			   .setText(R.string.europe_subworld).setTabListener(tabListener));
 	   actionBar.addTab(actionBar.newTab()
-			   .setText("Expert").setTabListener(tabListener));	    
+			   .setText(R.string.america_subworld).setTabListener(tabListener));
+	   actionBar.addTab(actionBar.newTab()
+			   .setText(R.string.asia_subworld).setTabListener(tabListener));
+	   actionBar.addTab(actionBar.newTab()
+			   .setText(R.string.all_subworld).setTabListener(tabListener));
 	}
 }

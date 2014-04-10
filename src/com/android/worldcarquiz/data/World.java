@@ -7,7 +7,7 @@ import android.database.Cursor;
 
 
 public class World {
-	public static final int NUM_SUBWORLDS = 2;
+	public static final int NUM_SUBWORLDS = 4;
 
 	private ArrayList<SubWorld> mSubWorlds;
 	

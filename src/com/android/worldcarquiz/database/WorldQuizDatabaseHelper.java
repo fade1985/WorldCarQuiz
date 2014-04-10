@@ -18,8 +18,8 @@ import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.data.World;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
-	private static final String DB_NAME = "worldCarQuiz.sqlite";
-	private static final int VERSION = 2;
+	public static final String DB_NAME = "worldCarQuiz.sqlite";
+	private static final int VERSION = 3;
 	
 	private static final String TABLE_QUESTIONS = "questions";
 	private static final String TABLE_CARS = "cars";
@@ -69,17 +69,19 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public void insertCars(SQLiteDatabase db) {
 	    InputStream is = null;
 	    try {
-	         is = mContext.getAssets().open("dbWorlds/world1.sql");
-	         if (is != null) {
-	             db.beginTransaction();
-	             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	             String line = reader.readLine();
-	             while (!TextUtils.isEmpty(line)) {
-	                 db.execSQL(line);
-	                 line = reader.readLine();
-	             }
-	             db.setTransactionSuccessful();
-	         }
+	    	db.beginTransaction();
+	    	for (int i = 1; i <= World.NUM_SUBWORLDS; i++) {
+	    		is = mContext.getAssets().open("dbWorlds/world1" + i +".sql");
+	    		if (is != null) {
+		            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		            String line = reader.readLine();
+		            while (!TextUtils.isEmpty(line)) {
+		            	db.execSQL(line);
+		                line = reader.readLine();
+		            }
+		         }
+	    	}
+	    	db.setTransactionSuccessful();
 	    } catch (Exception ex) {
 	        Log.d("SQL_ERROR", ex.getMessage());      
 	    } finally {
@@ -144,39 +146,5 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		
 		//Hacemos el update en la tabla.
 		db.update(TABLE_QUESTIONS, values, "questions._id = " + numQuestion, null);
-	}
-	
-	public ArrayList getpossibleanswers(SQLiteDatabase db, String segment, int year) {
-		//select para obtener coches del mismo segmento y año
-		Cursor cursor = db.rawQuery("SELECT model, brand FROM cars WHERE segment=" + segment + " AND year=" + year , null);
-		ArrayList<String> arrayAnswers = new ArrayList<String>();
-		
-		if(cursor.moveToFirst()){
-			while(!cursor.isAfterLast())
-			{
-				String brand = cursor.getString(1);
-				String model = cursor.getString(0);
-				arrayAnswers.add( brand + " " + model);
-				cursor.moveToNext();
-			}
-			cursor.close();
-		}
-		
-		//recorremos el array hasta encontrar uno de su marca
-		int i = 0;
-		while (i < arrayAnswers.size())
-		{
-			ArrayList<String>aux = new ArrayList<String>();
-			//if(arrayAnswers.get(i) == )
-				
-		}
-		return null;
-	}
-	
-	/**
-	 * Método que elimina la base de datos
-	 */
-	public void resetDatabase() { 
-		mContext.deleteDatabase(DB_NAME);
 	}
 }

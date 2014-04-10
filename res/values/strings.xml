@@ -14,4 +14,8 @@
     <string name="stamps">Stamps</string>
     <string name="div">3</string>
 
+    <string name="america_subworld">America</string>
+    <string name="europe_subworld">Europe</string>
+    <string name="asia_subworld">Asia</string>
+    <string name="all_subworld">All</string>
 </resources>
