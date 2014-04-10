@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -20,15 +21,22 @@ public class QuestionAnswerFragment extends Fragment {
 	private static final String EXTRA_ANSWER = "extra_answer";
 	
 	private String mAnswer;
+	private String[] mArrayAnswer;
 	private TableLayout mKeyBoard;
 	private TableLayout mTableAnswer;
 	private Vibrator mVibrator;
+	private int mLastPosition;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mAnswer = getArguments().getString(EXTRA_ANSWER);
+		String[] answerSplit = mAnswer.split(" ");
+		String carBrand = answerSplit[0];
+		String carModel = answerSplit[1];
+		mArrayAnswer = new String[carBrand.length() + carModel.length()];
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
+		mLastPosition = 0;
 	}
 	
 	@Override
@@ -59,14 +67,6 @@ public class QuestionAnswerFragment extends Fragment {
 		//Añadimos el gravity centrado e insertamos en el TableLayout.
 		tr.setGravity(Gravity.CENTER);
 		mKeyBoard.addView(tr);
-		mKeyBoard.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		}
 		
 		return v;
@@ -150,33 +150,50 @@ public class QuestionAnswerFragment extends Fragment {
 	 * Construye la tabla de botones que muestra la respuesta.
 	 */
 	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswer) {
-		String carBrand;
-		String carModel;
-		
 		String[] answerSplit = mAnswer.split(" ");
-		carBrand = answerSplit[0];
-		carModel = answerSplit[1];
+		String carBrand = answerSplit[0];
+		String carModel = answerSplit[1];
 		
 		//Creamos dos filas, una para la marca y otra para el modelo
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-		//params.setMargins(0, 5, 0, 0);
-		//brandRow.setLayoutParams(params);
+		params.setMargins(0, 5, 0, 0);
+		brandRow.setLayoutParams(params);
 		brandRow.setGravity(Gravity.CENTER);
-		//modelRow.setLayoutParams(params);
+		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
 		for (int i = 0; i < carBrand.length(); i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
+			aButton.setTag(i);
+			aButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					mLastPosition = (Integer)view.getTag();
+					deleteLetter(view);
+				}
+			});
 			brandRow.addView(keyView);
 		}
 		mTableAnswer.addView(brandRow);
 		
-		for (int i = 0; i < carModel.length(); i++) {
+		for (int i = carBrand.length(); i < carBrand.length() + carModel.length(); i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
+			aButton.setTag(i);
+			aButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					mLastPosition = (Integer)view.getTag();
+					deleteLetter(view);
+				}
+			});
 			modelRow.addView(keyView);
 		}
 		mTableAnswer.addView(modelRow);
@@ -184,10 +201,41 @@ public class QuestionAnswerFragment extends Fragment {
 	
 	public void paintLetter(View view) {
 		mVibrator.vibrate(10);
-		/*String s = ((Button)view).getText().toString();
-		String actualText = mEditText.getText().toString();
 		
-		mEditText.setText(actualText + s);*/
+		String[] answerSplit = mAnswer.split(" ");
+		String carBrand = answerSplit[0];
+		String carModel = answerSplit[1];
+		
+		String sKey = ((Button)view).getText().toString();
+		if (mLastPosition < (carBrand.length() + carModel.length())) {
+			String s = mArrayAnswer[mLastPosition];
+			while ((s != null) && !s.equals("")) {
+				mLastPosition++;
+				s = mArrayAnswer[mLastPosition];
+			}			
+		}
+
+		
+		if (mLastPosition < carBrand.length()) {
+			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
+			Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			aButton.setText(sKey);
+			mArrayAnswer[mLastPosition] = sKey;
+			mLastPosition++;
+		} else if (mLastPosition < (carBrand.length() + carModel.length())){
+			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(mLastPosition - carBrand.length());
+			Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			aButton.setText(sKey);
+			mArrayAnswer[mLastPosition] = sKey;
+			mLastPosition++;
+		}
+	}
+	
+	public void deleteLetter(View view) {
+		Button aButton = (Button)view;
+		aButton.setText("");
+		mArrayAnswer[mLastPosition] = "";
+		mLastPosition = 0;
 	}
 	
 	/**
