@@ -18,7 +18,9 @@ import android.widget.TableRow;
 import com.android.worldcarquiz.R;
 
 public class QuestionAnswerFragment extends Fragment {
+	private static final String EXTRA_ANSWER = "extra_answer";
 	
+	private String mAnswer;
 	private TableLayout mKeyBoard;
 	private EditText mEditText;
 	private Vibrator mVibrator;
@@ -26,6 +28,7 @@ public class QuestionAnswerFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mAnswer = getArguments().getString(EXTRA_ANSWER);
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
 	}
 	
@@ -36,6 +39,7 @@ public class QuestionAnswerFragment extends Fragment {
 		//Inflamos el layout del fragment que contiene el editText y el teclado virtual.
 		View v = inflater.inflate(R.layout.fragment_question_answer, null);
 		mEditText = (EditText) v.findViewById(R.id.editText);
+		mEditText.setText(mAnswer);
 		mKeyBoard = (TableLayout) v.findViewById(R.id.table);
 		TableRow tr = null;
 		
@@ -145,8 +149,9 @@ public class QuestionAnswerFragment extends Fragment {
 	/**
 	 * Crea una nueva instancia del fragment.
 	 */
-	public static Fragment newInstance(int numSubWorld) {
+	public static Fragment newInstance(String answer) {
 		Bundle arg = new Bundle();
+		arg.putString(EXTRA_ANSWER, answer);
 		QuestionAnswerFragment fragment = new QuestionAnswerFragment();
 		fragment.setArguments(arg);
 		

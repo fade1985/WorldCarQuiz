@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -123,7 +122,7 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 		int lastQuestion = (SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS) * world;
 		
 		//Se realiza la consulta en base de datos.
-		Cursor c = sqlitedatabase.rawQuery("SELECT locked, trys, score, file_name FROM questions, cars" +
+		Cursor c = sqlitedatabase.rawQuery("SELECT locked, trys, score, file_name, brand, model FROM questions, cars" +
 						" WHERE questions._id = cars._id and questions._id <= " + lastQuestion +
 						" and questions._id > " + firstQuestion, null);
 		

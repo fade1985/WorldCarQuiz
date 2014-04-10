@@ -97,6 +97,14 @@ public class WorldCarQuizLab {
 	}
 	
 	/**
+	 * Devuelve la respuesta de la pregunta.
+	 */
+	public String getQuestionAnswer(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.getQuestions().get(question).getAnswer();
+	}
+	
+	/**
 	 * Modifica la pregunta como acertada y le asigna su puntuacion.
 	 */
 	public void setQuestionAnswered(int numWorld, int numSubWorld, int numQuestion, int score) {

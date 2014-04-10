@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.SubWorld;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 import com.android.worldcarquiz.fragment.QuestionBannerFragment;
 import com.android.worldcarquiz.fragment.QuestionPhotoFragment;
 import com.android.worldcarquiz.fragment.QuestionAnswerFragment;
@@ -29,7 +30,8 @@ public class QuestionActivity extends FragmentActivity{
 		FragmentManager fm = getSupportFragmentManager();
 		
 		Fragment fragmentPhoto = QuestionPhotoFragment.newInstance(mNumWorld, mNumSubWorld, mNumQuestion);
-		Fragment fragmentAnswer = QuestionAnswerFragment.newInstance(mNumSubWorld);		
+		String answer = WorldCarQuizLab.get(this).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
+		Fragment fragmentAnswer = QuestionAnswerFragment.newInstance(answer);		
 		Fragment fragmentBanner = new QuestionBannerFragment();
 		
 		fm.beginTransaction()

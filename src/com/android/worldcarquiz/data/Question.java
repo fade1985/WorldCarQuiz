@@ -18,23 +18,29 @@ public class Question {
 	private int mScore;
 	private int mTrys;
 	private int mImageId;
+	private String mAnswer;
 
 	
 	/**
 	 * CONSTRUCTOR
 	 */
-	public Question(int status, int trys, int score, int imageId) {
+	public Question(int status, int trys, int score, int imageId, String answer) {
 		//mId = id;
 		mStatus = status;
 		mScore = score;
 		mTrys = trys;
 		mImageId = imageId;
+		mAnswer = answer;
 	}
 
 	
 	/**
 	 * GETTERS Y SETTERS
 	 */
+	
+	public String getAnswer() {
+		return mAnswer;
+	}
 	
 	public int getScore() {
 		return mScore;
