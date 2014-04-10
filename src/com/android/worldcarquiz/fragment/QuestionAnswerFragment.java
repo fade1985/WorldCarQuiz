@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -22,7 +21,7 @@ public class QuestionAnswerFragment extends Fragment {
 	
 	private String mAnswer;
 	private TableLayout mKeyBoard;
-	private EditText mEditText;
+	private TableLayout mTableAnswer;
 	private Vibrator mVibrator;
 			
 	@Override
@@ -38,9 +37,10 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		//Inflamos el layout del fragment que contiene el editText y el teclado virtual.
 		View v = inflater.inflate(R.layout.fragment_question_answer, null);
-		mEditText = (EditText) v.findViewById(R.id.editText);
-		mEditText.setText(mAnswer);
-		mKeyBoard = (TableLayout) v.findViewById(R.id.table);
+		mTableAnswer = (TableLayout) v.findViewById(R.id.tableAnswer);
+		buildTableAnswer(inflater, mTableAnswer);
+		
+		mKeyBoard = (TableLayout) v.findViewById(R.id.tableKeyboard);
 		TableRow tr = null;
 		
 		/*Creamos 4 filas y las añadimos al TableLayout del fragment. Cada fila tiene diferente numero de letras,
@@ -59,6 +59,14 @@ public class QuestionAnswerFragment extends Fragment {
 		//Añadimos el gravity centrado e insertamos en el TableLayout.
 		tr.setGravity(Gravity.CENTER);
 		mKeyBoard.addView(tr);
+		mKeyBoard.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		}
 		
 		return v;
@@ -86,7 +94,7 @@ public class QuestionAnswerFragment extends Fragment {
 		 
 		for (int j = 0; j < numLetters; j++) {
 			//Inflamos el botón y le asignamos de texto la letra que corresponda del array. También agregamos su listener.
-			View keyView = inflater.inflate(R.layout.fragment_key, null);
+			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
 			button.setText(letters[j]);
 			button.setOnClickListener(new OnClickListener() {
@@ -114,7 +122,7 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		for (int i = 1; i <= 10; i++) {
 			//Inflamos el botón y le asignamos de texto el dígito que corresponda. También agregamos su listener.
-			View keyView = inflater.inflate(R.layout.fragment_key, null);
+			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
 			
 			//El botón 0 irá al final de la fila.
@@ -138,12 +146,48 @@ public class QuestionAnswerFragment extends Fragment {
 		return tr;
 	}
 	
+	/**
+	 * Construye la tabla de botones que muestra la respuesta.
+	 */
+	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswer) {
+		String carBrand;
+		String carModel;
+		
+		String[] answerSplit = mAnswer.split(" ");
+		carBrand = answerSplit[0];
+		carModel = answerSplit[1];
+		
+		//Creamos dos filas, una para la marca y otra para el modelo
+		TableRow brandRow = new TableRow(getActivity());
+		TableRow modelRow = new TableRow(getActivity());
+		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+		//params.setMargins(0, 5, 0, 0);
+		//brandRow.setLayoutParams(params);
+		brandRow.setGravity(Gravity.CENTER);
+		//modelRow.setLayoutParams(params);
+		modelRow.setGravity(Gravity.CENTER);
+		
+		for (int i = 0; i < carBrand.length(); i++) {
+			//Inflamos el botón y lo dejamos vacio.
+			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+			brandRow.addView(keyView);
+		}
+		mTableAnswer.addView(brandRow);
+		
+		for (int i = 0; i < carModel.length(); i++) {
+			//Inflamos el botón y lo dejamos vacio.
+			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+			modelRow.addView(keyView);
+		}
+		mTableAnswer.addView(modelRow);
+	}
+	
 	public void paintLetter(View view) {
 		mVibrator.vibrate(10);
-		String s = ((Button)view).getText().toString();
+		/*String s = ((Button)view).getText().toString();
 		String actualText = mEditText.getText().toString();
 		
-		mEditText.setText(actualText + s);
+		mEditText.setText(actualText + s);*/
 	}
 	
 	/**
