@@ -30,8 +30,7 @@ public class QuestionActivity extends FragmentActivity{
 		FragmentManager fm = getSupportFragmentManager();
 		
 		Fragment fragmentPhoto = QuestionPhotoFragment.newInstance(mNumWorld, mNumSubWorld, mNumQuestion);
-		String answer = WorldCarQuizLab.get(this).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
-		Fragment fragmentAnswer = QuestionAnswerFragment.newInstance(answer);		
+		Fragment fragmentAnswer = QuestionAnswerFragment.newInstance(mNumWorld, mNumSubWorld, mNumQuestion);		
 		Fragment fragmentBanner = new QuestionBannerFragment();
 		
 		fm.beginTransaction()

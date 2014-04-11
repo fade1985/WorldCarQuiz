@@ -45,13 +45,7 @@ public class QuestionPhotoFragment extends Fragment {
 			
 			@Override
 			public void onClick(View arg0) {
-				WorldCarQuizLab.get(getActivity())
-					.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
-				
-				FragmentManager fm = getActivity().getSupportFragmentManager();
-				Fragment fragment = new QuestionSolvedFragment();
-				fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-					.replace(R.id.fragment_answer, fragment).commit();
+
 			}
 		});
 		

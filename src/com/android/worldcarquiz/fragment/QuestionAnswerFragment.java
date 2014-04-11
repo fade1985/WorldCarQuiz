@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,25 +17,39 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class QuestionAnswerFragment extends Fragment {
-	private static final String EXTRA_ANSWER = "extra_answer";
+	private static final String EXTRA_WORLD = "extra_world";
+	private static final String EXTRA_SUBWORLD = "extra_subworld";
+	private static final String EXTRA_QUESTION = "extra_question";
 	
-	private String mAnswer;
-	private String[] mArrayAnswer;
 	private TableLayout mKeyBoard;
 	private TableLayout mTableAnswer;
+	
 	private Vibrator mVibrator;
+	
+	private String mCarBrand;
+	private String mCarModel;
+	private String[] mArrayAnswer;
 	private int mLastPosition;
+	
+	private int mNumWorld;
+	private int mNumSubWorld;
+	private int mNumQuestion;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mAnswer = getArguments().getString(EXTRA_ANSWER);
-		String[] answerSplit = mAnswer.split(" ");
-		String carBrand = answerSplit[0];
-		String carModel = answerSplit[1];
-		mArrayAnswer = new String[carBrand.length() + carModel.length()];
+		mNumWorld = getArguments().getInt(EXTRA_WORLD);
+		mNumSubWorld = getArguments().getInt(EXTRA_SUBWORLD);
+		mNumQuestion = getArguments().getInt(EXTRA_QUESTION);
+		String answer = WorldCarQuizLab.get(getActivity()).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
+		String[] answerSplit = answer.split(" ");
+		mCarBrand = answerSplit[0];
+		mCarModel = answerSplit[1];
+		
+		mArrayAnswer = new String[mCarBrand.length() + mCarModel.length()];
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
 		mLastPosition = 0;
 	}
@@ -101,6 +116,7 @@ public class QuestionAnswerFragment extends Fragment {
 				@Override
 				public void onClick(View view) {
 					paintLetter(view);
+					checkAnswer();
 				}
 			});
 			tr.addView(keyView);
@@ -135,6 +151,7 @@ public class QuestionAnswerFragment extends Fragment {
 				@Override
 				public void onClick(View view) {
 					paintLetter(view);
+					checkAnswer();
 				}
 			});
 			tr.addView(keyView);
@@ -150,10 +167,6 @@ public class QuestionAnswerFragment extends Fragment {
 	 * Construye la tabla de botones que muestra la respuesta.
 	 */
 	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswer) {
-		String[] answerSplit = mAnswer.split(" ");
-		String carBrand = answerSplit[0];
-		String carModel = answerSplit[1];
-		
 		//Creamos dos filas, una para la marca y otra para el modelo
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
@@ -164,7 +177,7 @@ public class QuestionAnswerFragment extends Fragment {
 		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
-		for (int i = 0; i < carBrand.length(); i++) {
+		for (int i = 0; i < mCarBrand.length(); i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
 			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
@@ -181,7 +194,7 @@ public class QuestionAnswerFragment extends Fragment {
 		}
 		mTableAnswer.addView(brandRow);
 		
-		for (int i = carBrand.length(); i < carBrand.length() + carModel.length(); i++) {
+		for (int i = mCarBrand.length(); i < mArrayAnswer.length; i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
 			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
@@ -202,31 +215,28 @@ public class QuestionAnswerFragment extends Fragment {
 	public void paintLetter(View view) {
 		mVibrator.vibrate(10);
 		
-		String[] answerSplit = mAnswer.split(" ");
-		String carBrand = answerSplit[0];
-		String carModel = answerSplit[1];
-		
 		String sKey = ((Button)view).getText().toString();
-		if (mLastPosition < (carBrand.length() + carModel.length())) {
-			String s = mArrayAnswer[mLastPosition];
-			while ((s != null) && !s.equals("")) {
-				mLastPosition++;
-				s = mArrayAnswer[mLastPosition];
+		
+		
+		if (mLastPosition < mArrayAnswer.length) {
+			if (mLastPosition < mCarBrand.length()) {
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
+				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+				aButton.setText(sKey);
+				mArrayAnswer[mLastPosition] = sKey;
+				setNewposition();
+			} else if (mLastPosition < mArrayAnswer.length){
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(mLastPosition - mCarBrand.length());
+				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+				aButton.setText(sKey);
+				mArrayAnswer[mLastPosition] = sKey;
+				setNewposition();
 			}			
 		}
-
-		
-		if (mLastPosition < carBrand.length()) {
-			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
-			Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
-			aButton.setText(sKey);
-			mArrayAnswer[mLastPosition] = sKey;
-			mLastPosition++;
-		} else if (mLastPosition < (carBrand.length() + carModel.length())){
-			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(mLastPosition - carBrand.length());
-			Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
-			aButton.setText(sKey);
-			mArrayAnswer[mLastPosition] = sKey;
+	}
+	
+	public void setNewposition() {	
+		while ((mLastPosition < mArrayAnswer.length) && (mArrayAnswer[mLastPosition] != null) && !mArrayAnswer[mLastPosition].equals("")) {
 			mLastPosition++;
 		}
 	}
@@ -236,14 +246,37 @@ public class QuestionAnswerFragment extends Fragment {
 		aButton.setText("");
 		mArrayAnswer[mLastPosition] = "";
 		mLastPosition = 0;
+		setNewposition();
+	}
+	
+	public void checkAnswer() {
+		String answer = mCarBrand + mCarModel;
+		String actualAnswer = "";
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < mArrayAnswer.length; i++) {
+			buffer.append( mArrayAnswer[i] );
+		}
+		actualAnswer = buffer.toString().toLowerCase(getResources().getConfiguration().locale);
+		
+		if (answer.equals(actualAnswer)) {
+			WorldCarQuizLab.get(getActivity())
+			.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
+		
+			FragmentManager fm = getActivity().getSupportFragmentManager();
+			Fragment fragment = new QuestionSolvedFragment();
+			fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+				.replace(R.id.fragment_answer, fragment).commit();
+		}
 	}
 	
 	/**
 	 * Crea una nueva instancia del fragment.
 	 */
-	public static Fragment newInstance(String answer) {
+	public static Fragment newInstance(int numWorld, int numSubWorld, int numQuestion) {
 		Bundle arg = new Bundle();
-		arg.putString(EXTRA_ANSWER, answer);
+		arg.putInt(EXTRA_WORLD, numWorld);
+		arg.putInt(EXTRA_SUBWORLD, numSubWorld);
+		arg.putInt(EXTRA_QUESTION, numQuestion);
 		QuestionAnswerFragment fragment = new QuestionAnswerFragment();
 		fragment.setArguments(arg);
 		
