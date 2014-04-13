@@ -134,6 +134,7 @@ public class QuestionAnswerFragment extends Fragment {
 	public TableRow loadNumbersRow(LayoutInflater inflater) {
 		//Se inicializa el TableRow y se le asigna sus parametros.
 		TableRow tr = new TableRow(getActivity());
+		
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
 		
 		for (int i = 1; i <= 10; i++) {
@@ -158,7 +159,7 @@ public class QuestionAnswerFragment extends Fragment {
 		}
 		
 		//Añadimos los márgenes entre filas
-		params.setMargins(0, 10, 0, 0);
+		params.setMargins(0, 5, 0, 0);
 		tr.setLayoutParams(params);
 		return tr;
 	}
@@ -171,9 +172,10 @@ public class QuestionAnswerFragment extends Fragment {
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-		params.setMargins(0, 5, 0, 0);
+		params.setMargins(0,3, 0, 0);
 		brandRow.setLayoutParams(params);
 		brandRow.setGravity(Gravity.CENTER);
+		brandRow.setPadding(0, 28, 0, 0);
 		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
