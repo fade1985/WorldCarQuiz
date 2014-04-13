@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.SubWorld;
@@ -40,4 +42,10 @@ public class QuestionActivity extends FragmentActivity{
 		.commit();
 		
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.fragment_subworld, menu);
+		return true;
+	};
 }

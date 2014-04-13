@@ -12,7 +12,7 @@
     <style name="MyActionBar"
            parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@drawable/actionbar_background</item>
-        <item name="android:height">40dp</item>
+        <item name="android:height">35dp</item>
     </style>
 
     <!-- ActionBar title text -->

@@ -123,7 +123,7 @@ public class QuestionAnswerFragment extends Fragment {
 		}
 		
 		//Añadimos los márgenes entre filas
-		params.setMargins(0, 10, 0, 0);
+		params.setMargins(0, 5, 0, 0);
 		tr.setLayoutParams(params);
 		return tr;
 	}
@@ -158,7 +158,7 @@ public class QuestionAnswerFragment extends Fragment {
 		}
 		
 		//Añadimos los márgenes entre filas
-		params.setMargins(0, 20, 0, 0);
+		params.setMargins(0, 10, 0, 0);
 		tr.setLayoutParams(params);
 		return tr;
 	}
