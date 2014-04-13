@@ -4,13 +4,10 @@
     android:layout_height="wrap_content">
 	<Button 
 	    android:id= "@+id/key_button"
-<<<<<<< HEAD
+
 	    android:layout_height="30dp"
 	    android:layout_width="25dp"
-=======
-	    android:layout_height="40dp"
-	    android:layout_width="30dp"
->>>>>>> be96d5ccd93e87ceeed0d4049ceba0d8c92f258c
+
 	    android:textSize="18sp"
 	    android:layout_marginLeft="1dp"
 	    android:layout_marginRight="1dp"	   
