@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -218,8 +221,11 @@ public class QuestionAnswerFragment extends Fragment {
 		mVibrator.vibrate(10);
 		
 		String sKey = ((Button)view).getText().toString();
-		
-		
+		           
+		View v = new View(getActivity());
+		v = view;
+        moveViewToScreenCenter( v );
+        
 		if (mLastPosition < mArrayAnswer.length) {
 			if (mLastPosition < mCarBrand.length()) {
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
@@ -235,6 +241,26 @@ public class QuestionAnswerFragment extends Fragment {
 				setNewposition();
 			}			
 		}
+	}
+	
+	private void moveViewToScreenCenter( View view )
+	{
+	    LinearLayout root = (LinearLayout) getActivity().findViewById( R.id.container_question );
+	    DisplayMetrics dm = new DisplayMetrics();
+	    getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
+	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
+
+	    int originalPos[] = new int[2];
+	    view.getLocationOnScreen( originalPos );
+
+	    int xDest = dm.widthPixels/2;
+	    xDest -= (view.getMeasuredWidth()/2);
+	    int yDest = dm.heightPixels/2 - (view.getMeasuredHeight()/2) - statusBarOffset;
+
+	    TranslateAnimation anim = new TranslateAnimation( 0, xDest - originalPos[0] , 0, yDest - originalPos[1] );
+	    anim.setDuration(1000);
+	    anim.setFillEnabled(true);
+	    view.startAnimation(anim);
 	}
 	
 	public void setNewposition() {	
