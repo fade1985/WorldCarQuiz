@@ -14,34 +14,18 @@
                android:src="@drawable/ford_focus_2014"/>
            
            <ImageView
-                 android:id="@+id/shadoww"
+                 android:id="@+id/shadowTop"
                  android:layout_width="match_parent"
                  android:layout_height="12dp"
                  android:scaleType="centerCrop"
-                 android:src="@drawable/shadow" />
+                 android:src="@drawable/shadow_top" />
            
-            <ImageButton
-	           android:id="@+id/share_button"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:background="@drawable/button_right_rounded_selector"
-	           android:src="@drawable/ic_action_share" />
-            
-            <ImageButton
-                android:id="@+id/help_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/button_left_rounded_selector"
-                android:src="@drawable/ic_action_help" />
-            
 			<ImageView
-			    android:id="@+id/shadoww2"
+			    android:id="@+id/shadowBottom"
 			    android:layout_width="match_parent"
 			    android:layout_height="12dp"
 			    android:scaleType="center"
 			    android:layout_alignBottom="@id/photo_question"
-			    android:src="@drawable/shadow2" /> 
+			    android:src="@drawable/shadow_bottom" /> 
 
 </RelativeLayout>
