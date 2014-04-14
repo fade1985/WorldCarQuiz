@@ -1,25 +1,31 @@
 package com.android.worldcarquiz.activity;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ShareActionProvider;
 
 import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.data.SubWorld;
-import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.fragment.QuestionAnswerFragment;
 import com.android.worldcarquiz.fragment.QuestionBannerFragment;
 import com.android.worldcarquiz.fragment.QuestionPhotoFragment;
-import com.android.worldcarquiz.fragment.QuestionAnswerFragment;
 import com.android.worldcarquiz.fragment.SubWorldFragment;
 
 public class QuestionActivity extends FragmentActivity{
 	private int mNumSubWorld;
 	private int mNumWorld;
 	private int mNumQuestion;
+	
+	private ShareActionProvider mShareActionProvider;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,39 @@ public class QuestionActivity extends FragmentActivity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.fragment_subworld, menu);
-		return true;
+        // Inflate menu resource file.  
+        getMenuInflater().inflate(R.menu.menu_question, menu);  
+        // Locate MenuItem with ShareActionProvider  
+        MenuItem item = menu.findItem(R.id.menu_item_share);  
+        // Fetch and store ShareActionProvider  
+        mShareActionProvider = (ShareActionProvider) item.getActionProvider();  
+        setShareIntent(createShareIntent());  
+        // Return true to display menu  
+        return true;  
 	};
+	
+    // Call to update the share intent  
+    private void setShareIntent(Intent shareIntent) {  
+         if (mShareActionProvider != null) {  
+              mShareActionProvider.setShareIntent(shareIntent);  
+         }  
+    }  
+    private Intent createShareIntent() {  
+         Intent shareIntent = new Intent(Intent.ACTION_SEND);  
+         shareIntent.setType("image/*");
+         shareIntent.putExtra(Intent.EXTRA_TEXT, "Prueba");         
+
+         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/ford_focus_2014");
+         try {
+			InputStream stream = getContentResolver().openInputStream(uri);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         
+         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+         
+         
+         return shareIntent;  
+    } 
 }
