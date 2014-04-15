@@ -96,6 +96,7 @@ public class QuestionAnswerFragment extends Fragment {
 	public TableRow loadLettersRow(LayoutInflater inflater, int numLetters) {
 		//Se inicializa el TableRow y se le asigna sus parametros.
 		TableRow tr = new TableRow(getActivity());
+		tr.setClipChildren(false);
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
 		Resources res = getResources();
 		String[] letters = null;
@@ -114,8 +115,11 @@ public class QuestionAnswerFragment extends Fragment {
 			//Inflamos el botón y le asignamos de texto la letra que corresponda del array. También agregamos su listener.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
+			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button_copy);
+			
 			button.setText(letters[j]);
-			button.setOnClickListener(new OnClickListener() {
+			buttonCopy.setText(letters[j]);
+			buttonCopy.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					paintLetter(view);
@@ -137,21 +141,26 @@ public class QuestionAnswerFragment extends Fragment {
 	public TableRow loadNumbersRow(LayoutInflater inflater) {
 		//Se inicializa el TableRow y se le asigna sus parametros.
 		TableRow tr = new TableRow(getActivity());
-		
+		tr.setClipChildren(false);
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
 		
 		for (int i = 1; i <= 10; i++) {
 			//Inflamos el botón y le asignamos de texto el dígito que corresponda. También agregamos su listener.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
+			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button_copy);
 			
 			//El botón 0 irá al final de la fila.
-			if (i == 10) 
+			if (i == 10) {
 				button.setText(String.valueOf(0));
-			else
+				buttonCopy.setText(String.valueOf(0));
+			}		
+			else {
 				button.setText(String.valueOf(i));
+				buttonCopy.setText(String.valueOf(i));	
+			}	
 			
-			button.setOnClickListener(new OnClickListener() {	
+			buttonCopy.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
 					paintLetter(view);
@@ -259,7 +268,6 @@ public class QuestionAnswerFragment extends Fragment {
 
 	    TranslateAnimation anim = new TranslateAnimation( 0, xDest - originalPos[0] , 0, yDest - originalPos[1] );
 	    anim.setDuration(1000);
-	    anim.setFillEnabled(true);
 	    view.startAnimation(anim);
 	}
 	

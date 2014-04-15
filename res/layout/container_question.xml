@@ -10,13 +10,15 @@
         android:id="@+id/fragment_photo"
     	android:layout_width="wrap_content"
     	android:layout_height="0px"
-    	android:layout_weight="0.4"/>
+    	android:layout_weight="0.4"
+    	android:clipChildren="false"/>
     
     <FrameLayout 
         android:id="@+id/fragment_answer"
     	android:layout_width="match_parent"
     	android:layout_height="0px"
     	android:layout_weight="0.6"
+    	android:clipChildren="false"
     	android:background="@drawable/road_vertical"/>        
         
     <FrameLayout 
