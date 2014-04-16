@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -40,6 +42,8 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumWorld;
 	private int mNumSubWorld;
 	private int mNumQuestion;
+	
+	private View mView;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -122,7 +126,8 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					paintLetter(view);
+					mView = view;
+			        moveViewToScreenCenter(view);
 					checkAnswer();
 				}
 			});
@@ -163,7 +168,8 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
-					paintLetter(view);
+					mView = view;
+					moveViewToScreenCenter(view);
 					checkAnswer();
 				}
 			});
@@ -231,10 +237,6 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		String sKey = ((Button)view).getText().toString();
 		           
-		View v = new View(getActivity());
-		v = view;
-        moveViewToScreenCenter( v );
-        
 		if (mLastPosition < mArrayAnswer.length) {
 			if (mLastPosition < mCarBrand.length()) {
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
@@ -252,7 +254,7 @@ public class QuestionAnswerFragment extends Fragment {
 		}
 	}
 	
-	private void moveViewToScreenCenter( View view )
+	private void moveViewToScreenCenter(View view)
 	{
 	    LinearLayout root = (LinearLayout) getActivity().findViewById( R.id.container_question );
 	    DisplayMetrics dm = new DisplayMetrics();
@@ -268,6 +270,23 @@ public class QuestionAnswerFragment extends Fragment {
 
 	    TranslateAnimation anim = new TranslateAnimation( 0, xDest - originalPos[0] , 0, yDest - originalPos[1] );
 	    anim.setDuration(1000);
+	    anim.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				paintLetter(mView);				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+			}
+		});
 	    view.startAnimation(anim);
 	}
 	

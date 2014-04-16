@@ -73,10 +73,9 @@ public class QuestionActivity extends FragmentActivity{
     }  
     private Intent createShareIntent() {  
          Intent shareIntent = new Intent(Intent.ACTION_SEND);  
-         shareIntent.setType("image/*");
-         shareIntent.putExtra(Intent.EXTRA_TEXT, "Prueba");         
-
-         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/ford_focus_2014");
+         shareIntent.setType("text/*");
+         shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.google.es");         
+        /* Uri uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/ford_focus_2014");
          try {
 			InputStream stream = getContentResolver().openInputStream(uri);
 		} catch (FileNotFoundException e) {
@@ -84,7 +83,7 @@ public class QuestionActivity extends FragmentActivity{
 			e.printStackTrace();
 		}
          
-         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);*/
          
          
          return shareIntent;  
