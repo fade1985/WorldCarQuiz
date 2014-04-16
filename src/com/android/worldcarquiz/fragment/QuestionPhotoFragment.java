@@ -35,16 +35,8 @@ public class QuestionPhotoFragment extends Fragment {
 		LoaderImageView image = (LoaderImageView)v.findViewById(R.id.photo_question);
 		
         // Image url
-		String image_url = "";
-		if (mNumQuestion == 0) {
-			image_url = WorldCarQuizLab.get(getActivity())
-					.getImage(mNumWorld, mNumSubWorld, mNumQuestion);
-		} else {
-			image_url = "http://img.motorpasion.com/galleries/ford-focus-2014/NewFordFocus-5door-06.jpg";
-		}
+		String image_url = WorldCarQuizLab.get(getActivity()).getImage(mNumWorld, mNumSubWorld, mNumQuestion);
 
-		//iv.setImageBitmap(bImage);
-		         
 		// Loader image - will be shown before loading image
         int loader = R.drawable.ic_open_box_two;
         
