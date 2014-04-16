@@ -5,13 +5,10 @@
    
     <!-- Imagen del coche -->
     
-           <ImageView 
+           <com.android.worldcarquiz.utils.LoaderImageView 
                android:id="@+id/photo_question"
                android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:scaleType="centerCrop"
-               android:adjustViewBounds="true"
-               android:src="@drawable/ford_focus_2014"/>
+               android:layout_height="match_parent"/>
            
            <ImageView
                  android:id="@+id/shadowTop"

@@ -1,10 +1,15 @@
 package com.android.worldcarquiz.data;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
@@ -91,11 +96,16 @@ public class WorldCarQuizLab {
 	/**
 	 * Devuelve el id del recurso asociado al drawable de la pregunta.
 	 */
-	public int getImageId(int numWorld, int numSubWorld, int question) {
-		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.getQuestions().get(question).getImageId();
+	public String getImage(int numWorld, int numSubWorld, int question) {
+		String sImage = mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+							.getQuestions().get(question).getImage();
+		
+		//String URL = NUESTRA URL + sImage 
+		String URL = "http://www.bellamybudiman.com/blog/wp-content/uploads/2011/06/car-ford-focus.jpg";
+		
+		return URL;
 	}
-	
+		
 	/**
 	 * Devuelve la respuesta de la pregunta.
 	 */

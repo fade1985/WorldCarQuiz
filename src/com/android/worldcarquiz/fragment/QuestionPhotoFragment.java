@@ -5,11 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.cache.ImageLoader;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.utils.LoaderImageView;
 
 public class QuestionPhotoFragment extends Fragment {
 	public static final String EXTRA_NUM_QUESTION = "extra_num_question";
@@ -31,10 +32,31 @@ public class QuestionPhotoFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_question_photo, null);
-		ImageView iv = (ImageView)v.findViewById(R.id.photo_question);
-		int id = WorldCarQuizLab.get(getActivity())
-					.getImageId(mNumWorld, mNumSubWorld, mNumQuestion);
-		iv.setImageResource(id);
+		LoaderImageView image = (LoaderImageView)v.findViewById(R.id.photo_question);
+		
+        // Image url
+		String image_url = "";
+		if (mNumQuestion == 0) {
+			image_url = WorldCarQuizLab.get(getActivity())
+					.getImage(mNumWorld, mNumSubWorld, mNumQuestion);
+		} else {
+			image_url = "http://img.motorpasion.com/galleries/ford-focus-2014/NewFordFocus-5door-06.jpg";
+		}
+
+		//iv.setImageBitmap(bImage);
+		         
+		// Loader image - will be shown before loading image
+        int loader = R.drawable.ic_open_box_two;
+        
+        // ImageLoader class instance
+        ImageLoader imgLoader = new ImageLoader(getActivity());
+         
+        // whenever you want to load an image from url
+        // call DisplayImage function
+        // url - image url to load
+        // loader - loader image, will be displayed before getting image
+        // image - ImageView 
+        imgLoader.DisplayImage(image_url, loader, image);
 		
 		return v;
 	}

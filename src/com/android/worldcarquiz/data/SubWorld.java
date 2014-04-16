@@ -32,10 +32,10 @@ public class SubWorld {
 	          int locked = cursor.getInt(0);
 	          int trys = cursor.getInt(1);
 	          int score  = cursor.getInt(2);
+	          String image = cursor.getString(3);
 	          String brand = cursor.getString(4);
 	          String model = cursor.getString(5);
-	          int resImage = appContext.getResources().getIdentifier(cursor.getString(3), "drawable", appContext.getPackageName());
-	          mQuestions.add(new Question(locked, trys, score, resImage, brand + " " + model));
+	          mQuestions.add(new Question(locked, trys, score, image, brand + " " + model));
 	          cursor.moveToNext();
 	     } 		
 	}

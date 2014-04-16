@@ -17,19 +17,19 @@ public class Question {
 	private int mStatus;
 	private int mScore;
 	private int mTrys;
-	private int mImageId;
+	private String mImage;
 	private String mAnswer;
 
 	
 	/**
 	 * CONSTRUCTOR
 	 */
-	public Question(int status, int trys, int score, int imageId, String answer) {
+	public Question(int status, int trys, int score, String image, String answer) {
 		//mId = id;
 		mStatus = status;
 		mScore = score;
 		mTrys = trys;
-		mImageId = imageId;
+		mImage = image;
 		mAnswer = answer;
 	}
 
@@ -68,8 +68,8 @@ public class Question {
 		return mId;
 	}
 	*/
-	public int getImageId() {
-		return mImageId;
+	public String getImage() {
+		return mImage;
 	}
 
 	/**
