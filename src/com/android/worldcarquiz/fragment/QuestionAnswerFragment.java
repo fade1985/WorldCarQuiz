@@ -190,7 +190,7 @@ public class QuestionAnswerFragment extends Fragment {
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-		params.setMargins(0,3, 0, 0);
+		params.setMargins(0,1, 0, 0);
 		brandRow.setLayoutParams(params);
 		brandRow.setGravity(Gravity.CENTER);
 		brandRow.setPadding(0, 28, 0, 0);
