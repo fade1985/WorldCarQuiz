@@ -45,7 +45,6 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumSubWorld;
 	private int mNumQuestion;
 	
-	//private View mView;
 	private LinkedList<String> mStackLetters;
 			
 	@Override
