@@ -1,5 +1,7 @@
 package com.android.worldcarquiz.fragment;
 
+import java.util.LinkedList;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -43,7 +45,8 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumSubWorld;
 	private int mNumQuestion;
 	
-	private View mView;
+	//private View mView;
+	private LinkedList<String> mStackLetters;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class QuestionAnswerFragment extends Fragment {
 		mArrayAnswer = new String[mCarBrand.length() + mCarModel.length()];
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
 		mLastPosition = 0;
+		mStackLetters = new LinkedList<String>();
 	}
 	
 	@Override
@@ -126,7 +130,8 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					mView = view;
+					String key = ((Button)view).getText().toString();
+					mStackLetters.addFirst(key);
 			        moveViewToScreenCenter(view);
 					checkAnswer();
 				}
@@ -168,7 +173,8 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
-					mView = view;
+					String key = ((Button)view).getText().toString();
+					mStackLetters.addFirst(key);
 					moveViewToScreenCenter(view);
 					checkAnswer();
 				}
@@ -232,10 +238,8 @@ public class QuestionAnswerFragment extends Fragment {
 		mTableAnswer.addView(modelRow);
 	}
 	
-	public void paintLetter(View view) {
+	public void paintLetter(String sKey) {
 		mVibrator.vibrate(10);
-		
-		String sKey = ((Button)view).getText().toString();
 		           
 		if (mLastPosition < mArrayAnswer.length) {
 			if (mLastPosition < mCarBrand.length()) {
@@ -274,7 +278,7 @@ public class QuestionAnswerFragment extends Fragment {
 			
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				paintLetter(mView);				
+				paintLetter(mStackLetters.removeLast());				
 			}
 
 			@Override
