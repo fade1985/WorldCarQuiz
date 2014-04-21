@@ -44,11 +44,11 @@ public class ImageLoader {
         imageViews.put(imageView, url);
         Bitmap bitmap=memoryCache.get(url);
         if(bitmap!=null)
-            imageView.setImageBitmap(bitmap);
+            imageView.setImage(bitmap);
         else
         {
             queuePhoto(url, imageView);         
-            imageView.setImageResource(loader);
+            imageView.setLoader(loader);
         }
     }
   
@@ -167,9 +167,9 @@ public class ImageLoader {
             if(imageViewReused(photoToLoad))
                 return;
             if(bitmap!=null)
-                photoToLoad.imageView.setImageBitmap(bitmap);
+                photoToLoad.imageView.setImage(bitmap);
             else
-                photoToLoad.imageView.setImageResource(stub_id);
+                photoToLoad.imageView.setLoader(stub_id);
         }
     }
   

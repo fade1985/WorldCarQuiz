@@ -18,7 +18,7 @@ import com.android.worldcarquiz.data.World;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public static final String DB_NAME = "worldCarQuiz.sqlite";
-	private static final int VERSION = 3;
+	private static final int VERSION = 4;
 	
 	private static final String TABLE_QUESTIONS = "questions";
 	private static final String TABLE_CARS = "cars";
@@ -100,12 +100,20 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	void insertQuestions(SQLiteDatabase sqlitedatabase) {
 		//Insertamos todas las preguntas del nuevo mundo
-	    for(int i = 0; i < SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS; i++)
-	    {
+	    /*for(int i = 0; i < SubWorld.NUM_QUESTIONS * World.NUM_SUBWORLDS; i++) {
 	    	//Las SubWorld.QUESTIONS_TO_UNLOCK primeras preguntas se introducen como desbloqueadas (locked = 0).
 	    	int locked = (i < SubWorld.QUESTIONS_TO_UNLOCK) ? 0 : 1;
 	        //Insertamos los datos en la tabla de preguntas.
 	        sqlitedatabase.execSQL("INSERT INTO questions (locked) VALUES (" + locked + ")");
+	    }*/
+		
+		for (int i = 0; i < World.NUM_SUBWORLDS; i++) {
+			for (int j = 0; j < SubWorld.NUM_QUESTIONS; j++) {
+		    	//Las SubWorld.QUESTIONS_TO_UNLOCK primeras preguntas se introducen como desbloqueadas (locked = 0).
+		    	int locked = (j < SubWorld.QUESTIONS_UNLOCKED) ? 0 : 1;
+		        //Insertamos los datos en la tabla de preguntas.
+		        sqlitedatabase.execSQL("INSERT INTO questions (locked) VALUES (" + locked + ")");			
+			}
 	    }
 	}
 		

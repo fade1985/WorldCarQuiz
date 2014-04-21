@@ -37,14 +37,14 @@ public class LoaderImageView extends RelativeLayout {
        this.setGravity(Gravity.CENTER);
    }
    
-   public void setImageBitmap(Bitmap bitmap) {
+   public void setImage(Bitmap bitmap) {
        progressBar.setVisibility(View.GONE);
        imageView.setVisibility(View.VISIBLE);
        
        imageView.setImageBitmap(bitmap);
    }
    
-   public void setImageResource(int resource) {
+   public void setLoader(int resource) {
        progressBar.setVisibility(View.VISIBLE);
        imageView.setVisibility(View.GONE);
        
