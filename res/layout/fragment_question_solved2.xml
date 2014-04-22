@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"  
+   	android:layout_width="match_parent"
+   	android:layout_height="match_parent"
+   	android:orientation="vertical">
+    	
+	<ImageView
+     	android:id="@+id/world_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/awesome" />
+	
+	<TextView
+        android:id="@+id/world_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:gravity="center"
+        android:text="score"
+        android:textColor="#c3c3c3"
+        android:textSize="18sp" />
+	
+	<Button
+        android:id="@+id/solution_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_selector"
+        android:text="@string/next_car"
+        android:textColor="#ffffff"
+        android:textSize="20sp"/>
+         
+</LinearLayout>
