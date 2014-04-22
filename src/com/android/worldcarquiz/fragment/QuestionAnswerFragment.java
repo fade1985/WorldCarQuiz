@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -45,7 +43,7 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumSubWorld;
 	private int mNumQuestion;
 	
-	private LinkedList<String> mStackLetters;
+	private LinkedList<QueueInfo> mQueueInfo;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,7 @@ public class QuestionAnswerFragment extends Fragment {
 		mArrayAnswer = new String[mCarBrand.length() + mCarModel.length()];
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
 		mLastPosition = 0;
-		mStackLetters = new LinkedList<String>();
+		mQueueInfo = new LinkedList<QueueInfo>();
 	}
 	
 	@Override
@@ -129,10 +127,16 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					String key = ((Button)view).getText().toString();
-					mStackLetters.addFirst(key);
-			        moveViewToScreenCenter(view);
-					checkAnswer();
+					int newPosition = newPosition();
+					if (newPosition != -1) {
+						String key = ((Button)view).getText().toString();
+						mQueueInfo.addFirst(new QueueInfo(newPosition, key));
+						mArrayAnswer[newPosition] = key;
+						//Button newView = (Button)getActivity().getLayoutInflater().cloneInContext(getActivity()).inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
+						//Button newView = (Button)getActivity().getLayoutInflater().inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
+						moveViewToScreenCenter(view, newPosition);
+						checkAnswer();
+					}
 				}
 			});
 			tr.addView(keyView);
@@ -172,10 +176,14 @@ public class QuestionAnswerFragment extends Fragment {
 			buttonCopy.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
-					String key = ((Button)view).getText().toString();
-					mStackLetters.addFirst(key);
-					moveViewToScreenCenter(view);
-					checkAnswer();
+					int newPosition = newPosition();
+					if (newPosition != -1) {
+						String key = ((Button)view).getText().toString();
+						mQueueInfo.addFirst(new QueueInfo(newPosition, key));
+						mArrayAnswer[newPosition] = key;
+						moveViewToScreenCenter(view, newPosition);
+						checkAnswer();
+					}
 				}
 			});
 			tr.addView(keyView);
@@ -236,47 +244,51 @@ public class QuestionAnswerFragment extends Fragment {
 		mTableAnswer.addView(modelRow);
 	}
 	
-	public void paintLetter(String sKey) {
+	public void paintLetter(QueueInfo info) {
 		mVibrator.vibrate(10);
 		           
-		if (mLastPosition < mArrayAnswer.length) {
-			if (mLastPosition < mCarBrand.length()) {
-				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(mLastPosition);
+		if (info.getPosition() < mArrayAnswer.length) {
+			if (info.getPosition() < mCarBrand.length()) {
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(info.getPosition());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
-				aButton.setText(sKey);
-				mArrayAnswer[mLastPosition] = sKey;
-				setNewposition();
-			} else if (mLastPosition < mArrayAnswer.length){
-				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(mLastPosition - mCarBrand.length());
+				aButton.setText(info.getLetter());
+			} else if (info.getPosition() < mArrayAnswer.length){
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(info.getPosition() - mCarBrand.length());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
-				aButton.setText(sKey);
-				mArrayAnswer[mLastPosition] = sKey;
-				setNewposition();
+				aButton.setText(info.getLetter());
 			}			
 		}
 	}
 	
-	private void moveViewToScreenCenter(View view)
+	private void moveViewToScreenCenter(View view, int newPosition)
 	{
-	    LinearLayout root = (LinearLayout) getActivity().findViewById( R.id.container_question );
+	    /*LinearLayout root = (LinearLayout) getActivity().findViewById( R.id.container_question );
 	    DisplayMetrics dm = new DisplayMetrics();
 	    getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
-	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
+	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();*/
 
 	    int originalPos[] = new int[2];
-	    view.getLocationOnScreen( originalPos );
+	    view.getLocationOnScreen(originalPos);
+	    
+	    int destinyPos[] = new int[2];
+	    Button dButton;
+	    if (newPosition < mCarBrand.length()) {
+			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(newPosition);
+			dButton = (Button)layoutButton.findViewById(R.id.button_solution);
+	    } else {
+			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(newPosition - mCarBrand.length());
+			dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
+	    }
+	    
+	    dButton.getLocationOnScreen(destinyPos);
 
-	    int xDest = dm.widthPixels/2;
-	    xDest -= (view.getMeasuredWidth()/2);
-	    int yDest = dm.heightPixels/2 - (view.getMeasuredHeight()/2) - statusBarOffset;
-
-	    TranslateAnimation anim = new TranslateAnimation( 0, xDest - originalPos[0] , 0, yDest - originalPos[1] );
+	    TranslateAnimation anim = new TranslateAnimation( 0, destinyPos[0] - originalPos[0] , 0, destinyPos[1] - originalPos[1] );
 	    anim.setDuration(1000);
 	    anim.setAnimationListener(new AnimationListener() {
 			
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				paintLetter(mStackLetters.removeLast());				
+				paintLetter(mQueueInfo.removeLast());				
 			}
 
 			@Override
@@ -292,10 +304,18 @@ public class QuestionAnswerFragment extends Fragment {
 	    view.startAnimation(anim);
 	}
 	
-	public void setNewposition() {	
+	public int newPosition() {	
+		int position = mLastPosition;
 		while ((mLastPosition < mArrayAnswer.length) && (mArrayAnswer[mLastPosition] != null) && !mArrayAnswer[mLastPosition].equals("")) {
 			mLastPosition++;
 		}
+		
+		position = mLastPosition;
+		
+		if (mLastPosition >= mArrayAnswer.length) 
+			return -1;
+		else 
+			return position;
 	}
 	
 	public void deleteLetter(View view) {
@@ -303,7 +323,7 @@ public class QuestionAnswerFragment extends Fragment {
 		aButton.setText("");
 		mArrayAnswer[mLastPosition] = "";
 		mLastPosition = 0;
-		setNewposition();
+		//setNewposition();
 	}
 	
 	public void checkAnswer() {
@@ -338,5 +358,23 @@ public class QuestionAnswerFragment extends Fragment {
 		fragment.setArguments(arg);
 		
 		return fragment;
+	}
+	
+	private class QueueInfo {
+		private int mPosition;
+		private String mLetter;
+		
+		public QueueInfo(int position, String letter) {
+			mPosition = position;
+			mLetter = letter;
+		}
+		
+		public int getPosition() {
+			return mPosition;
+		}
+		
+		public String getLetter() {
+			return mLetter;
+		}
 	}
 }
