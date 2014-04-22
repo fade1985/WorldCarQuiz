@@ -198,7 +198,6 @@ public class QuestionAnswerFragment extends Fragment {
 		params.setMargins(0,1, 0, 0);
 		brandRow.setLayoutParams(params);
 		brandRow.setGravity(Gravity.CENTER);
-		brandRow.setPadding(0, 28, 0, 0);
 		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
