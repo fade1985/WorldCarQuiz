@@ -2,10 +2,8 @@ package com.android.worldcarquiz.fragment;
 
 import java.util.LinkedList;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -127,40 +125,8 @@ public class QuestionAnswerFragment extends Fragment {
 			button.setText(letters[j]);
 			button.setText(letters[j]);
 			button.setOnClickListener(new OnClickListener() {
-				
-				
-				@Override
-				/*public void onClick(View view) {
-					int newPosition = newPosition();
-					if (newPosition != -1) {
-						String key = ((Button)view).getText().toString();
-						mQueueInfo.addFirst(new QueueInfo(newPosition, key));
-						mArrayAnswer[newPosition] = key;
-						//Button newView = (Button)getActivity().getLayoutInflater().cloneInContext(getActivity()).inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
-						//Button newView = (Button)getActivity().getLayoutInflater().inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
-						moveViewToScreenCenter(view, newPosition);
-						checkAnswer();
-					}
-				}*/
-				@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 				public void onClick(View view) {
-					int newPosition = newPosition();
-					if (newPosition != -1) {
-						RelativeLayout parent = (RelativeLayout)((Button)view).getParent();
-					    Button copy = (Button)parent.findViewById(R.id.key_button);
-					    Button tv = new Button(getActivity());
-					    tv.setText(copy.getText());
-					    tv.setPadding(copy.getPaddingLeft(), copy.getPaddingTop(), copy.getPaddingRight(), copy.getPaddingBottom());
-					    tv.setLayoutParams(copy.getLayoutParams());
-					    tv.setBackground(copy.getBackground());
-					    parent.addView(tv);
-					    copy.bringToFront();
-					    copy.setFocusable(true);
-					    mArrayAnswer[newPosition] = copy.getText().toString();
-					    mQueueInfo.addFirst(new QueueInfo(newPosition, tv.getText().toString(), tv));
-						moveViewToScreenCenter(tv, newPosition);
-						checkAnswer();
-					}
+					pressKeyButton(view);
 				}
 			});
 			tr.addView(keyView);
@@ -185,29 +151,19 @@ public class QuestionAnswerFragment extends Fragment {
 			//Inflamos el botón y le asignamos de texto el dígito que corresponda. También agregamos su listener.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
-			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button);
 			
 			//El botón 0 irá al final de la fila.
 			if (i == 10) {
 				button.setText(String.valueOf(0));
-				buttonCopy.setText(String.valueOf(0));
 			}		
 			else {
-				button.setText(String.valueOf(i));
-				buttonCopy.setText(String.valueOf(i));	
+				button.setText(String.valueOf(i));	
 			}	
 			
-			buttonCopy.setOnClickListener(new OnClickListener() {	
+			button.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
-					int newPosition = newPosition();
-					if (newPosition != -1) {
-						String key = ((Button)view).getText().toString();
-						//mQueueInfo.addFirst(new QueueInfo(newPosition, key));
-						mArrayAnswer[newPosition] = key;
-						moveViewToScreenCenter(view, newPosition);
-						checkAnswer();
-					}
+					pressKeyButton(view);
 				}
 			});
 			tr.addView(keyView);
@@ -217,6 +173,29 @@ public class QuestionAnswerFragment extends Fragment {
 		params.setMargins(0, 5, 0, 0);
 		tr.setLayoutParams(params);
 		return tr;
+	}
+	
+	public void pressKeyButton(View view) {
+		int newPosition = newPosition();
+		if (newPosition != -1) {
+			RelativeLayout parent = (RelativeLayout)((Button)view).getParent();
+		    Button originalButton = (Button)parent.findViewById(R.id.key_button);
+		    Button copyButton = new Button(getActivity());
+		    
+		    copyButton.setText(originalButton.getText());
+		    copyButton.setPadding(originalButton.getPaddingLeft(), originalButton.getPaddingTop(),
+		    		originalButton.getPaddingRight(), originalButton.getPaddingBottom());
+		    copyButton.setLayoutParams(originalButton.getLayoutParams());
+		    copyButton.setBackgroundResource(R.drawable.key_selector);
+		    parent.addView(copyButton);
+		    originalButton.bringToFront();
+		    originalButton.setFocusable(true);
+		    
+		    mArrayAnswer[newPosition] = originalButton.getText().toString();
+		    mQueueInfo.addFirst(new QueueInfo(newPosition, originalButton.getText().toString()));
+			moveViewToScreenCenter(copyButton, newPosition);
+			checkAnswer();
+		}
 	}
 	
 	/**
@@ -387,12 +366,10 @@ public class QuestionAnswerFragment extends Fragment {
 	private class QueueInfo {
 		private int mPosition;
 		private String mLetter;
-		private View mView;
 		
-		public QueueInfo(int position, String letter, View view) {
+		public QueueInfo(int position, String letter) {
 			mPosition = position;
 			mLetter = letter;
-			mView = view;
 		}
 		
 		public int getPosition() {
@@ -403,8 +380,5 @@ public class QuestionAnswerFragment extends Fragment {
 			return mLetter;
 		}
 		
-		public View getView() {
-			return mView;
-		}
 	}
 }
