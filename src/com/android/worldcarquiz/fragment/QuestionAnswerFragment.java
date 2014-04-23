@@ -2,8 +2,10 @@ package com.android.worldcarquiz.fragment;
 
 import java.util.LinkedList;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -87,9 +90,9 @@ public class QuestionAnswerFragment extends Fragment {
 				case 3: tr = loadNumbersRow(inflater);
 						break;				
 			}
-		//Añadimos el gravity centrado e insertamos en el TableLayout.
-		tr.setGravity(Gravity.CENTER);
-		mKeyBoard.addView(tr);
+			//Añadimos el gravity centrado e insertamos en el TableLayout.
+			tr.setGravity(Gravity.CENTER);
+			mKeyBoard.addView(tr);
 		}
 		
 		return v;
@@ -120,13 +123,14 @@ public class QuestionAnswerFragment extends Fragment {
 			//Inflamos el botón y le asignamos de texto la letra que corresponda del array. También agregamos su listener.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
-			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button_copy);
 			
 			button.setText(letters[j]);
-			buttonCopy.setText(letters[j]);
-			buttonCopy.setOnClickListener(new OnClickListener() {
+			button.setText(letters[j]);
+			button.setOnClickListener(new OnClickListener() {
+				
+				
 				@Override
-				public void onClick(View view) {
+				/*public void onClick(View view) {
 					int newPosition = newPosition();
 					if (newPosition != -1) {
 						String key = ((Button)view).getText().toString();
@@ -135,6 +139,26 @@ public class QuestionAnswerFragment extends Fragment {
 						//Button newView = (Button)getActivity().getLayoutInflater().cloneInContext(getActivity()).inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
 						//Button newView = (Button)getActivity().getLayoutInflater().inflate(R.layout.fragment_question_answer_key, null).findViewById(R.id.key_button_copy);
 						moveViewToScreenCenter(view, newPosition);
+						checkAnswer();
+					}
+				}*/
+				@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+				public void onClick(View view) {
+					int newPosition = newPosition();
+					if (newPosition != -1) {
+						RelativeLayout parent = (RelativeLayout)((Button)view).getParent();
+					    Button copy = (Button)parent.findViewById(R.id.key_button);
+					    Button tv = new Button(getActivity());
+					    tv.setText(copy.getText());
+					    tv.setPadding(copy.getPaddingLeft(), copy.getPaddingTop(), copy.getPaddingRight(), copy.getPaddingBottom());
+					    tv.setLayoutParams(copy.getLayoutParams());
+					    tv.setBackground(copy.getBackground());
+					    parent.addView(tv);
+					    copy.bringToFront();
+					    copy.setFocusable(true);
+					    mArrayAnswer[newPosition] = copy.getText().toString();
+					    mQueueInfo.addFirst(new QueueInfo(newPosition, tv.getText().toString(), tv));
+						moveViewToScreenCenter(tv, newPosition);
 						checkAnswer();
 					}
 				}
@@ -161,7 +185,7 @@ public class QuestionAnswerFragment extends Fragment {
 			//Inflamos el botón y le asignamos de texto el dígito que corresponda. También agregamos su listener.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_key, null);
 			Button button = (Button)keyView.findViewById(R.id.key_button);
-			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button_copy);
+			Button buttonCopy = (Button)keyView.findViewById(R.id.key_button);
 			
 			//El botón 0 irá al final de la fila.
 			if (i == 10) {
@@ -179,7 +203,7 @@ public class QuestionAnswerFragment extends Fragment {
 					int newPosition = newPosition();
 					if (newPosition != -1) {
 						String key = ((Button)view).getText().toString();
-						mQueueInfo.addFirst(new QueueInfo(newPosition, key));
+						//mQueueInfo.addFirst(new QueueInfo(newPosition, key));
 						mArrayAnswer[newPosition] = key;
 						moveViewToScreenCenter(view, newPosition);
 						checkAnswer();
@@ -288,7 +312,7 @@ public class QuestionAnswerFragment extends Fragment {
 			
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				paintLetter(mQueueInfo.removeLast());				
+				paintLetter(mQueueInfo.removeLast());		
 			}
 
 			@Override
@@ -363,10 +387,12 @@ public class QuestionAnswerFragment extends Fragment {
 	private class QueueInfo {
 		private int mPosition;
 		private String mLetter;
+		private View mView;
 		
-		public QueueInfo(int position, String letter) {
+		public QueueInfo(int position, String letter, View view) {
 			mPosition = position;
 			mLetter = letter;
+			mView = view;
 		}
 		
 		public int getPosition() {
@@ -375,6 +401,10 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		public String getLetter() {
 			return mLetter;
+		}
+		
+		public View getView() {
+			return mView;
 		}
 	}
 }
