@@ -26,15 +26,27 @@ import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class QuestionAnswerFragment extends Fragment {
+	/**
+	 * Constantes para pasar parámetros al fragment.
+	 */
 	private static final String EXTRA_WORLD = "extra_world";
 	private static final String EXTRA_SUBWORLD = "extra_subworld";
 	private static final String EXTRA_QUESTION = "extra_question";
 	
+	/**
+	 * Tablas donde estan las letras(RelativeLayout) del teclado y las de la respuesta.
+	 */
 	private TableLayout mKeyBoard;
 	private TableLayout mTableAnswer;
 	
 	private Vibrator mVibrator;
 	
+	/**
+	 * mCarBrand: String con la marca del coche para crear la primera fila en la tabla mTableAnswer.
+	 * mCarModel: String con la marca del coche para crear la segunda fila en la tabla mTableAnswer.
+	 * mArrayAnswer: Array de Strings donde se guarda las letras introducidas por el jugador y que que se utiliza para validar la respuesta.
+	 * mLastPosition: Posición donde debemos introducir la nueva letra.
+	 */
 	private String mCarBrand;
 	private String mCarModel;
 	private String[] mArrayAnswer;
@@ -44,19 +56,26 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumSubWorld;
 	private int mNumQuestion;
 	
+	/**
+	 * mQueueInfo: Cola que se utilizada para almacenar las letras a pintar y su posición en orden cuando pulsamos otra tecla antes de que acabe su animación
+	 */
 	private LinkedList<QueueInfo> mQueueInfo;
 			
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//Obtenemos los parámetros básicos de la pregunta.
 		mNumWorld = getArguments().getInt(EXTRA_WORLD);
 		mNumSubWorld = getArguments().getInt(EXTRA_SUBWORLD);
 		mNumQuestion = getArguments().getInt(EXTRA_QUESTION);
+		
+		//Obtenemos el string que contiene la respuesta de la pregunta y la divimos en 2, marca y modelo.
 		String answer = WorldCarQuizLab.get(getActivity()).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
 		String[] answerSplit = answer.split(" ");
 		mCarBrand = answerSplit[0];
 		mCarModel = answerSplit[1];
 		
+		//Inicializamos el array mArrayAnswer con la longitud de la respuesta y el resto por defecto.
 		mArrayAnswer = new String[mCarBrand.length() + mCarModel.length()];
 		mVibrator = ((Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE));
 		mLastPosition = 0;
@@ -67,11 +86,12 @@ public class QuestionAnswerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		//Inflamos el layout del fragment que contiene el editText y el teclado virtual.
+		//Inflamos el layout del fragment que contiene la matricula y cargamos la tabla respuesta.
 		View v = inflater.inflate(R.layout.fragment_question_answer, null);
 		mTableAnswer = (TableLayout) v.findViewById(R.id.tableAnswer);
 		buildTableAnswer(inflater, mTableAnswer);
 		
+		//Obtenemos la tabla del teclado para ir creando sus filas.
 		mKeyBoard = (TableLayout) v.findViewById(R.id.tableKeyboard);
 		TableRow tr = null;
 		
@@ -123,10 +143,9 @@ public class QuestionAnswerFragment extends Fragment {
 			Button button = (Button)keyView.findViewById(R.id.key_button);
 			
 			button.setText(letters[j]);
-			button.setText(letters[j]);
 			button.setOnClickListener(new OnClickListener() {
 				public void onClick(View view) {
-					pressKeyButton(view);
+					pressKeyButton((Button)view);
 				}
 			});
 			tr.addView(keyView);
@@ -163,7 +182,7 @@ public class QuestionAnswerFragment extends Fragment {
 			button.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View view) {
-					pressKeyButton(view);
+					pressKeyButton((Button)view);
 				}
 			});
 			tr.addView(keyView);
@@ -175,36 +194,15 @@ public class QuestionAnswerFragment extends Fragment {
 		return tr;
 	}
 	
-	public void pressKeyButton(View view) {
-		int newPosition = newPosition();
-		if (newPosition != -1) {
-			RelativeLayout parent = (RelativeLayout)((Button)view).getParent();
-		    Button originalButton = (Button)parent.findViewById(R.id.key_button);
-		    Button copyButton = new Button(getActivity());
-		    
-		    copyButton.setText(originalButton.getText());
-		    copyButton.setPadding(originalButton.getPaddingLeft(), originalButton.getPaddingTop(),
-		    		originalButton.getPaddingRight(), originalButton.getPaddingBottom());
-		    copyButton.setLayoutParams(originalButton.getLayoutParams());
-		    copyButton.setBackgroundResource(R.drawable.key_selector);
-		    parent.addView(copyButton);
-		    originalButton.bringToFront();
-		    originalButton.setFocusable(true);
-		    
-		    mArrayAnswer[newPosition] = originalButton.getText().toString();
-		    mQueueInfo.addFirst(new QueueInfo(newPosition, originalButton.getText().toString()));
-			moveViewToScreenCenter(copyButton, newPosition);
-			checkAnswer();
-		}
-	}
-	
 	/**
 	 * Construye la tabla de botones que muestra la respuesta.
 	 */
 	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswer) {
-		//Creamos dos filas, una para la marca y otra para el modelo
+		//Creamos dos filas, una para la marca y otra para el modelo.
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
+		
+		//Le asignamos sus parametros iniciales.
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
 		params.setMargins(0,1, 0, 0);
 		brandRow.setLayoutParams(params);
@@ -212,34 +210,38 @@ public class QuestionAnswerFragment extends Fragment {
 		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
+		//Fila de la marca del coche.
 		for (int i = 0; i < mCarBrand.length(); i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
 			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
+			//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
 			aButton.setTag(i);
 			aButton.setOnClickListener(new OnClickListener() {
-				
 				@Override
 				public void onClick(View view) {
+					//Al borrar la letra la nueva posición es la que se queda vacía.
 					mLastPosition = (Integer)view.getTag();
-					deleteLetter(view);
+					deleteLetter((Button)view);
 				}
 			});
 			brandRow.addView(keyView);
 		}
 		mTableAnswer.addView(brandRow);
 		
+		//Fila del modelo del coche.
 		for (int i = mCarBrand.length(); i < mArrayAnswer.length; i++) {
 			//Inflamos el botón y lo dejamos vacio.
 			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
 			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
+			//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
 			aButton.setTag(i);
 			aButton.setOnClickListener(new OnClickListener() {
-				
 				@Override
 				public void onClick(View view) {
+					//Al borrar la letra la nueva posición es la que se queda vacía.
 					mLastPosition = (Integer)view.getTag();
-					deleteLetter(view);
+					deleteLetter((Button)view);
 				}
 			});
 			modelRow.addView(keyView);
@@ -247,50 +249,96 @@ public class QuestionAnswerFragment extends Fragment {
 		mTableAnswer.addView(modelRow);
 	}
 	
+	/**
+	 * Método que crea una copia del botón que se ha pulsado y lo traslada hacia su destino, le pasamos de parámetro el botón original.
+	 */
+	public void pressKeyButton(Button originalButton) {
+		//Calculamos primero la posición donde tiene que ir la animación. En caso de estar la respuesta completa no se hace nada.
+		int newPosition = newPosition();
+		if (newPosition != -1) {
+			//Obtenemos el padre del botón original
+			RelativeLayout parent = (RelativeLayout)originalButton.getParent();
+			
+			//Creamos un nuevo botón y le asignamos todos los atributos del original.
+		    Button copyButton = new Button(getActivity());
+		    copyButton.setText(originalButton.getText());
+		    copyButton.setPadding(originalButton.getPaddingLeft(), originalButton.getPaddingTop(),
+		    		originalButton.getPaddingRight(), originalButton.getPaddingBottom());
+		    copyButton.setLayoutParams(originalButton.getLayoutParams());
+		    copyButton.setBackgroundResource(R.drawable.key_selector);
+		    
+		    //Añadimos el boton al Layout y lo dejamos en segundo plano.
+		    parent.addView(copyButton);
+		    originalButton.bringToFront();
+		    originalButton.setFocusable(true);
+		    
+		    /*Rellenamos en la posicion newPosition en el array mArrayAnswer la letra que corresponda.
+		     *Añadimos a la lista la información (posicion y letra) para que se pinten en orden despues de que la animación acabe.
+		     *Llamamos al método que realiza la animación.*/
+		    mArrayAnswer[newPosition] = originalButton.getText().toString();
+		    mQueueInfo.addFirst(new QueueInfo(newPosition, originalButton.getText().toString()));
+			moveView(copyButton, newPosition);
+		}
+	}
+	
+	/**
+	 * Método que pinta la letra en la posición indicada. Dicha información (letra y posición) se encuentran en el parámetro info. 
+	 */
 	public void paintLetter(QueueInfo info) {
 		mVibrator.vibrate(10);
 		           
+		//Si la posición actual es inferior al nombre de la marca hay que pintar en la primera fila, sino en la segunda.
 		if (info.getPosition() < mArrayAnswer.length) {
 			if (info.getPosition() < mCarBrand.length()) {
+				//Obtenemos de la tabla el layout donde está el boton, en la fila 0, columna info.getPosition().
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(info.getPosition());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
 				aButton.setText(info.getLetter());
 			} else if (info.getPosition() < mArrayAnswer.length){
+				//Obtenemos de la tabla el layout donde está el boton, en la fila 1, columna info.getPosition() - longitud de la marca del coche.
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(info.getPosition() - mCarBrand.length());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
 				aButton.setText(info.getLetter());
 			}			
 		}
+		
+		//Comprobamos si la respuesta es correcta.
+		checkAnswer();
 	}
 	
-	private void moveViewToScreenCenter(View view, int newPosition)
-	{
-	    /*LinearLayout root = (LinearLayout) getActivity().findViewById( R.id.container_question );
-	    DisplayMetrics dm = new DisplayMetrics();
-	    getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
-	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();*/
-
+	/**
+	 * Método que traslada la vista view a la posición newPosition de la tabla respuesta.
+	 */
+	private void moveView(View view, int newPosition) {
+		//Calculamos la posición original del objeto.
 	    int originalPos[] = new int[2];
 	    view.getLocationOnScreen(originalPos);
 	    
+	    //Calculamos la posición destino del objeto.
 	    int destinyPos[] = new int[2];
 	    Button dButton;
+	    //Si la posición es inferior al nombre de la marca, deberá ir a la primera fila, sino a la segunda.
 	    if (newPosition < mCarBrand.length()) {
+	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.
 			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(newPosition);
 			dButton = (Button)layoutButton.findViewById(R.id.button_solution);
 	    } else {
+	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.	    	
 			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(newPosition - mCarBrand.length());
 			dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
 	    }
 	    
+	    //Con el botón destino recuperado obtenemos su posición.
 	    dButton.getLocationOnScreen(destinyPos);
 
+	    //Creamos la animación, su duración y hacemos que llame al método paintLetter en cuanto finalice.
 	    TranslateAnimation anim = new TranslateAnimation( 0, destinyPos[0] - originalPos[0] , 0, destinyPos[1] - originalPos[1] );
 	    anim.setDuration(1000);
 	    anim.setAnimationListener(new AnimationListener() {
 			
 			@Override
 			public void onAnimationEnd(Animation animation) {
+				//Llamamos al método paintLetter obteniendo el primero de los objetos de la cola que hay que pintar
 				paintLetter(mQueueInfo.removeLast());		
 			}
 
@@ -304,40 +352,58 @@ public class QuestionAnswerFragment extends Fragment {
 				
 			}
 		});
+	    
+	    //Empieza la animación.
 	    view.startAnimation(anim);
 	}
 	
+	/**
+	 * Método que calcula la primera posición vacía del array mArrayAnswer y donde dberemos pintar la nueva letra.
+	 */
 	public int newPosition() {	
 		int position = mLastPosition;
-		while ((mLastPosition < mArrayAnswer.length) && (mArrayAnswer[mLastPosition] != null) && !mArrayAnswer[mLastPosition].equals("")) {
+		//Mientras sea distinto de null y no nos salgamos de rango avanzamos.
+		while ((mLastPosition < mArrayAnswer.length) && (mArrayAnswer[mLastPosition] != null)) {
 			mLastPosition++;
 		}
 		
 		position = mLastPosition;
 		
+		//Si no nos hemos salido de rango devolvemos la nueva posición.
 		if (mLastPosition >= mArrayAnswer.length) 
 			return -1;
 		else 
 			return position;
 	}
 	
-	public void deleteLetter(View view) {
-		Button aButton = (Button)view;
-		aButton.setText("");
-		mArrayAnswer[mLastPosition] = "";
+	/**
+	 * Método que borra el contenido de un boton de la respuesta.
+	 */
+	public void deleteLetter(Button button) {
+		//Elimina el texto del botón, asigna null a su posición del array y reiniciamos el contador de última posicion.
+		button.setText("");
+		mArrayAnswer[mLastPosition] = null;
 		mLastPosition = 0;
-		//setNewposition();
 	}
 	
+	/**
+	 * Método que comprueba si la respuesta introducida es la correcta.
+	 */
 	public void checkAnswer() {
+		//Creamos el string con la respuesta.
 		String answer = mCarBrand + mCarModel;
+		
+		//Creamos el string con la respuesta introducida.
 		String actualAnswer = "";
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < mArrayAnswer.length; i++) {
 			buffer.append( mArrayAnswer[i] );
 		}
+		
+		//Como en la respuesta están en mayúsculas hay que pasarlas a minúscula.
 		actualAnswer = buffer.toString().toLowerCase(getResources().getConfiguration().locale);
 		
+		//Si son iguales marcamos la respuesta como correcta y lanzamos la transacción que muestra el fragment de acierto.
 		if (answer.equals(actualAnswer)) {
 			WorldCarQuizLab.get(getActivity())
 			.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
@@ -363,6 +429,9 @@ public class QuestionAnswerFragment extends Fragment {
 		return fragment;
 	}
 	
+	/**
+	 * Clase privada que guarda la información donde se ha de pintar las letras (posición y texto de la letra). Se inserta en la cola mQueueInfo.
+	 */
 	private class QueueInfo {
 		private int mPosition;
 		private String mLetter;
