@@ -46,6 +46,11 @@
             android:theme="@style/CustomActionBarTheme"
             android:label="@string/app_name">      
         </activity>       
+         <activity 
+            android:name="com.android.worldcarquiz.activity.QuestionActivitySolved"
+            android:theme="@style/CustomActionBarTheme"
+            android:label="@string/app_name">      
+        </activity>       
     </application>
 
 </manifest>
