@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +26,6 @@ import android.widget.TableRow;
 
 import com.android.worldcarquiz.R;
 import com.android.worldcarquiz.activity.QuestionActivitySolved;
-import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class QuestionAnswerFragment extends Fragment {
@@ -59,6 +58,8 @@ public class QuestionAnswerFragment extends Fragment {
 	private int mNumWorld;
 	private int mNumSubWorld;
 	private int mNumQuestion;
+	
+	private Handler mHandler = new Handler();
 	
 	/**
 	 * mQueueInfo: Cola que se utilizada para almacenar las letras a pintar y su posición en orden cuando pulsamos otra tecla antes de que acabe su animación
@@ -412,15 +413,15 @@ public class QuestionAnswerFragment extends Fragment {
 		if (answer.equals(actualAnswer)) {
 			WorldCarQuizLab.get(getActivity())
 			.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
-		/* pruebas pablo
-			FragmentManager fm = getActivity().getSupportFragmentManager();
-			Fragment fragment = new QuestionSolvedFragment();
-			fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-				.replace(R.id.fragment_answer, fragment).commit();*/
 			
-			//si acertó lanzo la activity 
-			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
-			startActivity(i);
+			mHandler.postDelayed(new Runnable() {
+	            public void run() {
+	    			//si acertó lanzo la activity 
+	    			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
+	    			startActivity(i);
+	            }
+	        }, 1000);
+
 		}
 	}
 	
