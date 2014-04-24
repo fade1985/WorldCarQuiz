@@ -14,7 +14,7 @@
         android:layout_height="0px"
     	android:layout_weight="0.4"
     	android:paddingTop="17dp"
-    	android:background="@drawable/matricula_america"
+    	android:background="@drawable/ic_american"
     	android:clipChildren="false"
        	android:layout_marginTop="1dp">
 
