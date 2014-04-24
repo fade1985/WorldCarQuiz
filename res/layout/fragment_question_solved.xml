@@ -46,7 +46,7 @@
 	        android:layout_marginLeft="5dp"
 	        android:layout_marginRight="5dp"
 	        android:adjustViewBounds= "true"
-	        android:scaleType="centerCrop"
+	        android:scaleType="fitCenter"
 	        android:src="@drawable/premio"/>
 	    <TextView 
 	        android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="-10dp"
 	    android:adjustViewBounds= "true"
-	    android:src="@drawable/separator"/>
+	    android:src="@drawable/separator_white"/>
 	<TextView 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 	    android:layout_marginLeft="5dp"
 	    android:layout_marginRight="5dp"
 	    android:textColor="#ffffff"
-	    android:textSize="18dp"
+	    android:textSize="18sp"
 	    android:text="Producido por Ford entre los años 1956 y 1967 el Gran Torino es un icono de los 60 en EEUU..."/>
 
 	<LinearLayout
@@ -94,7 +94,6 @@
 	        android:textColor="#ffffff"
 	        android:textSize="20sp" />
 	    
-	    
 	    <Button
 	        android:id="@+id/solution_garage"
 	        android:layout_width="wrap_content"
@@ -107,7 +106,6 @@
 	        android:text="@string/garage"
 	        android:textColor="#ffffff"
 	        android:textSize="20sp" />
-
 	    
 	    <Button
 	        android:id="@+id/solution_next"
@@ -122,6 +120,10 @@
 
 	</LinearLayout>
 	
-	
+	 <FrameLayout 
+        android:id="@+id/fragment_banner"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	/>
          
 </LinearLayout>
