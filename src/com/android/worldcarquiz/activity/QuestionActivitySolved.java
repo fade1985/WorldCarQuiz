@@ -27,6 +27,8 @@ public class QuestionActivitySolved extends FragmentActivity{
 		.add(R.id.fragment_question_solved, fragmentSolved)
 		.add(R.id.fragment_banner, fragmentBanner)
 		.commit();
+		
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 	}
 
 }

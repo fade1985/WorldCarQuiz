@@ -420,7 +420,7 @@ public class QuestionAnswerFragment extends Fragment {
 	    			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
 	    			startActivity(i);
 	            }
-	        }, 1000);
+	        }, 500);
 
 		}
 	}
