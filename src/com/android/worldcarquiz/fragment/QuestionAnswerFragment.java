@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -265,7 +266,8 @@ public class QuestionAnswerFragment extends Fragment {
 		    copyButton.setPadding(originalButton.getPaddingLeft(), originalButton.getPaddingTop(),
 		    		originalButton.getPaddingRight(), originalButton.getPaddingBottom());
 		    copyButton.setLayoutParams(originalButton.getLayoutParams());
-		    copyButton.setBackgroundResource(R.drawable.key_selector);
+		    copyButton.setTextColor(Color.parseColor("#065a9d"));
+		    copyButton.setBackgroundColor(Color.TRANSPARENT);
 		    
 		    //Añadimos el boton al Layout y lo dejamos en segundo plano.
 		    parent.addView(copyButton);
