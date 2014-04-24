@@ -3,6 +3,7 @@ package com.android.worldcarquiz.fragment;
 import java.util.LinkedList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.activity.QuestionActivitySolved;
+import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
 public class QuestionAnswerFragment extends Fragment {
@@ -409,11 +412,15 @@ public class QuestionAnswerFragment extends Fragment {
 		if (answer.equals(actualAnswer)) {
 			WorldCarQuizLab.get(getActivity())
 			.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
-		
+		/* pruebas pablo
 			FragmentManager fm = getActivity().getSupportFragmentManager();
 			Fragment fragment = new QuestionSolvedFragment();
 			fm.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-				.replace(R.id.fragment_answer, fragment).commit();
+				.replace(R.id.fragment_answer, fragment).commit();*/
+			
+			//si acertó lanzo la activity 
+			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
+			startActivity(i);
 		}
 	}
 	
