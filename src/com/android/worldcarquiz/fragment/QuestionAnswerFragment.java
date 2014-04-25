@@ -25,6 +25,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.activity.QuestionActivity;
 import com.android.worldcarquiz.activity.QuestionActivitySolved;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
@@ -418,6 +419,9 @@ public class QuestionAnswerFragment extends Fragment {
 	            public void run() {
 	    			//si acertó lanzo la activity 
 	    			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
+				    i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, mNumWorld);
+				    i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, mNumSubWorld);
+				    i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion);
 	    			startActivity(i);
 	            }
 	        }, 500);

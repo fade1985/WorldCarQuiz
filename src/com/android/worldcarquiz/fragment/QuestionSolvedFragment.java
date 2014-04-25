@@ -2,23 +2,29 @@ package com.android.worldcarquiz.fragment;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.worldcarquiz.R;
+import com.android.worldcarquiz.activity.QuestionActivity;
+import com.android.worldcarquiz.activity.WorldsListActivity;
 import com.android.worldcarquiz.data.Question;
+import com.android.worldcarquiz.data.SubWorld;
 import com.android.worldcarquiz.data.World;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
+import com.android.worldcarquiz.database.WorldQuizDatabaseHelper;
 
 public class QuestionSolvedFragment extends Fragment {
 	
 	private String mCarBrand;
 	private String mCarModel;
-	private ArrayList<World> mWorlds;
 	
 	private TextView mTextViewCar;
 	private TextView mTextViewScore;
@@ -27,6 +33,10 @@ public class QuestionSolvedFragment extends Fragment {
 	private int mNumWorld;
 	private int mNumQuestion;
 	private int score;
+	
+	private Button mNextCar;
+	private Button mPrevCar;
+	private Button mGarage;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,8 +51,7 @@ public class QuestionSolvedFragment extends Fragment {
 		String[] answerSplit = answer.split(" ");
 		mCarBrand = answerSplit[0];
 		mCarModel = answerSplit[1];	
-		score = mWorlds.get(mNumWorld).getSubWorlds().get(mNumSubWorld)
-				.getQuestions().get(mNumQuestion).getScore();
+		score =  WorldCarQuizLab.get(getActivity()).score(mNumWorld, mNumSubWorld, mNumQuestion);
 		
 	}
 	
@@ -54,8 +63,44 @@ public class QuestionSolvedFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_question_solved, null);
 		mTextViewCar = (TextView) v.findViewById(R.id.car_title);
 		mTextViewCar.setText(mCarBrand.toUpperCase() + "\n" + mCarModel.toUpperCase());
-		mTextViewScore = (TextView) v.findViewById(R.id.points_solved);
+		mTextViewScore = (TextView) v.findViewById(R.id.points);
 		mTextViewScore.setText("+" + score);
+		
+		//Listener de los botones
+		//Listener del boton next car
+		mNextCar = (Button)v.findViewById(R.id.solution_next_button);
+		mNextCar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			//	if(mNumQuestion <= SubWorld.NUM_QUESTIONS*mNumWorld*mNumSubWorld){
+					Intent i = new Intent(getActivity(), QuestionActivity.class);
+				   i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, mNumWorld);
+				   i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, mNumSubWorld);
+				   i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion + 1);
+			       startActivity(i);
+				}
+			//}
+		});
+		
+		//Listener del boton prev car
+		mPrevCar = (Button)v.findViewById(R.id.solution_prev_button);
+		mPrevCar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//if(mNumQuestion >= ){
+					Intent i = new Intent(getActivity(), QuestionActivity.class);
+				    i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, mNumWorld);
+				    i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, mNumSubWorld);
+				    i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion -1 );
+			        startActivity(i);
+				}
+			//}
+		});
+		
+		
+				
 		return v;
 	}
 	

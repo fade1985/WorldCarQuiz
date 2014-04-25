@@ -71,8 +71,16 @@ public class WorldCarQuizLab {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
 				.getQuestions().get(question).isLocked();
 	}
-
+	
 	/**
+	 * Devuelve la puntuación de una pregunta.
+	 */
+	public int score(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.getQuestions().get(question).getScore();
+	}
+
+	/*
 	 * Devuelve true si la pregunta del mundo 'numWorld' y del submundo 'numSubWorld' ha sido resuelta.
 	 */
 	public boolean questionAnswered(int numWorld, int numSubWorld, int question) {
