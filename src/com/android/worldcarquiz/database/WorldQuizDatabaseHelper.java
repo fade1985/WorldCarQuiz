@@ -18,7 +18,7 @@ import com.android.worldcarquiz.data.World;
 
 public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	public static final String DB_NAME = "worldCarQuiz.sqlite";
-	private static final int VERSION = 4;
+	private static final int VERSION = 8;
 	
 	private static final String TABLE_QUESTIONS = "questions";
 	private static final String TABLE_CARS = "cars";
@@ -41,14 +41,16 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 				" brand TEXT, model TEXT, segment TEXT, year INTEGER, file_name TEXT)");
 		
 		//Inicializamos el primer mundo
-		insertNewWorld(sqlitedatabase);		
+		insertNewWorld(sqlitedatabase, 1);		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase sqlitedatabase, int i, int j) {
 		if (i < j) {
-			mContext.deleteDatabase(DB_NAME);
-			onCreate(sqlitedatabase);
+			sqlitedatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CARS);
+			sqlitedatabase.execSQL("create table " + TABLE_CARS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+					" brand TEXT, model TEXT, segment TEXT, year INTEGER, file_name TEXT)");
+			insertCars(sqlitedatabase, 1);
 		}
 	}
 	
@@ -56,30 +58,28 @@ public class WorldQuizDatabaseHelper extends SQLiteOpenHelper {
 	 * Se inserta un nuevo mundo. En realidad sólo se insertan nuevas preguntas a la tabla.
 	 * El control de los mundos se hace en función de la cantidad de preguntas que haya.
 	 */
-	public void insertNewWorld(SQLiteDatabase sqlitedatabase) {
+	public void insertNewWorld(SQLiteDatabase sqlitedatabase, int numWorld) {
 	    //Inicializamos sus preguntas
 	    insertQuestions(sqlitedatabase);
-		insertCars(sqlitedatabase);
+		insertCars(sqlitedatabase, numWorld);
 	}
 	
 	/**
 	 * Método que introduce nuevas filas a la tabla de coches a través de un archivo sql.
 	 */
-	public void insertCars(SQLiteDatabase db) {
+	public void insertCars(SQLiteDatabase db, int numWorld) {
 	    InputStream is = null;
 	    try {
 	    	db.beginTransaction();
-	    	for (int i = 1; i <= World.NUM_SUBWORLDS; i++) {
-	    		is = mContext.getAssets().open("dbWorlds/world1" + i +".sql");
-	    		if (is != null) {
-		            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		            String line = reader.readLine();
-		            while (!TextUtils.isEmpty(line)) {
-		            	db.execSQL(line);
-		                line = reader.readLine();
-		            }
-		         }
-	    	}
+    		is = mContext.getAssets().open("dbWorlds/world" + numWorld +".sql");
+    		if (is != null) {
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	            String line = reader.readLine();
+	            while (!TextUtils.isEmpty(line)) {
+	            	db.execSQL(line);
+	                line = reader.readLine();
+	            }
+	         }
 	    	db.setTransactionSuccessful();
 	    } catch (Exception ex) {
 	        Log.d("SQL_ERROR", ex.getMessage());      
