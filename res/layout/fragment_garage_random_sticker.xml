@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+
+    <LinearLayout 
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@drawable/shapes_border"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
+        
+        <TextView
+            android:id="@+id/random_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp" 
+            android:text="@string/random"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <ImageView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ford_focus_2014"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
+        
+        <TextView
+            android:id="@+id/random_car_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/random_car"
+            android:textColor="#ffffff"
+            android:layout_marginTop="6dp" 
+            android:textSize="18sp" />
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/read"
+            android:layout_gravity="right"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="-5dp"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+       
+    </LinearLayout>
+
+</RelativeLayout>

@@ -20,4 +20,10 @@
     <string name="asia_subworld">Asia</string>
     <string name="all_subworld">All</string>
     <string name="garage">Garage</string>
+    <string name="year">Year</string>
+    <string name="segment">Segment</string>
+    <string name="brand">Brand</string>
+    <string name="random">Random Sticker Car</string>
+    <string name="random_car">Ford Focus 2014</string>
+    <string name="read">Read more...</string>
 </resources>

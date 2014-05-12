@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent" >
+
+    <LinearLayout 
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+       <TextView 
+           android:id="@+id/info_number_of_cars"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textColor="#ffffff"
+           android:text="Number of cars in the garange     35"/>
+       <TextView 
+           android:id="@+id/info_brands"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="3dp"
+           android:textColor="#ffffff"
+           android:text="Number of brands in the garange     4"/>
+       <TextView 
+           android:id="@+id/info_segments"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="3dp"
+           android:textColor="#ffffff"
+           android:text="Number of segments cars in the garange     6"/>
+       <TextView 
+           android:id="@+id/info_years"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="3dp"
+           android:textColor="#ffffff"
+           android:text="Number of years of cars in the garange     14"/>
+    </LinearLayout>
+
+</RelativeLayout>
