@@ -25,7 +25,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.android.worldcarquiz.R;
-import com.android.worldcarquiz.activity.QuestionActivity;
 import com.android.worldcarquiz.activity.QuestionActivitySolved;
 import com.android.worldcarquiz.data.WorldCarQuizLab;
 
@@ -76,10 +75,8 @@ public class QuestionAnswerFragment extends Fragment {
 		mNumQuestion = getArguments().getInt(EXTRA_QUESTION);
 		
 		//Obtenemos el string que contiene la respuesta de la pregunta y la divimos en 2, marca y modelo.
-		String answer = WorldCarQuizLab.get(getActivity()).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
-		String[] answerSplit = answer.split(" ");
-		mCarBrand = answerSplit[0];
-		mCarModel = answerSplit[1];
+		mCarBrand = WorldCarQuizLab.get(getActivity()).getQuestionBrand(mNumWorld, mNumSubWorld, mNumQuestion).replace(" ", "");
+		mCarModel = WorldCarQuizLab.get(getActivity()).getQuestionModel(mNumWorld, mNumSubWorld, mNumQuestion);
 		
 		//Inicializamos el array mArrayAnswer con la longitud de la respuesta y el resto por defecto.
 		mArrayAnswer = new String[mCarBrand.length() + mCarModel.length()];
@@ -259,6 +256,7 @@ public class QuestionAnswerFragment extends Fragment {
 	 * Método que crea una copia del botón que se ha pulsado y lo traslada hacia su destino, le pasamos de parámetro el botón original.
 	 */
 	public void pressKeyButton(Button originalButton) {
+		mVibrator.vibrate(10);
 		//Calculamos primero la posición donde tiene que ir la animación. En caso de estar la respuesta completa no se hace nada.
 		int newPosition = newPosition();
 		if (newPosition != -1) {
@@ -292,8 +290,6 @@ public class QuestionAnswerFragment extends Fragment {
 	 * Método que pinta la letra en la posición indicada. Dicha información (letra y posición) se encuentran en el parámetro info. 
 	 */
 	public void paintLetter(QueueInfo info) {
-		mVibrator.vibrate(10);
-		           
 		//Si la posición actual es inferior al nombre de la marca hay que pintar en la primera fila, sino en la segunda.
 		if (info.getPosition() < mArrayAnswer.length) {
 			if (info.getPosition() < mCarBrand.length()) {

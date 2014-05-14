@@ -18,19 +18,21 @@ public class Question {
 	private int mScore;
 	private int mTrys;
 	private String mImage;
-	private String mAnswer;
+	private String mBrand;
+	private String mModel;
 
 	
 	/**
 	 * CONSTRUCTOR
 	 */
-	public Question(int status, int trys, int score, String image, String answer) {
+	public Question(int status, int trys, int score, String image, String brand, String model) {
 		//mId = id;
 		mStatus = status;
 		mScore = score;
 		mTrys = trys;
 		mImage = image;
-		mAnswer = answer;
+		mBrand = brand;
+		mModel = model;
 	}
 
 	
@@ -38,8 +40,12 @@ public class Question {
 	 * GETTERS Y SETTERS
 	 */
 	
-	public String getAnswer() {
-		return mAnswer;
+	public String getBrand() {
+		return mBrand;
+	}
+	
+	public String getModel() {
+		return mModel;
 	}
 	
 	public int getScore() {

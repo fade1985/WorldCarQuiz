@@ -109,11 +109,19 @@ public class WorldCarQuizLab {
 	}
 		
 	/**
-	 * Devuelve la respuesta de la pregunta.
+	 * Devuelve la marca del coche de la pregunta.
 	 */
-	public String getQuestionAnswer(int numWorld, int numSubWorld, int question) {
+	public String getQuestionBrand(int numWorld, int numSubWorld, int question) {
 		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
-				.getQuestions().get(question).getAnswer();
+				.getQuestions().get(question).getBrand();
+	}
+	
+	/**
+	 * Devuelve el modelo del coche de la pregunta.
+	 */
+	public String getQuestionModel(int numWorld, int numSubWorld, int question) {
+		return mWorlds.get(numWorld).getSubWorlds().get(numSubWorld)
+				.getQuestions().get(question).getModel();
 	}
 	
 	/**

@@ -35,7 +35,7 @@ public class SubWorld {
 	          String image = cursor.getString(3);
 	          String brand = cursor.getString(4);
 	          String model = cursor.getString(5);
-	          mQuestions.add(new Question(locked, trys, score, image, brand + " " + model));
+	          mQuestions.add(new Question(locked, trys, score, image, brand, model));
 	          cursor.moveToNext();
 	     } 		
 	}

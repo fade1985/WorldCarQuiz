@@ -47,10 +47,8 @@ public class QuestionSolvedFragment extends Fragment {
 		mNumQuestion = getArguments().getInt(QuestionPhotoFragment.EXTRA_NUM_QUESTION);
 		
 		//Obtenemos el string que contiene la respuesta de la pregunta y la divimos en 2, marca y modelo.
-		String answer = WorldCarQuizLab.get(getActivity()).getQuestionAnswer(mNumWorld, mNumSubWorld, mNumQuestion);
-		String[] answerSplit = answer.split(" ");
-		mCarBrand = answerSplit[0];
-		mCarModel = answerSplit[1];	
+		mCarBrand = WorldCarQuizLab.get(getActivity()).getQuestionBrand(mNumWorld, mNumSubWorld, mNumQuestion);
+		mCarModel = WorldCarQuizLab.get(getActivity()).getQuestionModel(mNumWorld, mNumSubWorld, mNumQuestion);
 		score =  WorldCarQuizLab.get(getActivity()).score(mNumWorld, mNumSubWorld, mNumQuestion);
 		
 	}
