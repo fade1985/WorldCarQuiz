@@ -9,6 +9,8 @@
 	    android:id="@+id/button_solution"
 	    android:layout_width="25dp"
 	    android:layout_height="30dp"
+	    android:layout_marginLeft="1dp"
+	    android:layout_marginRight="1dp"
 	    android:padding="0px"
 	    android:textColor="#065a9d"
 	    android:textSize="18sp"

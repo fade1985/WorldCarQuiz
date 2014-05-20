@@ -6,19 +6,31 @@
     android:clipChildren="false"
     android:weightSum="1">
 
-	
-	<TableLayout
-    	android:id="@+id/tableAnswer"
-    	android:gravity="top|center_horizontal"
-      	android:layout_width="match_parent"
-        android:layout_height="0px"
-    	android:layout_weight="0.4"
-    	android:paddingTop="17dp"
-    	android:background="@drawable/ic_american"
-    	android:clipChildren="false"
-       	android:layout_marginTop="1dp">
-
-    </TableLayout>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="0px"
+	    android:gravity="top|center_horizontal"
+	    android:orientation="vertical"
+	    android:layout_weight="0.4"
+	    android:background="@drawable/ic_american">
+	    <TableLayout
+	    	android:id="@+id/tableAnswerBrand"
+	    	android:gravity="top|center_horizontal"
+	      	android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	    	android:paddingTop="22dp"
+	    	android:clipChildren="false">
+    	</TableLayout>
+    	
+	   <TableLayout
+	    	android:id="@+id/tableAnswerModel"
+	    	android:gravity="top|center_horizontal"
+	      	android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	    	android:paddingTop="5dp"
+	    	android:clipChildren="false">
+    	</TableLayout>
+	</LinearLayout>
     
 	<TableLayout 
 		android:id="@+id/tableKeyboard"

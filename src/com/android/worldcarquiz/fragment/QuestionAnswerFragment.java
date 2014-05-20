@@ -40,7 +40,8 @@ public class QuestionAnswerFragment extends Fragment {
 	 * Tablas donde estan las letras(RelativeLayout) del teclado y las de la respuesta.
 	 */
 	private TableLayout mKeyBoard;
-	private TableLayout mTableAnswer;
+	private TableLayout mTableAnswerBrand;
+	private TableLayout mTableAnswerModel;
 	
 	private Vibrator mVibrator;
 	
@@ -91,8 +92,9 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		//Inflamos el layout del fragment que contiene la matricula y cargamos la tabla respuesta.
 		View v = inflater.inflate(R.layout.fragment_question_answer, null);
-		mTableAnswer = (TableLayout) v.findViewById(R.id.tableAnswer);
-		buildTableAnswer(inflater, mTableAnswer);
+		mTableAnswerBrand = (TableLayout) v.findViewById(R.id.tableAnswerBrand);
+		mTableAnswerModel = (TableLayout) v.findViewById(R.id.tableAnswerModel);
+		buildTableAnswer(inflater, mTableAnswerBrand, mTableAnswerModel);
 		
 		//Obtenemos la tabla del teclado para ir creando sus filas.
 		mKeyBoard = (TableLayout) v.findViewById(R.id.tableKeyboard);
@@ -200,7 +202,7 @@ public class QuestionAnswerFragment extends Fragment {
 	/**
 	 * Construye la tabla de botones que muestra la respuesta.
 	 */
-	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswer) {
+	public void buildTableAnswer(LayoutInflater inflater, TableLayout tableAnswerBrand, TableLayout tableAnswerModel) {
 		//Creamos dos filas, una para la marca y otra para el modelo.
 		TableRow brandRow = new TableRow(getActivity());
 		TableRow modelRow = new TableRow(getActivity());
@@ -247,7 +249,7 @@ public class QuestionAnswerFragment extends Fragment {
 				space = true;
 			}
 		}
-		mTableAnswer.addView(brandRow);
+		mTableAnswerBrand.addView(brandRow);
 		
 		cont = mCarBrand.length();
 		space = false;
@@ -282,7 +284,7 @@ public class QuestionAnswerFragment extends Fragment {
 				space = true;
 			}
 		}
-		mTableAnswer.addView(modelRow);
+		mTableAnswerModel.addView(modelRow);
 	}		
 	
 	/**
@@ -327,7 +329,7 @@ public class QuestionAnswerFragment extends Fragment {
 		if (info.getPosition() < mArrayAnswer.length) {
 			if (info.getPosition() < mCarBrand.length()) {
 				//Obtenemos de la tabla el layout donde está el boton, en la fila 0, columna info.getPosition().
-				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(info.getPosition());
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswerBrand.getChildAt(0)).getChildAt(info.getPosition());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
 				if (aButton == null) {
 					aButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
@@ -335,7 +337,7 @@ public class QuestionAnswerFragment extends Fragment {
 				aButton.setText(info.getLetter());
 			} else if (info.getPosition() < mArrayAnswer.length){
 				//Obtenemos de la tabla el layout donde está el boton, en la fila 1, columna info.getPosition() - longitud de la marca del coche.
-				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(info.getPosition() - mCarBrand.length());
+				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswerModel.getChildAt(0)).getChildAt(info.getPosition() - mCarBrand.length());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
 				if (aButton == null) {
 					aButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
@@ -363,11 +365,11 @@ public class QuestionAnswerFragment extends Fragment {
 	    //Si la posición es inferior al nombre de la marca, deberá ir a la primera fila, sino a la segunda.
 	    if (newPosition < mCarBrand.length()) {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.
-			layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(newPosition);
+			layoutButton = (FrameLayout)((TableRow)mTableAnswerBrand.getChildAt(0)).getChildAt(newPosition);
 			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);
 	    } else {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.	    	
-			layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(newPosition - mCarBrand.length());
+			layoutButton = (FrameLayout)((TableRow)mTableAnswerModel.getChildAt(0)).getChildAt(newPosition - mCarBrand.length());
 			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
 	    }
 	    
