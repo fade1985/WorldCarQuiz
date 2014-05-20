@@ -207,50 +207,83 @@ public class QuestionAnswerFragment extends Fragment {
 		
 		//Le asignamos sus parametros iniciales.
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-		params.setMargins(0,1, 0, 0);
+		params.setMargins(0, 1, 0, 0);
 		brandRow.setLayoutParams(params);
 		brandRow.setGravity(Gravity.CENTER);
 		modelRow.setLayoutParams(params);
 		modelRow.setGravity(Gravity.CENTER);
 		
 		//Fila de la marca del coche.
-		for (int i = 0; i < mCarBrand.length(); i++) {
-			//Inflamos el botón y lo dejamos vacio.
-			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
-			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
-			//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
-			aButton.setTag(i);
-			aButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					//Al borrar la letra la nueva posición es la que se queda vacía.
-					mLastPosition = (Integer)view.getTag();
-					deleteLetter((Button)view);
+		String originalBrand = WorldCarQuizLab.get(getActivity()).getQuestionBrand(mNumWorld, mNumSubWorld, mNumQuestion);
+		String originalModel = WorldCarQuizLab.get(getActivity()).getQuestionModel(mNumWorld, mNumSubWorld, mNumQuestion);
+		boolean space = false;
+		int cont = 0;
+		for (int i = 0; i < originalBrand.length(); i++) {
+			if (originalBrand.charAt(i) != ' '){
+				View keyView;
+				Button aButton;
+				if (space) {
+					//Inflamos el botón y lo dejamos vacio.
+					keyView = inflater.inflate(R.layout.fragment_question_answer_solution_space, null);
+					aButton = (Button)keyView.findViewById(R.id.button_solution_space);
+					space = false;
+					//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
+				} else {
+					keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+					aButton = (Button)keyView.findViewById(R.id.button_solution);
 				}
-			});
-			brandRow.addView(keyView);
+				aButton.setTag(cont);
+				aButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						//Al borrar la letra la nueva posición es la que se queda vacía.
+						mLastPosition = (Integer)view.getTag();
+						deleteLetter((Button)view);
+					}
+				});
+				brandRow.addView(keyView);
+				cont++;
+			} else {
+				space = true;
+			}
 		}
 		mTableAnswer.addView(brandRow);
 		
+		cont = mCarBrand.length();
+		space = false;
 		//Fila del modelo del coche.
-		for (int i = mCarBrand.length(); i < mArrayAnswer.length; i++) {
-			//Inflamos el botón y lo dejamos vacio.
-			View keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
-			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
-			//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
-			aButton.setTag(i);
-			aButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					//Al borrar la letra la nueva posición es la que se queda vacía.
-					mLastPosition = (Integer)view.getTag();
-					deleteLetter((Button)view);
+		//for (int i = mCarBrand.length(); i < mArrayAnswer.length; i++) {
+		for (int i = 0; i < originalModel.length(); i++) {
+			if (originalModel.charAt(i) != ' '){
+				View keyView;
+				Button aButton;
+				if (space) {
+					//Inflamos el botón y lo dejamos vacio.
+					keyView = inflater.inflate(R.layout.fragment_question_answer_solution_space, null);
+					aButton = (Button)keyView.findViewById(R.id.button_solution_space);
+					//El Tag del boton será la posición que ocupe y se usará para saber que boton hemos pulsado y borrar su contenido.
+					space = false;
+				} else {
+					keyView = inflater.inflate(R.layout.fragment_question_answer_solution, null);
+					aButton = (Button)keyView.findViewById(R.id.button_solution);
 				}
-			});
-			modelRow.addView(keyView);
+				aButton.setTag(cont);
+				aButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						//Al borrar la letra la nueva posición es la que se queda vacía.
+						mLastPosition = (Integer)view.getTag();
+						deleteLetter((Button)view);
+					}
+				});
+				modelRow.addView(keyView);
+				cont++;
+			} else {
+				space = true;
+			}
 		}
 		mTableAnswer.addView(modelRow);
-	}
+	}		
 	
 	/**
 	 * Método que crea una copia del botón que se ha pulsado y lo traslada hacia su destino, le pasamos de parámetro el botón original.
@@ -296,11 +329,17 @@ public class QuestionAnswerFragment extends Fragment {
 				//Obtenemos de la tabla el layout donde está el boton, en la fila 0, columna info.getPosition().
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(info.getPosition());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+				if (aButton == null) {
+					aButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
+				}
 				aButton.setText(info.getLetter());
 			} else if (info.getPosition() < mArrayAnswer.length){
 				//Obtenemos de la tabla el layout donde está el boton, en la fila 1, columna info.getPosition() - longitud de la marca del coche.
 				FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(info.getPosition() - mCarBrand.length());
 				Button aButton = (Button)layoutButton.findViewById(R.id.button_solution);
+				if (aButton == null) {
+					aButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
+				}
 				aButton.setText(info.getLetter());
 			}			
 		}
@@ -319,20 +358,21 @@ public class QuestionAnswerFragment extends Fragment {
 	    
 	    //Calculamos la posición destino del objeto.
 	    int destinyPos[] = new int[2];
-	    Button dButton;
+	    //Button dButton;
+	    FrameLayout layoutButton;
 	    //Si la posición es inferior al nombre de la marca, deberá ir a la primera fila, sino a la segunda.
 	    if (newPosition < mCarBrand.length()) {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.
-			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(newPosition);
-			dButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(0)).getChildAt(newPosition);
+			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);
 	    } else {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.	    	
-			FrameLayout layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(newPosition - mCarBrand.length());
-			dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
+			layoutButton = (FrameLayout)((TableRow)mTableAnswer.getChildAt(1)).getChildAt(newPosition - mCarBrand.length());
+			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
 	    }
 	    
 	    //Con el botón destino recuperado obtenemos su posición.
-	    dButton.getLocationOnScreen(destinyPos);
+	    layoutButton.getLocationOnScreen(destinyPos);
 
 	    //Creamos la animación, su duración y hacemos que llame al método paintLetter en cuanto finalice.
 	    TranslateAnimation anim = new TranslateAnimation( 0, destinyPos[0] - originalPos[0] , 0, destinyPos[1] - originalPos[1] );
