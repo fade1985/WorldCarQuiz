@@ -348,9 +348,6 @@ public class QuestionAnswerFragment extends Fragment {
 				aButton.setText(info.getLetter());
 			}			
 		}
-		
-		//Comprobamos si la respuesta es correcta.
-		checkAnswer();
 	}
 	
 	/**
@@ -394,7 +391,9 @@ public class QuestionAnswerFragment extends Fragment {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				//Llamamos al método paintLetter obteniendo el primero de los objetos de la cola que hay que pintar
-				paintLetter(mQueueInfo.removeLast());		
+				paintLetter(mQueueInfo.removeLast());			
+				//Comprobamos si la respuesta es correcta.
+				checkAnswer();	
 			}
 
 			@Override
@@ -459,21 +458,23 @@ public class QuestionAnswerFragment extends Fragment {
 		actualAnswer = buffer.toString().toLowerCase(getResources().getConfiguration().locale);
 		
 		//Si son iguales marcamos la respuesta como correcta y lanzamos la transacción que muestra el fragment de acierto.
-		if (answer.equals(actualAnswer)) {
-			WorldCarQuizLab.get(getActivity())
-			.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
-			
-			mHandler.postDelayed(new Runnable() {
-	            public void run() {
-	    			//si acertó lanzo la activity 
-	    			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
-				    i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, mNumWorld);
-				    i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, mNumSubWorld);
-				    i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion);
-	    			startActivity(i);
-	            }
-	        }, 500);
+		if (mQueueInfo.isEmpty()) {
+			if (answer.equals(actualAnswer)) {
+				WorldCarQuizLab.get(getActivity())
+				.setQuestionAnswered(mNumWorld, mNumSubWorld, mNumQuestion, mNumQuestion + 1);
+				
+				mHandler.postDelayed(new Runnable() {
+		            public void run() {
+		    			//si acertó lanzo la activity 
+		    			Intent i = new Intent(getActivity(), QuestionActivitySolved.class);
+					    i.putExtra(SubWorldFragment.EXTRA_NUM_WORLD, mNumWorld);
+					    i.putExtra(SubWorldFragment.EXTRA_NUM_SUBWORLD, mNumSubWorld);
+					    i.putExtra(QuestionPhotoFragment.EXTRA_NUM_QUESTION, mNumQuestion);
+		    			startActivity(i);
+		            }
+		        }, 500);
 
+			}
 		}
 	}
 	
