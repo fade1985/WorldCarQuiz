@@ -298,12 +298,15 @@ public class QuestionAnswerFragment extends Fragment {
 			//Obtenemos el padre del botón original
 			RelativeLayout parent = (RelativeLayout)originalButton.getParent();
 			
+			View keyView = getActivity().getLayoutInflater().inflate(R.layout.fragment_question_answer_solution, null);
+			Button aButton = (Button)keyView.findViewById(R.id.button_solution);
+
 			//Creamos un nuevo botón y le asignamos todos los atributos del original.
 		    Button copyButton = new Button(getActivity());
 		    copyButton.setText(originalButton.getText());
-		    copyButton.setPadding(originalButton.getPaddingLeft(), originalButton.getPaddingTop(),
-		    		originalButton.getPaddingRight(), originalButton.getPaddingBottom());
-		    copyButton.setLayoutParams(originalButton.getLayoutParams());
+		    copyButton.setPadding(aButton.getPaddingLeft(), aButton.getPaddingTop(),
+		    		aButton.getPaddingRight(), aButton.getPaddingBottom());
+		    copyButton.setLayoutParams(aButton.getLayoutParams());
 		    copyButton.setTextColor(Color.parseColor("#065a9d"));
 		    copyButton.setBackgroundColor(Color.TRANSPARENT);
 		    
@@ -360,25 +363,32 @@ public class QuestionAnswerFragment extends Fragment {
 	    
 	    //Calculamos la posición destino del objeto.
 	    int destinyPos[] = new int[2];
-	    //Button dButton;
+	    Button dButton;
 	    FrameLayout layoutButton;
 	    //Si la posición es inferior al nombre de la marca, deberá ir a la primera fila, sino a la segunda.
 	    if (newPosition < mCarBrand.length()) {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.
 			layoutButton = (FrameLayout)((TableRow)mTableAnswerBrand.getChildAt(0)).getChildAt(newPosition);
-			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			dButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			if (dButton == null) {
+				dButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
+			}
 	    } else {
 	    	//Obtenemos de la tabla el botón al igual que en el método paintLetter.	    	
 			layoutButton = (FrameLayout)((TableRow)mTableAnswerModel.getChildAt(0)).getChildAt(newPosition - mCarBrand.length());
-			//dButton = (Button)layoutButton.findViewById(R.id.button_solution);    	
+			dButton = (Button)layoutButton.findViewById(R.id.button_solution);
+			if (dButton == null) {
+				dButton = (Button)layoutButton.findViewById(R.id.button_solution_space);
+			}
 	    }
 	    
 	    //Con el botón destino recuperado obtenemos su posición.
-	    layoutButton.getLocationOnScreen(destinyPos);
+	    dButton.getLocationOnScreen(destinyPos);
 
 	    //Creamos la animación, su duración y hacemos que llame al método paintLetter en cuanto finalice.
 	    TranslateAnimation anim = new TranslateAnimation( 0, destinyPos[0] - originalPos[0] , 0, destinyPos[1] - originalPos[1] );
-	    anim.setDuration(1000);
+	    anim.setDuration(1200);
+	    anim.getFillBefore();
 	    anim.setAnimationListener(new AnimationListener() {
 			
 			@Override
