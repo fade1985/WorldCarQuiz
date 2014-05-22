@@ -98,4 +98,10 @@ public class WorldPagerActivity extends FragmentActivity {
 	   actionBar.addTab(actionBar.newTab()
 			   .setText(R.string.all_subworld).setTabListener(tabListener));
 	}
+	
+	@Override
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.slide_in_back, R.anim.slide_out_back);
+	}
 }

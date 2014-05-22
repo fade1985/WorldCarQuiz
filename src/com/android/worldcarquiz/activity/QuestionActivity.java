@@ -85,4 +85,10 @@ public class QuestionActivity extends FragmentActivity{
          
          return shareIntent;  
     } 
+    
+	@Override
+	public void onBackPressed() {
+	    super.onBackPressed();
+		overridePendingTransition(R.anim.slide_in_back, R.anim.slide_out_back);
+	}
 }
