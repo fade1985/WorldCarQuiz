@@ -8,7 +8,7 @@
     
     <FrameLayout 
         android:id="@+id/fragment_photo"
-    	android:layout_width="wrap_content"
+    	android:layout_width="match_parent"
     	android:layout_height="0px"
     	android:layout_weight="0.4"
     	android:clipChildren="false"/>
