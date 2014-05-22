@@ -25,8 +25,8 @@ public class LoaderImageView extends RelativeLayout {
        imageView = new ImageView(context, attrSet);
        progressBar = new ProgressBar(context, attrSet);
        
-       imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-       imageView.setScaleType(ScaleType.FIT_XY);
+       imageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+       imageView.setScaleType(ScaleType.CENTER_CROP);
        imageView.setAdjustViewBounds(true);
        
        progressBar.setIndeterminate(true);
